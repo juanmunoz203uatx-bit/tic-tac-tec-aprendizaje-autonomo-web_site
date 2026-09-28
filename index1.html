@@ -1,0 +1,2145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Concepto de aprendizaje autónomo | TIC, TAC y TEP</title>
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050505'/%3E%3Cpath d='M28 18h44v12H57v52H43V30H28z' fill='%23ff6a00'/%3E%3Ccircle cx='75' cy='76' r='8' fill='%23ff1e1e'/%3E%3Ccircle cx='25' cy='76' r='8' fill='%2300eaff'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+:root{
+--black:#030303;
+--black2:#080808;
+--white:#fff;
+--gray:#a8a8a8;
+--red:#ff1e1e;
+--orange:#ff6a00;
+--gold:#ffc400;
+--cyan:#00eaff;
+--blue:#008cff;
+--green:#00ff88;
+--font-title:'Montserrat',sans-serif;
+--font-body:'Poppins',sans-serif
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+html{
+scroll-behavior:smooth
+}
+
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at 10% 20%,rgba(0,234,255,.08),transparent 25%),
+radial-gradient(circle at 90% 65%,rgba(255,106,0,.10),transparent 25%),
+#05070a;
+color:#fff;
+font-family:var(--font-body);
+overflow-x:hidden
+}
+
+/* HEADER CONSERVADO */
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+background:linear-gradient(180deg,rgba(0,0,0,.96),rgba(8,8,8,.91));
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,.09);
+box-shadow:0 10px 40px rgba(0,0,0,.65);
+transition:transform .45s ease,opacity .45s ease
+}
+
+.header.hide{
+transform:translateY(-105%);
+opacity:0
+}
+
+.header-led{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:5px;
+background:linear-gradient(90deg,#ffc400,#ff9500,#00cfff,#00eaff,#00ff88,#ffc400,#ff9500);
+background-size:300% 100%;
+animation:ledMove 5s linear infinite;
+box-shadow:
+0 0 7px rgba(255,196,0,.9),
+0 0 14px rgba(255,149,0,.7),
+0 0 22px rgba(0,234,255,.55),
+0 0 30px rgba(0,255,136,.35);
+z-index:20
+}
+
+@keyframes ledMove{
+to{
+background-position:300% 50%
+}
+}
+
+.institution-area{
+max-height:260px;
+overflow:hidden;
+transition:max-height .55s ease,opacity .4s ease
+}
+
+.institution-area.closed{
+max-height:0;
+opacity:0
+}
+
+.institution-main{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:20px;
+padding:16px 70px 8px
+}
+
+.logo-box{
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-shrink:0
+}
+
+.logo-box:before{
+content:"";
+position:absolute;
+width:82px;
+height:82px;
+border-radius:50%;
+border:1px solid rgba(255,70,0,.5);
+box-shadow:
+0 0 12px rgba(255,50,0,.4),
+inset 0 0 15px rgba(255,50,0,.15);
+animation:logoRing 4s linear infinite
+}
+
+@keyframes logoRing{
+to{
+transform:rotate(360deg)
+}
+}
+
+.logo{
+width:68px;
+position:relative;
+z-index:2;
+filter:
+drop-shadow(0 0 5px var(--red))
+drop-shadow(0 0 12px rgba(255,70,0,.45))
+}
+
+.institution-text{
+text-align:left
+}
+
+.uni-name{
+font-family:var(--font-title);
+font-size:clamp(1rem,2vw,1.35rem);
+font-weight:800;
+letter-spacing:.8px;
+margin-bottom:3px
+}
+
+.facultad{
+font-family:var(--font-title);
+font-size:clamp(.72rem,1.4vw,.95rem);
+font-weight:600;
+color:var(--orange);
+letter-spacing:.7px
+}
+
+.carrera{
+font-size:.72rem;
+color:#aaa;
+margin-top:3px
+}
+
+.academic-data{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:8px;
+padding:3px 20px 13px
+}
+
+.academic-item{
+display:flex;
+align-items:center;
+gap:7px;
+padding:6px 13px;
+border:1px solid rgba(255,255,255,.12);
+border-radius:30px;
+background:rgba(255,255,255,.035);
+color:#ddd;
+font-size:.68rem;
+transition:.3s
+}
+
+.academic-item i{
+color:var(--orange)
+}
+
+.academic-item:hover{
+border-color:var(--orange);
+box-shadow:0 0 12px rgba(255,106,0,.25)
+}
+
+.institution-button{
+position:absolute;
+right:18px;
+top:18px;
+display:flex;
+align-items:center;
+gap:6px;
+padding:7px 11px;
+border:1px solid rgba(255,106,0,.55);
+border-radius:7px;
+background:rgba(255,70,0,.08);
+color:var(--orange);
+font-size:.65rem;
+cursor:pointer;
+transition:.3s;
+z-index:5
+}
+
+.institution-button:hover{
+background:var(--orange);
+color:#000;
+box-shadow:0 0 15px var(--orange)
+}
+
+.navbar{
+display:flex;
+justify-content:center;
+padding:7px 15px 10px
+}
+
+.nav-links{
+list-style:none;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:7px;
+padding:5px;
+border:1px solid rgba(255,255,255,.12);
+border-radius:12px;
+background:rgba(255,255,255,.035);
+box-shadow:
+inset 0 0 15px rgba(255,255,255,.025),
+0 5px 20px rgba(0,0,0,.35)
+}
+
+.nav-links a{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:8px;
+min-width:105px;
+padding:9px 15px;
+color:#d8d8d8;
+text-decoration:none;
+font-size:.70rem;
+font-weight:700;
+border:1px solid transparent;
+border-radius:8px;
+transition:.3s
+}
+
+.nav-links a:hover{
+color:#fff;
+border-color:rgba(255,106,0,.45);
+background:rgba(255,106,0,.08);
+box-shadow:
+inset 0 0 12px rgba(255,106,0,.06),
+0 0 12px rgba(255,106,0,.12)
+}
+
+.nav-links i{
+color:var(--orange)
+}
+
+.nav-links a:hover i{
+color:#fff;
+transform:scale(1.12)
+}
+
+
+/* =========================================================
+   SUBMENU DE CONTENIDO
+   ========================================================= */
+
+.has-submenu{
+position:relative;
+z-index:3000
+}
+
+/* Caja completa del submenu */
+
+.submenu{
+position:absolute;
+top:calc(100% + 8px);
+left:50%;
+transform:translateX(-50%) translateY(8px);
+
+width:330px;
+max-width:calc(100vw - 30px);
+
+background:#fff;
+
+border:1px solid #cfcfcf;
+border-radius:10px;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.45),
+0 4px 15px rgba(0,0,0,.20);
+
+opacity:0;
+visibility:hidden;
+pointer-events:none;
+
+transition:
+opacity .25s ease,
+transform .25s ease,
+visibility .25s ease;
+
+overflow:hidden;
+
+z-index:5000
+}
+
+/* Aparece al pasar el mouse */
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+opacity:1;
+visibility:visible;
+pointer-events:auto;
+transform:translateX(-50%) translateY(0)
+}
+
+
+/* =========================================================
+   ÁREA INTERNA CON SCROLL
+   ========================================================= */
+
+.submenu-scroll{
+max-height:300px;
+overflow-y:auto;
+overflow-x:hidden;
+scroll-behavior:smooth;
+background:#fff;
+padding:0;
+}
+
+
+/* BARRA DE DESPLAZAMIENTO GRANDE Y FÁCIL DE MANIPULAR */
+
+.submenu-scroll::-webkit-scrollbar{
+width:14px
+}
+
+.submenu-scroll::-webkit-scrollbar-track{
+background:#e5e5e5;
+border-left:1px solid #d0d0d0
+}
+
+.submenu-scroll::-webkit-scrollbar-thumb{
+background:#777;
+border-radius:10px;
+border:3px solid #e5e5e5;
+min-height:60px
+}
+
+.submenu-scroll::-webkit-scrollbar-thumb:hover{
+background:#222
+}
+
+
+/* Firefox */
+
+.submenu-scroll{
+scrollbar-width:auto;
+scrollbar-color:#777 #e5e5e5
+}
+
+
+/* =========================================================
+   ELEMENTOS DEL SUBMENU
+   ========================================================= */
+
+.submenu a{
+display:flex !important;
+align-items:center;
+justify-content:flex-start !important;
+
+width:100%;
+min-width:0 !important;
+
+padding:14px 18px !important;
+
+background:#fff !important;
+color:#111 !important;
+
+border:none !important;
+border-radius:0 !important;
+
+font-family:var(--font-body);
+font-size:.74rem !important;
+font-weight:700;
+
+line-height:1.4;
+text-align:left;
+
+text-decoration:none;
+
+box-shadow:none !important;
+
+transition:
+background .2s ease,
+color .2s ease,
+padding-left .2s ease
+}
+
+/* Divisiones entre los 10 puntos */
+
+.submenu a{
+border-bottom:1px solid #d8d8d8 !important
+}
+
+.submenu a:last-child{
+border-bottom:none !important
+}
+
+/* Hover de cada punto */
+
+.submenu a:hover{
+background:#f0f0f0 !important;
+color:#000 !important;
+padding-left:24px !important;
+border-color:#d0d0d0 !important;
+box-shadow:none !important
+}
+
+
+/* =========================================================
+   NUMERACIÓN DEL SUBMENU
+   ========================================================= */
+
+.submenu-number{
+display:flex;
+align-items:center;
+justify-content:center;
+
+width:27px;
+height:27px;
+
+flex:0 0 27px;
+
+margin-right:11px;
+
+background:#111;
+color:#fff;
+
+border-radius:50%;
+
+font-size:.65rem;
+font-weight:800
+}
+
+.submenu a:hover .submenu-number{
+background:var(--orange);
+color:#fff
+}
+
+
+/* =========================================================
+   FONDO / EFECTOS
+   ========================================================= */
+
+.bg-effects,.stars,.bubbles{
+position:fixed;
+inset:0;
+pointer-events:none;
+overflow:hidden;
+z-index:-1
+}
+
+.bg-glow{
+position:absolute;
+width:420px;
+height:420px;
+border-radius:50%;
+filter:blur(100px);
+opacity:.13
+}
+
+.g1{
+background:var(--cyan);
+left:-200px;
+top:25%
+}
+
+.g2{
+background:var(--orange);
+right:-180px;
+bottom:15%
+}
+
+.star{
+position:absolute;
+width:4px;
+height:4px;
+border-radius:50%;
+background:#fff;
+box-shadow:
+0 0 8px #fff,
+0 0 15px var(--cyan);
+animation:star 10s linear infinite
+}
+
+@keyframes star{
+0%{
+transform:translateY(105vh) scale(.4);
+opacity:0
+}
+15%{
+opacity:.8
+}
+100%{
+transform:translateY(-15vh) translateX(30px) scale(1.3);
+opacity:0
+}
+}
+
+.bubble{
+position:absolute;
+border:1px solid rgba(255,255,255,.2);
+border-radius:50%;
+background:
+radial-gradient(
+circle at 30% 25%,
+rgba(255,255,255,.2),
+transparent 45%
+);
+box-shadow:
+inset 0 0 20px rgba(0,234,255,.08),
+0 0 25px rgba(255,106,0,.08);
+animation:bubble 7s ease-in-out infinite
+}
+
+@keyframes bubble{
+50%{
+transform:translate(25px,-45px) scale(1.06)
+}
+}
+
+
+/* =========================================================
+   CONTENIDO
+   ========================================================= */
+
+main{
+padding-top:210px;
+position:relative
+}
+
+.page-intro{
+text-align:center;
+padding:35px 20px 15px
+}
+
+.kicker{
+display:inline-flex;
+align-items:center;
+gap:8px;
+color:var(--cyan);
+font-size:.7rem;
+font-weight:800;
+letter-spacing:2px;
+border:1px solid rgba(0,234,255,.35);
+padding:8px 15px;
+border-radius:999px;
+background:rgba(0,234,255,.05);
+box-shadow:0 0 22px rgba(0,234,255,.08)
+}
+
+.page-title{
+font-family:var(--font-title);
+font-size:clamp(2rem,5vw,4rem);
+font-weight:900;
+margin:20px auto 10px;
+letter-spacing:-1px;
+text-shadow:0 0 22px rgba(0,234,255,.12)
+}
+
+.page-title span{
+color:var(--orange)
+}
+
+.page-subtitle{
+max-width:760px;
+margin:auto;
+color:#aeb6c0;
+font-size:.9rem;
+line-height:1.7
+}
+
+
+/* =========================================================
+   CARRUSEL
+   ========================================================= */
+
+.carousel-wrap{
+width:min(980px,92%);
+margin:30px auto 45px;
+position:relative
+}
+
+.carousel{
+height:310px;
+border-radius:24px;
+overflow:hidden;
+border:1px solid rgba(255,255,255,.16);
+box-shadow:
+0 25px 70px rgba(0,0,0,.55),
+0 0 35px rgba(0,234,255,.07);
+background:#080b10;
+position:relative
+}
+
+.slide{
+position:absolute;
+inset:0;
+opacity:0;
+transform:scale(1.05);
+transition:
+opacity .7s ease,
+transform 1.1s ease
+}
+
+.slide.active{
+opacity:1;
+transform:scale(1)
+}
+
+.slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+filter:brightness(.58) saturate(1.12)
+}
+
+.slide:after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(90deg,rgba(0,0,0,.78),transparent 65%),
+linear-gradient(0deg,rgba(0,0,0,.55),transparent 55%)
+}
+
+.slide-caption{
+position:absolute;
+left:30px;
+bottom:28px;
+z-index:2;
+max-width:500px
+}
+
+.slide-caption strong{
+font-size:1.25rem
+}
+
+.slide-caption p{
+color:#cbd3dc;
+font-size:.72rem;
+margin-top:5px
+}
+
+.carousel-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+z-index:4;
+width:42px;
+height:42px;
+border:1px solid rgba(255,255,255,.25);
+border-radius:50%;
+background:rgba(0,0,0,.48);
+color:#fff;
+cursor:pointer;
+backdrop-filter:blur(8px);
+transition:.3s
+}
+
+.carousel-btn:hover{
+background:var(--orange);
+box-shadow:0 0 18px var(--orange)
+}
+
+.prev{
+left:15px
+}
+
+.next{
+right:15px
+}
+
+.dots{
+position:absolute;
+z-index:5;
+right:25px;
+bottom:23px;
+display:flex;
+gap:6px
+}
+
+.dot{
+width:8px;
+height:8px;
+border-radius:50%;
+border:1px solid #fff;
+background:transparent;
+cursor:pointer;
+opacity:.6
+}
+
+.dot.active{
+background:var(--cyan);
+box-shadow:0 0 9px var(--cyan);
+opacity:1
+}
+
+
+/* =========================================================
+   TARJETA PRINCIPAL
+   ========================================================= */
+
+.content-area{
+width:min(1120px,92%);
+margin:0 auto;
+padding:10px 0 110px;
+position:relative
+}
+
+.info-card{
+position:relative;
+overflow:visible;
+background:
+linear-gradient(
+145deg,
+rgba(15,20,28,.96),
+rgba(5,8,13,.96)
+);
+border:1px solid rgba(255,255,255,.13);
+border-radius:28px;
+padding:48px;
+box-shadow:
+0 30px 80px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.07)
+}
+
+.info-card:before{
+content:"";
+position:absolute;
+inset:-1px;
+border-radius:29px;
+padding:1px;
+background:
+linear-gradient(
+120deg,
+var(--cyan),
+transparent 28%,
+var(--orange) 62%,
+var(--gold)
+);
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+-webkit-mask-composite:xor;
+mask-composite:exclude;
+pointer-events:none;
+opacity:.75
+}
+
+.info-card:after{
+content:"✦";
+position:absolute;
+right:-30px;
+top:-35px;
+font-size:82px;
+color:var(--gold);
+text-shadow:0 0 25px rgba(255,196,0,.5);
+animation:spark 3s ease-in-out infinite
+}
+
+@keyframes spark{
+50%{
+transform:rotate(12deg) scale(1.08);
+opacity:.65
+}
+}
+
+.info-head{
+display:flex;
+align-items:center;
+gap:18px;
+margin-bottom:26px
+}
+
+.info-icon{
+width:62px;
+height:62px;
+display:grid;
+place-items:center;
+border-radius:18px;
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.15),
+rgba(255,106,0,.15)
+);
+border:1px solid rgba(0,234,255,.5);
+color:var(--cyan);
+font-size:1.5rem;
+box-shadow:0 0 25px rgba(0,234,255,.08)
+}
+
+.info-head h2{
+font-size:clamp(1.45rem,3vw,2.25rem);
+font-weight:900
+}
+
+.info-head p{
+color:var(--orange);
+font-size:.7rem;
+font-weight:800;
+letter-spacing:1.5px;
+margin-top:4px
+}
+
+.text-block{
+color:#d8dde5;
+font-size:.9rem;
+line-height:1.9;
+margin-bottom:28px
+}
+
+.text-block strong{
+color:#fff
+}
+
+.text-block p{
+margin-bottom:16px
+}
+
+.feature-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+margin-top:25px
+}
+
+.feature{
+position:relative;
+padding:24px;
+border-radius:20px;
+border:1px solid rgba(255,255,255,.1);
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.045),
+rgba(255,255,255,.015)
+);
+transition:.35s;
+overflow:hidden
+}
+
+.feature:hover{
+transform:translateY(-5px);
+border-color:rgba(0,234,255,.55);
+box-shadow:
+0 15px 35px rgba(0,0,0,.35),
+0 0 20px rgba(0,234,255,.07)
+}
+
+.feature i{
+font-size:1.3rem;
+color:var(--cyan);
+margin-bottom:13px
+}
+
+.feature h3{
+font-size:.95rem;
+margin-bottom:7px
+}
+
+.feature p{
+color:#aeb6c0;
+font-size:.76rem;
+line-height:1.7
+}
+
+.example{
+margin-top:25px;
+padding:25px 28px;
+border-left:4px solid var(--orange);
+border-radius:16px;
+background:
+linear-gradient(
+90deg,
+rgba(255,106,0,.10),
+rgba(255,106,0,.025)
+);
+box-shadow:inset 0 0 30px rgba(255,106,0,.03)
+}
+
+.example-title{
+color:var(--gold);
+font-size:.7rem;
+font-weight:900;
+letter-spacing:2px;
+margin-bottom:8px
+}
+
+.example p{
+color:#e4e8ee;
+line-height:1.8;
+font-size:.82rem
+}
+
+
+/* PERSONAJES */
+
+.characters{
+display:flex;
+justify-content:center;
+gap:18px;
+margin-top:38px;
+flex-wrap:wrap
+}
+
+.character{
+width:135px;
+height:120px;
+border:1px solid rgba(255,255,255,.1);
+border-radius:20px;
+background:
+linear-gradient(
+145deg,
+rgba(0,234,255,.07),
+rgba(255,106,0,.06)
+);
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:8px;
+animation:floatChar 4s ease-in-out infinite
+}
+
+.character:nth-child(2){
+animation-delay:-1s
+}
+
+.character:nth-child(3){
+animation-delay:-2s
+}
+
+.character i{
+font-size:2rem;
+color:var(--orange);
+text-shadow:0 0 15px rgba(255,106,0,.45)
+}
+
+.character span{
+font-size:.67rem;
+color:#c8d0da
+}
+
+@keyframes floatChar{
+50%{
+transform:translateY(-8px)
+}
+}
+
+
+/* =========================================================
+   ONDAS
+   ========================================================= */
+
+.wave-section{
+height:125px;
+position:relative;
+overflow:hidden;
+margin-top:15px
+}
+
+.wave{
+position:absolute;
+left:-5%;
+width:110%;
+height:100px;
+border-radius:50% 50% 0 0;
+border-top:3px solid var(--cyan);
+box-shadow:0 -3px 15px var(--cyan);
+animation:wave 5s ease-in-out infinite
+}
+
+.wave.w2{
+top:15px;
+border-color:var(--orange);
+box-shadow:0 -3px 15px var(--orange);
+animation-duration:7s;
+animation-direction:reverse;
+opacity:.7
+}
+
+.wave.w3{
+top:30px;
+border-color:var(--gold);
+box-shadow:0 -3px 15px var(--gold);
+animation-duration:9s;
+opacity:.45
+}
+
+@keyframes wave{
+50%{
+transform:translateX(3%) scaleY(1.3)
+}
+}
+
+
+/* =========================================================
+   FOOTER CONSERVADO
+   ========================================================= */
+
+footer{
+text-align:center;
+padding:40px 20px;
+border-top:1px solid rgba(255,255,255,.08);
+background:rgba(0,0,0,.8);
+position:relative;
+z-index:2
+}
+
+.footer-line{
+width:120px;
+height:2px;
+margin:0 auto 18px;
+background:
+linear-gradient(
+90deg,
+var(--red),
+var(--orange),
+white
+);
+box-shadow:0 0 10px var(--orange)
+}
+
+footer p{
+font-size:.67rem;
+color:#777;
+line-height:1.8
+}
+
+
+/* =========================================================
+   ANCLAS DE LOS 10 PUNTOS
+   ========================================================= */
+
+#contenido1,
+#contenido2,
+#contenido3,
+#contenido4,
+#contenido5,
+#contenido6,
+#contenido7,
+#contenido8,
+#contenido9,
+#contenido10{
+scroll-margin-top:220px
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width:700px){
+
+.institution-main{
+flex-direction:column;
+padding:15px 50px 8px
+}
+
+.institution-text{
+text-align:center
+}
+
+.logo{
+width:58px
+}
+
+.logo-box:before{
+width:70px;
+height:70px
+}
+
+.navbar{
+overflow-x:auto;
+justify-content:flex-start
+}
+
+.nav-links{
+flex-wrap:nowrap;
+min-width:max-content
+}
+
+.nav-links a{
+min-width:100px
+}
+
+main{
+padding-top:205px
+}
+
+.carousel{
+height:250px
+}
+
+.slide-caption{
+left:20px;
+bottom:20px
+}
+
+.info-card{
+padding:28px 22px
+}
+
+.feature-grid{
+grid-template-columns:1fr
+}
+
+
+/* SUBMENU EN PANTALLAS PEQUEÑAS */
+
+.submenu{
+position:absolute;
+left:0;
+transform:translateY(8px);
+
+width:310px;
+max-width:85vw
+}
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+transform:translateY(0)
+}
+
+.submenu-scroll{
+max-height:270px
+}
+
+.submenu-scroll::-webkit-scrollbar{
+width:15px
+}
+
+.submenu a{
+padding:15px 16px !important;
+font-size:.70rem !important
+}
+
+}
+
+
+@media(max-width:450px){
+
+.institution-button span{
+display:none
+}
+
+.carousel{
+height:220px
+}
+
+.page-title{
+font-size:2rem
+}
+
+.submenu{
+width:285px;
+max-width:82vw
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="bg-effects">
+<span class="bg-glow g1"></span>
+<span class="bg-glow g2"></span>
+</div>
+
+<div class="stars">
+
+<span class="star" style="left:7%;animation-duration:12s"></span>
+<span class="star" style="left:18%;animation-delay:-4s"></span>
+<span class="star" style="left:31%;animation-duration:14s;animation-delay:-7s"></span>
+<span class="star" style="left:46%;animation-delay:-2s"></span>
+<span class="star" style="left:61%;animation-duration:13s;animation-delay:-9s"></span>
+<span class="star" style="left:75%;animation-delay:-5s"></span>
+<span class="star" style="left:88%;animation-duration:15s;animation-delay:-11s"></span>
+
+</div>
+
+<div class="bubbles">
+
+<span class="bubble" style="width:90px;height:90px;left:4%;top:28%"></span>
+<span class="bubble" style="width:45px;height:45px;right:8%;top:22%;animation-duration:5s"></span>
+<span class="bubble" style="width:120px;height:120px;right:2%;top:58%;animation-duration:10s"></span>
+<span class="bubble" style="width:55px;height:55px;left:10%;top:72%;animation-duration:6s"></span>
+
+</div>
+
+
+<header
+class="header"
+id="header">
+
+<div class="header-led"></div>
+
+
+<button
+class="institution-button"
+id="institutionButton">
+
+<i class="fa-solid fa-eye"></i>
+
+<span>
+Ocultar información
+</span>
+
+</button>
+
+
+<div
+class="institution-area"
+id="institutionArea">
+
+<div class="institution-main">
+
+<div class="logo-box">
+
+<img
+src="img/logofce.png"
+alt="Logo de la Facultad de Ciencias de la Educación"
+class="logo">
+
+</div>
+
+
+<div class="institution-text">
+
+<h1 class="uni-name">
+UNIVERSIDAD AUTÓNOMA DE TLAXCALA
+</h1>
+
+<h2 class="facultad">
+FACULTAD DE CIENCIAS DE LA EDUCACIÓN
+</h2>
+
+<p class="carrera">
+Licenciatura en Ciencias de la Educación
+</p>
+
+</div>
+
+</div>
+
+
+<div class="academic-data">
+
+<div class="academic-item">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+<span>
+U.A. SISTEMAS ABIERTOS DE APRENDIZAJE
+</span>
+
+</div>
+
+
+<div class="academic-item">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<span>
+MTRO. JUAN CARLOS SILMAR NAVA
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =================================================
+     MENÚ
+================================================== -->
+
+<nav class="navbar">
+
+<ul class="nav-links">
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-book-open"></i>
+
+Introducción
+
+</a>
+
+</li>
+
+
+<!-- =================================================
+     CONTENIDO + SUBMENU
+================================================== -->
+
+<li class="has-submenu">
+
+<a
+href="index.html"
+class="submenu-trigger"
+aria-haspopup="true"
+aria-expanded="false">
+
+<i class="fa-solid fa-diagram-project"></i>
+Contenido
+
+</a>
+
+
+<div class="submenu">
+
+<div class="submenu-scroll">
+
+<a href="index1.html">
+
+<span class="submenu-number">1</span>
+
+Concepto de aprendizaje autónomo
+
+</a>
+
+
+<a href="index2.html">
+
+<span class="submenu-number">2</span>
+
+Características del estudiante autónomo
+
+</a>
+
+
+<a href="index3.html">
+
+<span class="submenu-number">3</span>
+
+Papel del docente como guía o facilitador
+
+</a>
+
+
+<a href="#index4.html">
+
+<span class="submenu-number">4</span>
+
+TIC, TAC y TEP para el aprendizaje autónomo
+
+</a>
+
+
+<a href="index5.html">
+
+<span class="submenu-number">5</span>
+
+Plataformas y aplicaciones para el estudio independiente
+
+</a>
+
+
+<a href="index6.html">
+
+<span class="submenu-number">6</span>
+
+Recursos digitales para buscar, seleccionar y organizar información
+
+</a>
+
+
+<a href="index7.html">
+
+<span class="submenu-number">7</span>
+
+Herramientas para establecer metas, horarios y seguimiento del aprendizaje
+
+</a>
+
+
+<a href="index8.html">
+
+<span class="submenu-number">8</span>
+
+Ventajas y desafíos del aprendizaje autónomo mediante tecnologías
+
+</a>
+
+
+<a href="index9.html">
+
+<span class="submenu-number">9</span>
+
+Conclusión
+
+</a>
+
+</div>
+
+</div>
+
+</li>
+
+<li>
+
+<a href="index10.html">
+
+<i class="fa-solid fa-puzzle-piece"></i>
+
+Material didáctico
+
+</a>
+
+</li>
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<main id="inicio">
+
+<section class="page-intro">
+
+<div class="kicker">
+
+<i class="fa-solid fa-brain"></i>
+
+PUNTO 01 · APRENDIZAJE AUTÓNOMO
+
+</div>
+
+<h1 class="page-title">
+
+Concepto de <span>aprendizaje autónomo</span>
+
+</h1>
+
+<p class="page-subtitle">
+
+Comprender el aprendizaje autónomo permite reconocer cómo una persona puede dirigir, organizar y evaluar su propio proceso de aprendizaje.
+
+</p>
+
+</section>
+
+
+<section class="carousel-wrap" aria-label="Galería sobre aprendizaje autónomo">
+
+<div class="carousel">
+
+<div class="slide active">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=80"
+alt="Estudiante usando tecnología para aprender">
+
+<div class="slide-caption">
+
+<strong>
+Aprender con tecnología
+</strong>
+
+<p>
+El entorno digital amplía las posibilidades de estudio independiente.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1400&q=80"
+alt="Personas colaborando con computadoras">
+
+<div class="slide-caption">
+
+<strong>
+Organizar el aprendizaje
+</strong>
+
+<p>
+Planear tiempos y recursos ayuda a avanzar con mayor autonomía.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1400&q=80"
+alt="Computadora y herramientas digitales">
+
+<div class="slide-caption">
+
+<strong>
+Explorar recursos digitales
+</strong>
+
+<p>
+Internet ofrece herramientas para investigar y practicar.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=80"
+alt="Estudiantes aprendiendo juntos">
+
+<div class="slide-caption">
+
+<strong>
+Aprender de forma activa
+</strong>
+
+<p>
+La autonomía también implica tomar decisiones y participar.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1400&q=80"
+alt="Equipo trabajando con tecnología">
+
+<div class="slide-caption">
+
+<strong>
+Aprendizaje permanente
+</strong>
+
+<p>
+La capacidad de aprender continúa más allá del aula.
+</p>
+
+</div>
+
+</div>
+
+
+<button
+class="carousel-btn prev"
+aria-label="Anterior">
+
+<i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+
+<button
+class="carousel-btn next"
+aria-label="Siguiente">
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+
+<div class="dots"></div>
+
+</div>
+
+</section>
+
+
+<!-- =================================================
+     CONTENIDO 1
+================================================== -->
+
+<section
+class="content-area"
+id="contenido1">
+
+<article class="info-card">
+
+<div class="info-head">
+
+<div class="info-icon">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+</div>
+
+<div>
+
+<h2>
+¿Qué es el aprendizaje autónomo?
+</h2>
+
+<p>
+CONCEPTO E IMPORTANCIA
+</p>
+
+</div>
+
+</div>
+
+
+<div class="text-block">
+
+<p>
+
+El <strong>aprendizaje autónomo</strong> es la capacidad que tiene una persona para dirigir, organizar y evaluar su propio proceso de aprendizaje. Implica asumir un papel activo en la adquisición de conocimientos, estableciendo objetivos y tomando decisiones sobre cómo aprender.
+
+</p>
+
+
+<p>
+
+En otras palabras, el estudiante participa de manera activa en su aprendizaje y no depende completamente de que otra persona le indique cada paso. Puede establecer metas, elegir recursos, organizar su tiempo y revisar sus avances.
+
+</p>
+
+</div>
+
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<i class="fa-solid fa-compass"></i>
+
+<h3>
+Dirigir
+</h3>
+
+<p>
+Tomar decisiones sobre qué aprender y cómo avanzar hacia los objetivos establecidos.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<i class="fa-solid fa-calendar-days"></i>
+
+<h3>
+Organizar
+</h3>
+
+<p>
+Distribuir el tiempo, seleccionar recursos y estructurar las actividades de estudio.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<i class="fa-solid fa-chart-line"></i>
+
+<h3>
+Evaluar
+</h3>
+
+<p>
+Revisar los avances, identificar dificultades y reconocer qué aspectos necesitan mejorar.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<i class="fa-solid fa-bullseye"></i>
+
+<h3>
+Establecer objetivos
+</h3>
+
+<p>
+Definir metas claras que orienten el proceso y permitan dar seguimiento al aprendizaje.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="example">
+
+<div class="example-title">
+
+<i class="fa-solid fa-lightbulb"></i>
+
+EJEMPLO
+
+</div>
+
+<p>
+
+Un estudiante que desea aprender un idioma puede utilizar plataformas digitales, organizar su tiempo de estudio y evaluar sus avances sin depender completamente de un profesor.
+
+</p>
+
+</div>
+
+
+<div class="characters">
+
+<div class="character">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+<span>
+Estudiante activo
+</span>
+
+</div>
+
+
+<div class="character">
+
+<i class="fa-solid fa-laptop"></i>
+
+<span>
+Recursos digitales
+</span>
+
+</div>
+
+
+<div class="character">
+
+<i class="fa-solid fa-bullseye"></i>
+
+<span>
+Metas personales
+</span>
+
+</div>
+
+</div>
+
+</article>
+
+</section>
+
+
+<!-- =================================================
+     CONTENIDO 2
+================================================== -->
+
+<section
+class="content-area"
+id="contenido2"
+style="padding-top:0">
+
+<article class="info-card">
+
+<div class="info-head">
+
+<div class="info-icon">
+
+<i class="fa-solid fa-globe"></i>
+
+</div>
+
+<div>
+
+<h2>
+Importancia en la educación actual
+</h2>
+
+<p>
+APRENDIZAJE MÁS ALLÁ DEL AULA
+</p>
+
+</div>
+
+</div>
+
+
+<div class="text-block">
+
+<p>
+
+En una sociedad donde la información cambia constantemente, el aprendizaje autónomo permite que los estudiantes continúen aprendiendo más allá del aula. Esta capacidad favorece la adaptación a nuevos contextos, el desarrollo de habilidades para resolver problemas y el aprendizaje permanente.
+
+</p>
+
+</div>
+
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<i class="fa-solid fa-arrows-rotate"></i>
+
+<h3>
+Adaptación
+</h3>
+
+<p>
+Permite responder a nuevos contextos y a los cambios constantes de la información.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<i class="fa-solid fa-puzzle-piece"></i>
+
+<h3>
+Resolución de problemas
+</h3>
+
+<p>
+Favorece el desarrollo de habilidades para analizar situaciones y buscar soluciones.
+</p>
+
+</div>
+
+</div>
+
+</article>
+
+</section>
+
+
+<!-- =================================================
+     ESPACIOS PARA LOS 10 PUNTOS
+     
+     NO SE MODIFICA EL CONTENIDO ORIGINAL.
+     Los siguientes puntos quedan preparados para
+     vincularse con tus demás páginas/secciones.
+================================================== -->
+
+<section id="contenido3" class="submenu-anchor"></section>
+<section id="contenido4" class="submenu-anchor"></section>
+<section id="contenido5" class="submenu-anchor"></section>
+<section id="contenido6" class="submenu-anchor"></section>
+<section id="contenido7" class="submenu-anchor"></section>
+<section id="contenido8" class="submenu-anchor"></section>
+<section id="contenido9" class="submenu-anchor"></section>
+<section id="contenido10" class="submenu-anchor"></section>
+
+
+<div class="wave-section">
+
+<div class="wave"></div>
+
+<div class="wave w2"></div>
+
+<div class="wave w3"></div>
+
+</div>
+
+</main>
+
+
+<footer>
+
+<div class="footer-line"></div>
+
+<p>
+TIC, TAC y TEP para el Aprendizaje Autónomo
+</p>
+
+<p>
+Universidad Autónoma de Tlaxcala ·
+Facultad de Ciencias de la Educación
+</p>
+
+<p>
+GRUPO 503
+</p>
+
+<p>
+SEGUNDO PARCIAL
+</p>
+
+<p>
+EQUIPO 4: Rosa | Juan | Isael | Pedro | Yadsiri
+</p>
+
+</footer>
+
+
+<script>
+
+/* =================================================
+   INFORMACIÓN INSTITUCIONAL
+================================================== */
+
+const institutionButton=document.getElementById('institutionButton'),
+institutionArea=document.getElementById('institutionArea');
+
+institutionButton.addEventListener('click',()=>{
+
+const closed=institutionArea.classList.toggle('closed');
+
+institutionButton.innerHTML=
+closed
+?
+'<i class="fa-solid fa-eye"></i><span>Mostrar información</span>'
+:
+'<i class="fa-solid fa-eye-slash"></i><span>Ocultar información</span>';
+
+});
+
+
+/* =================================================
+   HEADER AL HACER SCROLL
+================================================== */
+
+const header=document.getElementById('header');
+
+let lastScroll=window.scrollY;
+
+window.addEventListener(
+'scroll',
+()=>{
+
+const y=window.scrollY;
+
+if(y<=80)
+
+header.classList.remove('hide');
+
+else if(y>lastScroll)
+
+header.classList.add('hide');
+
+else
+
+header.classList.remove('hide');
+
+lastScroll=y;
+
+},
+{passive:true}
+);
+
+
+/* =================================================
+   SUBMENU DE CONTENIDO
+================================================== */
+
+const submenuTrigger=document.querySelector('.submenu-trigger');
+const submenuParent=document.querySelector('.has-submenu');
+
+submenuTrigger.addEventListener('click',(event)=>{
+
+/*
+En pantallas pequeñas se abre mediante clic
+para que sea fácil de manipular.
+*/
+
+if(window.innerWidth<=700){
+
+event.preventDefault();
+
+const abierto=submenuParent.classList.toggle('open');
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+abierto ? 'true' : 'false'
+);
+
+}
+
+});
+
+
+/*
+Cerrar el submenu cuando se hace clic
+fuera de él.
+*/
+
+document.addEventListener('click',(event)=>{
+
+if(
+!submenuParent.contains(event.target)
+){
+
+submenuParent.classList.remove('open');
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+'false'
+);
+
+}
+
+});
+
+
+/* =================================================
+   CARRUSEL
+================================================== */
+
+const slides=[
+...document.querySelectorAll('.slide')
+];
+
+const dots=document.querySelector('.dots');
+
+let current=0;
+let timer;
+
+
+slides.forEach((_,i)=>{
+
+const d=document.createElement('button');
+
+d.className=
+'dot'+
+(i===0?' active':'');
+
+d.setAttribute(
+'aria-label',
+'Ir a imagen '+(i+1)
+);
+
+d.onclick=()=>show(i);
+
+dots.appendChild(d);
+
+});
+
+
+function show(i){
+
+current=
+(i+slides.length)%slides.length;
+
+slides.forEach(
+(s,n)=>
+s.classList.toggle(
+'active',
+n===current
+)
+);
+
+[...dots.children].forEach(
+(d,n)=>
+d.classList.toggle(
+'active',
+n===current
+)
+);
+
+clearInterval(timer);
+
+timer=setInterval(
+()=>show(current+1),
+5000
+);
+
+}
+
+
+document.querySelector('.next').onclick=
+()=>show(current+1);
+
+document.querySelector('.prev').onclick=
+()=>show(current-1);
+
+timer=setInterval(
+()=>show(current+1),
+5000
+);
+
+</script>
+
+</body>
+</html>

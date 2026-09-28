@@ -1,0 +1,2818 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Uso de TIC, TAC y TEP para organizar el aprendizaje</title>
+
+<link rel="icon"
+type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23030303'/%3E%3Ctext x='50' y='63' text-anchor='middle' font-size='45' font-family='Arial' font-weight='bold' fill='%2300eaff'%3ET%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root{
+
+--black:#030303;
+--black2:#080808;
+--white:#fff;
+--gray:#a8a8a8;
+
+--red:#ff1e1e;
+--orange:#ff6a00;
+--gold:#ffc400;
+
+--cyan:#00eaff;
+--blue:#008cff;
+
+--green:#00ff88;
+
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+background:
+radial-gradient(circle at 10% 20%,rgba(0,234,255,.10),transparent 25%),
+radial-gradient(circle at 90% 70%,rgba(255,106,0,.10),transparent 25%),
+linear-gradient(135deg,#020202,#080808 45%,#030303);
+
+color:var(--white);
+
+font-family:'Poppins',sans-serif;
+
+overflow-x:hidden;
+
+}
+
+
+/* =========================================================
+   LED SUPERIOR
+========================================================= */
+
+.led-strip{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:5px;
+
+z-index:9999;
+
+background:
+linear-gradient(
+90deg,
+#ffc400,
+#ff6a00,
+#00eaff,
+#008cff,
+#00ff88,
+#ffc400,
+#ff6a00,
+#00eaff
+);
+
+background-size:400% 100%;
+
+animation:ledMove 8s linear infinite;
+
+box-shadow:
+0 0 10px rgba(0,234,255,.7),
+0 0 20px rgba(255,106,0,.5);
+
+}
+
+@keyframes ledMove{
+
+0%{
+background-position:0% 50%;
+}
+
+100%{
+background-position:400% 50%;
+}
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header{
+
+position:fixed;
+
+top:5px;
+left:0;
+
+width:100%;
+
+z-index:1000;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.96),
+rgba(3,3,3,.88)
+);
+
+backdrop-filter:blur(15px);
+
+border-bottom:1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 8px 30px rgba(0,0,0,.45);
+
+transition:.4s;
+
+}
+
+header.hide{
+transform:translateY(-100%);
+}
+
+
+/* =========================================================
+   INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+.institution{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:20px;
+
+padding:13px 20px 8px;
+
+}
+
+.logo{
+
+width:72px;
+height:72px;
+
+object-fit:contain;
+
+filter:
+drop-shadow(0 0 7px rgba(0,234,255,.25));
+
+}
+
+.institution-text{
+
+text-align:left;
+
+}
+
+.institution-text h1{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:16px;
+
+font-weight:800;
+
+letter-spacing:1px;
+
+}
+
+.institution-text h2{
+
+font-size:13px;
+
+font-weight:700;
+
+color:var(--cyan);
+
+letter-spacing:.7px;
+
+margin-top:2px;
+
+}
+
+.institution-text p{
+
+font-size:11px;
+
+color:#ccc;
+
+margin-top:3px;
+
+}
+
+
+.academic-data{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:7px;
+
+margin-top:7px;
+
+}
+
+.chip{
+
+padding:5px 11px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:20px;
+
+font-size:9px;
+
+font-weight:700;
+
+letter-spacing:.6px;
+
+background:rgba(255,255,255,.04);
+
+color:#ddd;
+
+}
+
+.chip:first-child{
+
+border-color:rgba(0,234,255,.35);
+
+color:var(--cyan);
+
+}
+
+.chip:last-child{
+
+border-color:rgba(255,106,0,.35);
+
+color:#ffb27a;
+
+}
+
+
+/* =========================================================
+   BOTÓN INFORMACIÓN
+========================================================= */
+
+.info-toggle{
+
+display:block;
+
+margin:3px auto 7px;
+
+padding:5px 13px;
+
+border-radius:20px;
+
+border:1px solid rgba(0,234,255,.35);
+
+background:rgba(0,234,255,.06);
+
+color:var(--cyan);
+
+font-family:'Poppins',sans-serif;
+
+font-size:9px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.info-toggle:hover{
+
+background:rgba(0,234,255,.14);
+
+transform:translateY(-2px);
+
+}
+
+
+/* =========================================================
+   MENU
+========================================================= */
+
+nav{
+
+display:flex;
+
+justify-content:center;
+
+padding:7px 15px 11px;
+
+}
+
+.menu{
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:5px;
+
+padding:5px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:18px;
+
+background:rgba(255,255,255,.025);
+
+}
+
+.menu>a,
+.menu-item>a{
+
+display:flex;
+
+align-items:center;
+
+gap:7px;
+
+padding:9px 16px;
+
+border-radius:13px;
+
+color:#eee;
+
+text-decoration:none;
+
+font-size:11px;
+
+font-weight:600;
+
+transition:.3s;
+
+white-space:nowrap;
+
+}
+
+.menu>a:hover,
+.menu-item>a:hover{
+
+background:rgba(0,234,255,.08);
+
+color:var(--cyan);
+
+}
+
+.menu-item{
+
+position:relative;
+
+}
+
+.menu-item>a i{
+
+font-size:9px;
+
+}
+
+
+/* =========================================================
+   SUBMENU
+========================================================= */
+
+.submenu{
+
+position:absolute;
+
+top:calc(100% + 8px);
+
+left:50%;
+
+transform:translateX(-50%);
+
+width:355px;
+
+max-height:470px;
+
+overflow-y:auto;
+
+padding:9px;
+
+background:#fff;
+
+border:1px solid rgba(0,0,0,.15);
+
+border-radius:15px;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.5);
+
+opacity:0;
+
+visibility:hidden;
+
+pointer-events:none;
+
+transition:.25s;
+
+z-index:2000;
+
+}
+
+.menu-item:hover .submenu,
+.menu-item.open .submenu{
+
+opacity:1;
+
+visibility:visible;
+
+pointer-events:auto;
+
+}
+
+.submenu a{
+
+display:flex;
+
+align-items:center;
+
+gap:10px;
+
+padding:9px 8px;
+
+border-bottom:1px solid #ddd;
+
+color:#111;
+
+text-decoration:none;
+
+font-size:10px;
+
+font-weight:600;
+
+line-height:1.35;
+
+transition:.2s;
+
+}
+
+.submenu a:last-child{
+
+border-bottom:none;
+
+}
+
+.submenu a:hover{
+
+background:#f2f2f2;
+
+color:#008cff;
+
+}
+
+.sub-number{
+
+min-width:25px;
+height:25px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+border-radius:50%;
+
+background:#111;
+
+color:#fff;
+
+font-size:10px;
+
+font-weight:800;
+
+}
+
+.submenu a:hover .sub-number{
+
+background:#008cff;
+
+}
+
+
+/* =========================================================
+   FONDO
+========================================================= */
+
+.background-shape{
+
+position:fixed;
+
+width:300px;
+height:300px;
+
+border-radius:50%;
+
+filter:blur(100px);
+
+opacity:.12;
+
+pointer-events:none;
+
+z-index:-1;
+
+}
+
+.shape1{
+
+top:20%;
+left:-100px;
+
+background:var(--cyan);
+
+}
+
+.shape2{
+
+right:-100px;
+bottom:10%;
+
+background:var(--orange);
+
+}
+
+.shape3{
+
+top:60%;
+left:45%;
+
+background:var(--blue);
+
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+main{
+
+padding-top:215px;
+
+padding-bottom:50px;
+
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.page-intro{
+
+text-align:center;
+
+max-width:1100px;
+
+margin:auto;
+
+padding:20px;
+
+}
+
+.kicker{
+
+display:inline-block;
+
+padding:7px 13px;
+
+border:1px solid rgba(0,234,255,.3);
+
+border-radius:20px;
+
+color:var(--cyan);
+
+font-size:10px;
+
+font-weight:800;
+
+letter-spacing:1.5px;
+
+margin-bottom:15px;
+
+background:rgba(0,234,255,.04);
+
+}
+
+.page-intro h1{
+
+font-family:'Bungee',sans-serif;
+
+font-size:clamp(27px,5vw,52px);
+
+line-height:1.1;
+
+letter-spacing:1px;
+
+text-shadow:
+0 0 20px rgba(0,234,255,.12);
+
+}
+
+.page-intro h1 span{
+
+background:
+linear-gradient(
+90deg,
+var(--cyan),
+var(--blue),
+var(--orange),
+var(--gold)
+);
+
+-webkit-background-clip:text;
+
+-webkit-text-fill-color:transparent;
+
+}
+
+.page-intro p{
+
+max-width:850px;
+
+margin:15px auto 0;
+
+color:#bcbcbc;
+
+font-size:13px;
+
+line-height:1.8;
+
+}
+
+
+/* =========================================================
+   CARRUSEL
+========================================================= */
+
+.carousel{
+
+width:min(1100px,92%);
+
+height:440px;
+
+margin:35px auto;
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:28px;
+
+border:1px solid rgba(255,255,255,.12);
+
+background:#050505;
+
+box-shadow:
+0 20px 70px rgba(0,0,0,.45);
+
+}
+
+.slide{
+
+position:absolute;
+
+inset:0;
+
+opacity:0;
+
+transition:opacity .7s ease;
+
+}
+
+.slide.active{
+
+opacity:1;
+
+}
+
+.slide img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+}
+
+.slide::after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.05),
+rgba(0,0,0,.75)
+);
+
+}
+
+.slide-caption{
+
+position:absolute;
+
+bottom:35px;
+left:40px;
+
+z-index:2;
+
+max-width:700px;
+
+}
+
+.slide-caption h3{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:28px;
+
+font-weight:800;
+
+margin-bottom:6px;
+
+}
+
+.slide-caption p{
+
+color:#ddd;
+
+font-size:12px;
+
+}
+
+.carousel-btn{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+width:42px;
+height:42px;
+
+border-radius:50%;
+
+border:1px solid rgba(255,255,255,.25);
+
+background:rgba(0,0,0,.45);
+
+color:#fff;
+
+cursor:pointer;
+
+z-index:4;
+
+transition:.3s;
+
+}
+
+.carousel-btn:hover{
+
+background:rgba(0,234,255,.2);
+
+border-color:var(--cyan);
+
+color:var(--cyan);
+
+}
+
+.prev{
+
+left:18px;
+
+}
+
+.next{
+
+right:18px;
+
+}
+
+.dots{
+
+position:absolute;
+
+bottom:15px;
+
+left:50%;
+
+transform:translateX(-50%);
+
+display:flex;
+
+gap:7px;
+
+z-index:5;
+
+}
+
+.dot{
+
+width:8px;
+height:8px;
+
+border-radius:50%;
+
+background:rgba(255,255,255,.4);
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.dot.active{
+
+width:25px;
+
+border-radius:10px;
+
+background:var(--cyan);
+
+}
+
+
+/* =========================================================
+   TARJETA PRINCIPAL
+========================================================= */
+
+.info-card{
+
+width:min(1100px,92%);
+
+margin:30px auto;
+
+padding:42px;
+
+position:relative;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.045),
+rgba(255,255,255,.015)
+);
+
+border:1px solid rgba(255,255,255,.10);
+
+box-shadow:
+0 20px 70px rgba(0,0,0,.4);
+
+overflow:hidden;
+
+}
+
+.info-card::before{
+
+content:"";
+
+position:absolute;
+
+top:0;
+left:0;
+
+width:100%;
+height:3px;
+
+background:
+linear-gradient(
+90deg,
+var(--cyan),
+var(--blue),
+var(--orange),
+var(--gold),
+var(--cyan)
+);
+
+background-size:300%;
+
+animation:borderMove 8s linear infinite;
+
+}
+
+@keyframes borderMove{
+
+0%{
+background-position:0%;
+}
+
+100%{
+background-position:300%;
+}
+
+}
+
+
+/* =========================================================
+   ENCABEZADO CONTENIDO
+========================================================= */
+
+.info-head{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+margin-bottom:30px;
+
+}
+
+.info-icon{
+
+width:58px;
+height:58px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.16),
+rgba(0,140,255,.08)
+);
+
+border:1px solid rgba(0,234,255,.3);
+
+color:var(--cyan);
+
+font-size:23px;
+
+box-shadow:
+0 0 25px rgba(0,234,255,.08);
+
+}
+
+.info-head h2{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:25px;
+
+font-weight:800;
+
+}
+
+.info-head p{
+
+font-size:11px;
+
+color:#999;
+
+margin-top:4px;
+
+}
+
+
+/* =========================================================
+   GRID TIC TAC TEP
+========================================================= */
+
+.tech-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:22px;
+
+}
+
+
+/* =========================================================
+   TARJETAS
+========================================================= */
+
+.tech-card{
+
+position:relative;
+
+padding:28px;
+
+border-radius:23px;
+
+min-height:350px;
+
+overflow:hidden;
+
+transition:.35s;
+
+background:#090909;
+
+}
+
+.tech-card:hover{
+
+transform:translateY(-7px);
+
+}
+
+.tech-card::after{
+
+content:"";
+
+position:absolute;
+
+width:130px;
+height:130px;
+
+border-radius:50%;
+
+right:-55px;
+bottom:-55px;
+
+filter:blur(20px);
+
+opacity:.12;
+
+}
+
+
+/* TIC */
+
+.tic-card{
+
+border:1px solid rgba(0,234,255,.30);
+
+background:
+linear-gradient(
+145deg,
+rgba(0,234,255,.08),
+rgba(0,0,0,.4)
+);
+
+}
+
+.tic-card::after{
+
+background:var(--cyan);
+
+}
+
+.tic-card:hover{
+
+box-shadow:
+0 15px 45px rgba(0,234,255,.10);
+
+}
+
+
+/* TAC */
+
+.tac-card{
+
+border:1px solid rgba(255,166,0,.32);
+
+background:
+linear-gradient(
+145deg,
+rgba(255,106,0,.09),
+rgba(0,0,0,.4)
+);
+
+}
+
+.tac-card::after{
+
+background:var(--orange);
+
+}
+
+.tac-card:hover{
+
+box-shadow:
+0 15px 45px rgba(255,106,0,.10);
+
+}
+
+
+/* TEP */
+
+.tep-card{
+
+border:1px solid rgba(0,255,136,.30);
+
+background:
+linear-gradient(
+145deg,
+rgba(0,255,136,.07),
+rgba(0,0,0,.4)
+);
+
+}
+
+.tep-card::after{
+
+background:var(--green);
+
+}
+
+.tep-card:hover{
+
+box-shadow:
+0 15px 45px rgba(0,255,136,.09);
+
+}
+
+
+/* =========================================================
+   ICONO Y NUMERO
+========================================================= */
+
+.tech-top{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:23px;
+
+}
+
+.tech-number{
+
+font-family:'Bungee',sans-serif;
+
+font-size:12px;
+
+opacity:.55;
+
+}
+
+.tech-symbol{
+
+width:52px;
+height:52px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+border-radius:15px;
+
+font-size:21px;
+
+}
+
+.tic-card .tech-symbol{
+
+background:rgba(0,234,255,.12);
+
+color:var(--cyan);
+
+}
+
+.tac-card .tech-symbol{
+
+background:rgba(255,106,0,.12);
+
+color:var(--orange);
+
+}
+
+.tep-card .tech-symbol{
+
+background:rgba(0,255,136,.10);
+
+color:var(--green);
+
+}
+
+
+/* =========================================================
+   TEXTO TARJETAS
+========================================================= */
+
+.tech-card h3{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:21px;
+
+font-weight:800;
+
+margin-bottom:6px;
+
+}
+
+.tech-card h3 span{
+
+display:block;
+
+font-size:10px;
+
+font-weight:600;
+
+color:#999;
+
+margin-top:4px;
+
+letter-spacing:.4px;
+
+}
+
+.tech-card p{
+
+font-size:11.5px;
+
+line-height:1.8;
+
+color:#c6c6c6;
+
+margin-top:17px;
+
+}
+
+
+/* =========================================================
+   EJEMPLOS
+========================================================= */
+
+.examples{
+
+margin-top:24px;
+
+padding-top:17px;
+
+border-top:1px solid rgba(255,255,255,.09);
+
+}
+
+.examples-title{
+
+font-size:9px;
+
+font-weight:800;
+
+text-transform:uppercase;
+
+letter-spacing:1.2px;
+
+color:#888;
+
+margin-bottom:10px;
+
+}
+
+.example-list{
+
+display:flex;
+
+flex-wrap:wrap;
+
+gap:7px;
+
+}
+
+.example{
+
+padding:6px 9px;
+
+border-radius:9px;
+
+font-size:9px;
+
+font-weight:600;
+
+background:rgba(255,255,255,.055);
+
+color:#ddd;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+.tic-card .example{
+
+border-color:rgba(0,234,255,.20);
+
+}
+
+.tac-card .example{
+
+border-color:rgba(255,106,0,.20);
+
+}
+
+.tep-card .example{
+
+border-color:rgba(0,255,136,.18);
+
+}
+
+
+/* =========================================================
+   GALERÍA
+========================================================= */
+
+.gallery-section{
+
+margin-top:42px;
+
+}
+
+.gallery-title{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin-bottom:20px;
+
+}
+
+.gallery-title i{
+
+color:var(--gold);
+
+}
+
+.gallery-title h3{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:18px;
+
+font-weight:800;
+
+}
+
+.gallery{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:14px;
+
+}
+
+.gallery-item{
+
+height:190px;
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.1);
+
+background:#050505;
+
+}
+
+.gallery-item img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+transition:.5s;
+
+}
+
+.gallery-item:hover img{
+
+transform:scale(1.08);
+
+}
+
+.gallery-overlay{
+
+position:absolute;
+
+left:0;
+right:0;
+bottom:0;
+
+padding:18px 15px 13px;
+
+background:
+linear-gradient(
+transparent,
+rgba(0,0,0,.9)
+);
+
+}
+
+.gallery-overlay h4{
+
+font-size:12px;
+
+font-weight:800;
+
+}
+
+.gallery-overlay p{
+
+font-size:9px;
+
+color:#bbb;
+
+margin-top:2px;
+
+}
+
+
+/* =========================================================
+   FRANJA FINAL
+========================================================= */
+
+.tech-summary{
+
+margin-top:35px;
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:12px;
+
+}
+
+.summary-box{
+
+padding:17px;
+
+border-radius:15px;
+
+text-align:center;
+
+font-size:10px;
+
+font-weight:700;
+
+border:1px solid rgba(255,255,255,.08);
+
+background:rgba(255,255,255,.025);
+
+}
+
+.summary-box i{
+
+display:block;
+
+font-size:19px;
+
+margin-bottom:7px;
+
+}
+
+.summary-tic{
+
+color:var(--cyan);
+
+}
+
+.summary-tac{
+
+color:var(--orange);
+
+}
+
+.summary-tep{
+
+color:var(--green);
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer{
+
+padding:35px 20px;
+
+text-align:center;
+
+border-top:1px solid rgba(255,255,255,.08);
+
+background:#020202;
+
+}
+
+footer h3{
+
+font-family:'Montserrat',sans-serif;
+
+font-size:13px;
+
+font-weight:800;
+
+}
+
+footer p{
+
+font-size:10px;
+
+color:#777;
+
+margin-top:5px;
+
+}
+
+.footer-data{
+
+display:flex;
+
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+margin-top:12px;
+
+}
+
+.footer-data span{
+
+padding:5px 10px;
+
+border-radius:10px;
+
+font-size:9px;
+
+color:#aaa;
+
+border:1px solid rgba(255,255,255,.08);
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:900px){
+
+.tech-grid{
+
+grid-template-columns:1fr;
+
+}
+
+.tech-card{
+
+min-height:auto;
+
+}
+
+.gallery{
+
+grid-template-columns:
+repeat(2,1fr);
+
+}
+
+.tech-summary{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+
+@media(max-width:700px){
+
+.institution{
+
+flex-direction:column;
+
+text-align:center;
+
+gap:7px;
+
+}
+
+.institution-text{
+
+text-align:center;
+
+}
+
+.logo{
+
+width:60px;
+height:60px;
+
+}
+
+.menu{
+
+flex-wrap:wrap;
+
+}
+
+.menu>a,
+.menu-item>a{
+
+padding:8px 10px;
+
+font-size:9px;
+
+}
+
+.submenu{
+
+width:300px;
+
+max-width:90vw;
+
+}
+
+main{
+
+padding-top:285px;
+
+}
+
+.carousel{
+
+height:330px;
+
+}
+
+.slide-caption{
+
+left:25px;
+bottom:30px;
+
+right:20px;
+
+}
+
+.slide-caption h3{
+
+font-size:21px;
+
+}
+
+.info-card{
+
+padding:25px 18px;
+
+}
+
+.gallery{
+
+grid-template-columns:1fr;
+
+}
+
+.gallery-item{
+
+height:210px;
+
+}
+
+}
+
+
+@media(max-width:450px){
+
+.page-intro h1{
+
+font-size:25px;
+
+}
+
+.carousel{
+
+height:280px;
+
+}
+
+.info-head h2{
+
+font-size:20px;
+
+}
+
+}
+
+
+/* =========================================================
+   OCULTAR INFORMACIÓN
+========================================================= */
+
+.institution.hidden{
+
+display:none;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LED
+===================================================== -->
+
+<div class="led-strip"></div>
+
+
+<!-- =====================================================
+     FONDOS
+===================================================== -->
+
+<div class="background-shape shape1"></div>
+<div class="background-shape shape2"></div>
+<div class="background-shape shape3"></div>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header id="header">
+
+
+<div class="institution" id="institution">
+
+
+<img
+src="img/logofce.png"
+alt="Logo Facultad de Ciencias de la Educación"
+class="logo">
+
+
+<div class="institution-text">
+
+<h1>UNIVERSIDAD AUTÓNOMA DE TLAXCALA</h1>
+
+<h2>FACULTAD DE CIENCIAS DE LA EDUCACIÓN</h2>
+
+<p>Licenciatura en Ciencias de la Educación</p>
+
+
+<div class="academic-data">
+
+<span class="chip">
+U.A. SISTEMAS ABIERTOS DE APRENDIZAJE
+</span>
+
+<span class="chip">
+MTRO. JUAN CARLOS SILMAR NAVA
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<button
+class="info-toggle"
+id="toggleInfo">
+
+Ocultar información
+
+</button>
+
+
+<!-- =====================================================
+     MENU
+===================================================== -->
+
+<nav>
+
+<div class="menu">
+
+
+<a href="index.html">
+<i class="fa-solid fa-house"></i>
+Inicio
+</a>
+
+
+<a href="index.html">
+<i class="fa-solid fa-book-open"></i>
+Introducción
+</a>
+
+
+<div class="menu-item" id="contentMenu">
+
+<a href="index.html">
+<i class="fa-solid fa-layer-group"></i>
+Contenido
+<i class="fa-solid fa-chevron-down"></i>
+</a>
+
+
+<div class="submenu">
+
+
+<a href="index1.html">
+<span class="sub-number">1</span>
+Concepto de aprendizaje autónomo
+</a>
+
+
+<a href="index2.html">
+<span class="sub-number">2</span>
+Características del estudiante autónomo
+</a>
+
+
+<a href="index3.html">
+<span class="sub-number">3</span>
+Papel del docente como guía o facilitador
+</a>
+
+
+<a href="index4.html">
+<span class="sub-number">4</span>
+TIC, TAC y TEP para el aprendizaje autónomo
+</a>
+
+
+<a href="index5.html">
+<span class="sub-number">5</span>
+Plataformas y aplicaciones para el estudio independiente
+</a>
+
+
+<a href="index6.html">
+<span class="sub-number">6</span>
+Recursos digitales para buscar, seleccionar y organizar información
+</a>
+
+
+<a href="index7.html">
+<span class="sub-number">7</span>
+Herramientas para establecer metas, horarios y seguimiento del aprendizaje
+</a>
+
+
+<a href="index8.html">
+<span class="sub-number">8</span>
+Ventajas y desafíos del aprendizaje autónomo mediante tecnologías
+</a>
+
+
+<a href="index9.html">
+<span class="sub-number">9</span>
+Conclusión
+</a>
+
+
+</div>
+
+</div>
+
+
+<a href="index10.html">
+<i class="fa-solid fa-box-open"></i>
+Material didáctico
+</a>
+
+
+</div>
+
+</nav>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+
+<section class="page-intro">
+
+
+<span class="kicker">
+PUNTO 04 · TECNOLOGÍAS PARA EL APRENDIZAJE
+</span>
+
+
+<h1>
+Uso de <span>TIC, TAC y TEP</span>
+para organizar el aprendizaje
+</h1>
+
+
+<p>
+Las TIC, TAC y TEP permiten incorporar diferentes tecnologías para acceder a la información, facilitar el aprendizaje y favorecer la participación.
+</p>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CARRUSEL
+===================================================== -->
+
+<section class="carousel" id="carousel">
+
+
+<div class="slide active">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1600&q=85"
+alt="Computadora e Internet">
+
+<div class="slide-caption">
+
+<h3>Internet y computadoras</h3>
+
+<p>
+Herramientas que permiten acceder, buscar y compartir información.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1600&q=85"
+alt="Teléfono inteligente">
+
+<div class="slide-caption">
+
+<h3>Teléfonos inteligentes</h3>
+
+<p>
+Dispositivos que facilitan el acceso a información y recursos digitales.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1596526131083-e8c633c948d2?auto=format&fit=crop&w=1600&q=85"
+alt="Correo electrónico">
+
+<div class="slide-caption">
+
+<h3>Correo electrónico</h3>
+
+<p>
+Medio digital para compartir información necesaria para aprender.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?auto=format&fit=crop&w=1600&q=85"
+alt="Aprendizaje digital">
+
+<div class="slide-caption">
+
+<h3>Google Classroom y Moodle</h3>
+
+<p>
+Herramientas de aprendizaje y conocimiento diseñadas para aprender.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=85"
+alt="Colaboración virtual">
+
+<div class="slide-caption">
+
+<h3>Foros y comunidades virtuales</h3>
+
+<p>
+Espacios que favorecen la participación y el intercambio de experiencias.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=85"
+alt="Aprendizaje colaborativo">
+
+<div class="slide-caption">
+
+<h3>Participación y colaboración</h3>
+
+<p>
+Las tecnologías también permiten compartir experiencias de aprendizaje con otras personas.
+</p>
+
+</div>
+
+</div>
+
+
+<button class="carousel-btn prev" id="prev">
+<i class="fa-solid fa-chevron-left"></i>
+</button>
+
+
+<button class="carousel-btn next" id="next">
+<i class="fa-solid fa-chevron-right"></i>
+</button>
+
+
+<div class="dots">
+
+<span class="dot active"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+<span class="dot"></span>
+
+</div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<section class="info-card">
+
+
+<div class="info-head">
+
+<div class="info-icon">
+
+<i class="fa-solid fa-network-wired"></i>
+
+</div>
+
+
+<div>
+
+<h2>
+TIC, TAC y TEP
+</h2>
+
+<p>
+Tecnologías de la Información, el Aprendizaje y la Participación
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     TIC TAC TEP
+===================================================== -->
+
+<div class="tech-grid">
+
+
+<!-- =====================================================
+     TIC
+===================================================== -->
+
+<article class="tech-card tic-card">
+
+
+<div class="tech-top">
+
+<span class="tech-number">
+01 · TIC
+</span>
+
+<div class="tech-symbol">
+
+<i class="fa-solid fa-globe"></i>
+
+</div>
+
+</div>
+
+
+<h3>
+TIC
+
+<span>
+Tecnologías de la Información y la Comunicación
+</span>
+
+</h3>
+
+
+<p>
+Permiten al estudiante acceder, buscar y compartir información necesaria para aprender de manera independiente.
+</p>
+
+
+<div class="examples">
+
+<div class="examples-title">
+Ejemplos
+</div>
+
+
+<div class="example-list">
+
+<span class="example">
+Internet
+</span>
+
+<span class="example">
+Computadoras
+</span>
+
+<span class="example">
+Teléfonos inteligentes
+</span>
+
+<span class="example">
+Correo electrónico
+</span>
+
+</div>
+
+</div>
+
+
+</article>
+
+
+
+<!-- =====================================================
+     TAC
+===================================================== -->
+
+<article class="tech-card tac-card">
+
+
+<div class="tech-top">
+
+<span class="tech-number">
+02 · TAC
+</span>
+
+<div class="tech-symbol">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+</div>
+
+</div>
+
+
+<h3>
+TAC
+
+<span>
+Tecnologías del Aprendizaje y el Conocimiento
+</span>
+
+</h3>
+
+
+<p>
+Facilitan la comprensión y construcción del conocimiento mediante herramientas diseñadas para aprender.
+</p>
+
+
+<div class="examples">
+
+<div class="examples-title">
+Ejemplos
+</div>
+
+
+<div class="example-list">
+
+<span class="example">
+Google Classroom
+</span>
+
+<span class="example">
+Moodle
+</span>
+
+<span class="example">
+Khan Academy
+</span>
+
+</div>
+
+</div>
+
+
+</article>
+
+
+
+<!-- =====================================================
+     TEP
+===================================================== -->
+
+<article class="tech-card tep-card">
+
+
+<div class="tech-top">
+
+<span class="tech-number">
+03 · TEP
+</span>
+
+<div class="tech-symbol">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+</div>
+
+
+<h3>
+TEP
+
+<span>
+Tecnologías para el Empoderamiento y la Participación
+</span>
+
+</h3>
+
+
+<p>
+Favorecen la participación activa, la colaboración y el intercambio de experiencias de aprendizaje con otras personas.
+</p>
+
+
+<div class="examples">
+
+<div class="examples-title">
+Ejemplos
+</div>
+
+
+<div class="example-list">
+
+<span class="example">
+Redes sociales educativas
+</span>
+
+<span class="example">
+Foros
+</span>
+
+<span class="example">
+Comunidades virtuales de aprendizaje
+</span>
+
+</div>
+
+</div>
+
+
+</article>
+
+
+</div>
+
+
+
+<!-- =====================================================
+     GALERÍA
+===================================================== -->
+
+<div class="gallery-section">
+
+
+<div class="gallery-title">
+
+<i class="fa-solid fa-images"></i>
+
+<h3>
+Tecnologías relacionadas con el aprendizaje
+</h3>
+
+</div>
+
+
+<div class="gallery">
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85"
+alt="Internet y computadora">
+
+<div class="gallery-overlay">
+
+<h4>Internet</h4>
+
+<p>TIC · Acceso y búsqueda de información</p>
+
+</div>
+
+</div>
+
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=900&q=85"
+alt="Computadora portátil">
+
+<div class="gallery-overlay">
+
+<h4>Computadoras</h4>
+
+<p>TIC · Herramientas para acceder a información</p>
+
+</div>
+
+</div>
+
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=85"
+alt="Teléfono inteligente">
+
+<div class="gallery-overlay">
+
+<h4>Teléfonos inteligentes</h4>
+
+<p>TIC · Acceso a recursos digitales</p>
+
+</div>
+
+</div>
+
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1584697964358-3e14ca57658b?auto=format&fit=crop&w=900&q=85"
+alt="Aprendizaje en línea">
+
+<div class="gallery-overlay">
+
+<h4>Google Classroom y Moodle</h4>
+
+<p>TAC · Herramientas diseñadas para aprender</p>
+
+</div>
+
+</div>
+
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85"
+alt="Aprendizaje digital">
+
+<div class="gallery-overlay">
+
+<h4>Khan Academy</h4>
+
+<p>TAC · Comprensión y construcción del conocimiento</p>
+
+</div>
+
+</div>
+
+
+
+<div class="gallery-item">
+
+<img
+src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85"
+alt="Colaboración y aprendizaje">
+
+<div class="gallery-overlay">
+
+<h4>Foros y comunidades virtuales</h4>
+
+<p>TEP · Participación y colaboración</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     FRANJA FINAL
+===================================================== -->
+
+<div class="tech-summary">
+
+
+<div class="summary-box summary-tic">
+
+<i class="fa-solid fa-globe"></i>
+
+TIC · Información y comunicación
+
+</div>
+
+
+<div class="summary-box summary-tac">
+
+<i class="fa-solid fa-book-open-reader"></i>
+
+TAC · Aprendizaje y conocimiento
+
+</div>
+
+
+<div class="summary-box summary-tep">
+
+<i class="fa-solid fa-people-group"></i>
+
+TEP · Empoderamiento y participación
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+
+<h3>
+TIC, TAC y TEP para el Aprendizaje Autónomo
+</h3>
+
+
+<p>
+Universidad Autónoma de Tlaxcala · Facultad de Ciencias de la Educación
+</p>
+
+
+<div class="footer-data">
+
+<span>
+GRUPO 503
+</span>
+
+<span>
+SEGUNDO PARCIAL
+</span>
+
+<span>
+EQUIPO 4: Rosa | Juan | Isael | Pedro | Yadsiri
+</span>
+
+</div>
+
+
+</footer>
+
+
+
+<script>
+
+/* =========================================================
+   INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+const toggleInfo =
+document.getElementById("toggleInfo");
+
+const institution =
+document.getElementById("institution");
+
+
+toggleInfo.addEventListener("click",()=>{
+
+institution.classList.toggle("hidden");
+
+if(institution.classList.contains("hidden")){
+
+toggleInfo.textContent =
+"Mostrar información";
+
+}else{
+
+toggleInfo.textContent =
+"Ocultar información";
+
+}
+
+});
+
+
+/* =========================================================
+   HEADER AL HACER SCROLL
+========================================================= */
+
+const header =
+document.getElementById("header");
+
+let lastScroll = 0;
+
+
+window.addEventListener("scroll",()=>{
+
+const current =
+window.scrollY;
+
+
+if(current > lastScroll && current > 120){
+
+header.classList.add("hide");
+
+}else{
+
+header.classList.remove("hide");
+
+}
+
+
+lastScroll = current;
+
+});
+
+
+/* =========================================================
+   SUBMENU
+========================================================= */
+
+const contentMenu =
+document.getElementById("contentMenu");
+
+
+contentMenu
+.querySelector("a")
+.addEventListener("click",(e)=>{
+
+if(window.innerWidth <= 700){
+
+e.preventDefault();
+
+contentMenu.classList.toggle("open");
+
+}
+
+});
+
+
+document.addEventListener("click",(e)=>{
+
+if(
+!contentMenu.contains(e.target)
+){
+
+contentMenu.classList.remove("open");
+
+}
+
+});
+
+
+/* =========================================================
+   CARRUSEL
+========================================================= */
+
+const slides =
+document.querySelectorAll(".slide");
+
+const dots =
+document.querySelectorAll(".dot");
+
+const prev =
+document.getElementById("prev");
+
+const next =
+document.getElementById("next");
+
+let currentSlide = 0;
+
+
+function showSlide(index){
+
+if(index >= slides.length){
+
+currentSlide = 0;
+
+}else if(index < 0){
+
+currentSlide =
+slides.length - 1;
+
+}else{
+
+currentSlide = index;
+
+}
+
+
+slides.forEach((slide,i)=>{
+
+slide.classList.toggle(
+"active",
+i === currentSlide
+);
+
+});
+
+
+dots.forEach((dot,i)=>{
+
+dot.classList.toggle(
+"active",
+i === currentSlide
+);
+
+});
+
+}
+
+
+next.addEventListener("click",()=>{
+
+showSlide(currentSlide + 1);
+
+});
+
+
+prev.addEventListener("click",()=>{
+
+showSlide(currentSlide - 1);
+
+});
+
+
+dots.forEach((dot,index)=>{
+
+dot.addEventListener("click",()=>{
+
+showSlide(index);
+
+});
+
+});
+
+
+setInterval(()=>{
+
+showSlide(currentSlide + 1);
+
+},5000);
+
+
+/* =========================================================
+   CARRUSEL CON TECLADO
+========================================================= */
+
+document.addEventListener("keydown",(e)=>{
+
+if(e.key === "ArrowRight"){
+
+showSlide(currentSlide + 1);
+
+}
+
+if(e.key === "ArrowLeft"){
+
+showSlide(currentSlide - 1);
+
+}
+
+});
+
+
+</script>
+
+
+</body>
+
+</html>

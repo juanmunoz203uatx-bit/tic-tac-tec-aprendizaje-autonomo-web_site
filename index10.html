@@ -1,0 +1,2679 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Material didáctico | TIC, TAC y TEP</title>
+
+<link rel="icon" type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050914'/%3E%3Ccircle cx='50' cy='50' r='29' fill='none' stroke='%237c5cff' stroke-width='8'/%3E%3Cpath d='M35 52l10 10 21-25' fill='none' stroke='%2300e5ff' stroke-width='8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- LIBRERÍA PARA CREAR QR -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+
+:root{
+  --agua:#dffaff;
+  --agua2:#b9f3f7;
+  --cyan:#00cfe8;
+  --turquesa:#12d8c5;
+  --verde:#65c466;
+  --verde2:#a6e57c;
+  --azul:#42a5f5;
+  --azul2:#75d7ff;
+  --limon:#c9f93d;
+  --amarillo:#ffe66d;
+  --rosa:#ff91c8;
+  --morado:#9c7cff;
+
+  --texto:#193f50;
+  --texto2:#4b7180;
+
+  --blanco:#ffffff;
+
+  --title:'Montserrat',sans-serif;
+  --body:'Poppins',sans-serif;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  font-family:var(--body);
+  color:var(--texto);
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(circle at 10% 15%,rgba(255,255,255,.95),transparent 25%),
+    radial-gradient(circle at 90% 20%,rgba(102,226,246,.32),transparent 30%),
+    radial-gradient(circle at 20% 80%,rgba(174,244,202,.30),transparent 28%),
+    linear-gradient(
+      135deg,
+      #e9fdff 0%,
+      #c9f7fa 35%,
+      #e9ffff 65%,
+      #c7f1ed 100%
+    );
+}
+
+/* =====================================================
+   HEADER ORIGINAL
+===================================================== */
+
+.header{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+
+  background:linear-gradient(
+    180deg,
+    rgba(4,7,17,.97),
+    rgba(7,12,25,.91)
+  );
+
+  backdrop-filter:blur(18px);
+
+  border-bottom:1px solid rgba(255,255,255,.09);
+
+  box-shadow:0 12px 40px rgba(0,0,0,.55);
+
+  transition:transform .45s ease,opacity .45s ease;
+}
+
+.header.hide{
+  transform:translateY(-105%);
+  opacity:0;
+}
+
+.header-led{
+  height:4px;
+  width:100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      #8b5cf6,
+      #00e5ff,
+      #ff4fa3,
+      #ffd45a,
+      #8b5cf6
+    );
+
+  background-size:300% 100%;
+
+  animation:led 5s linear infinite;
+
+  box-shadow:0 0 15px rgba(139,92,246,.65);
+}
+
+@keyframes led{
+  to{
+    background-position:300% 50%;
+  }
+}
+
+.institution-area{
+  max-height:260px;
+  overflow:hidden;
+
+  transition:
+    max-height .55s ease,
+    opacity .4s ease;
+}
+
+.institution-area.closed{
+  max-height:0;
+  opacity:0;
+}
+
+.institution-main{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:20px;
+
+  padding:15px 70px 8px;
+}
+
+.logo-box{
+  position:relative;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  flex-shrink:0;
+}
+
+.logo-box:before{
+  content:"";
+
+  position:absolute;
+
+  width:80px;
+  height:80px;
+
+  border-radius:50%;
+
+  border:1px solid rgba(139,92,246,.65);
+
+  box-shadow:
+    0 0 18px rgba(139,92,246,.35),
+    inset 0 0 18px rgba(0,229,255,.12);
+
+  animation:ring 5s linear infinite;
+}
+
+@keyframes ring{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.logo{
+  width:67px;
+  position:relative;
+  z-index:2;
+
+  filter:
+    drop-shadow(
+      0 0 8px rgba(139,92,246,.65)
+    );
+}
+
+.institution-text{
+  text-align:left;
+}
+
+.uni-name{
+  font-family:var(--title);
+  font-size:clamp(1rem,2vw,1.35rem);
+  font-weight:800;
+  letter-spacing:.7px;
+}
+
+.facultad{
+  font-family:var(--title);
+  font-size:clamp(.72rem,1.4vw,.95rem);
+  font-weight:600;
+
+  color:#00e5ff;
+
+  letter-spacing:.6px;
+
+  margin-top:2px;
+}
+
+.carrera{
+  font-size:.72rem;
+  color:#98a5ba;
+  margin-top:3px;
+}
+
+.academic-data{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+
+  padding:3px 20px 13px;
+}
+
+.academic-item{
+  display:flex;
+  align-items:center;
+  gap:7px;
+
+  padding:6px 13px;
+
+  border:1px solid rgba(255,255,255,.12);
+
+  border-radius:30px;
+
+  background:rgba(255,255,255,.035);
+
+  color:#dce3ef;
+
+  font-size:.68rem;
+
+  transition:.3s;
+}
+
+.academic-item i{
+  color:#c084fc;
+}
+
+.academic-item:hover{
+  border-color:#00e5ff;
+
+  box-shadow:
+    0 0 14px rgba(0,229,255,.2);
+}
+
+.institution-button{
+  position:absolute;
+
+  right:18px;
+  top:17px;
+
+  z-index:5;
+
+  display:flex;
+  align-items:center;
+  gap:6px;
+
+  padding:7px 11px;
+
+  border:1px solid rgba(139,92,246,.6);
+
+  border-radius:8px;
+
+  background:rgba(139,92,246,.10);
+
+  color:#d9caff;
+
+  font-size:.65rem;
+
+  cursor:pointer;
+
+  transition:.3s;
+}
+
+.institution-button:hover{
+  background:#8b5cf6;
+
+  color:#fff;
+
+  box-shadow:
+    0 0 18px rgba(139,92,246,.45);
+}
+
+.navbar{
+  display:flex;
+  justify-content:center;
+
+  padding:7px 15px 10px;
+}
+
+.nav-links{
+  list-style:none;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-wrap:wrap;
+
+  gap:7px;
+
+  padding:5px;
+
+  border:1px solid rgba(255,255,255,.11);
+
+  border-radius:12px;
+
+  background:rgba(255,255,255,.035);
+}
+
+.nav-links a{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  gap:8px;
+
+  min-width:105px;
+
+  padding:9px 15px;
+
+  color:#d4dbea;
+
+  text-decoration:none;
+
+  font-size:.70rem;
+  font-weight:700;
+
+  border:1px solid transparent;
+
+  border-radius:8px;
+
+  transition:.3s;
+}
+
+.nav-links a:hover{
+  color:#fff;
+
+  border-color:rgba(139,92,246,.5);
+
+  background:rgba(139,92,246,.10);
+
+  box-shadow:
+    0 0 14px rgba(139,92,246,.14);
+}
+
+.nav-links i{
+  color:#00e5ff;
+
+  transition:.3s;
+}
+
+.nav-links a:hover i{
+  color:#fff;
+  transform:scale(1.12);
+}
+
+.has-submenu{
+  position:relative;
+  z-index:3000;
+}
+
+.submenu{
+  position:absolute;
+
+  top:calc(100% + 8px);
+  left:50%;
+
+  transform:
+    translateX(-50%)
+    translateY(8px);
+
+  width:330px;
+
+  max-width:calc(100vw - 30px);
+
+  background:#fff;
+
+  border:1px solid #d1d1d1;
+
+  border-radius:10px;
+
+  box-shadow:
+    0 15px 35px rgba(0,0,0,.45);
+
+  opacity:0;
+  visibility:hidden;
+
+  pointer-events:none;
+
+  transition:.25s;
+
+  overflow:hidden;
+
+  z-index:5000;
+}
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+.submenu-scroll{
+  max-height:300px;
+  overflow-y:auto;
+  background:#fff;
+}
+
+.submenu-scroll::-webkit-scrollbar{
+  width:14px;
+}
+
+.submenu-scroll::-webkit-scrollbar-track{
+  background:#e7e7e7;
+}
+
+.submenu-scroll::-webkit-scrollbar-thumb{
+  background:#777;
+  border-radius:10px;
+  border:3px solid #e7e7e7;
+}
+
+.submenu a{
+  display:flex!important;
+  align-items:center;
+  justify-content:flex-start!important;
+
+  width:100%;
+
+  min-width:0!important;
+
+  padding:14px 18px!important;
+
+  background:#fff!important;
+
+  color:#111!important;
+
+  border:none!important;
+
+  border-bottom:
+    1px solid #d8d8d8!important;
+
+  border-radius:0!important;
+
+  font-size:.74rem!important;
+
+  text-align:left;
+
+  box-shadow:none!important;
+}
+
+.submenu a:last-child{
+  border-bottom:none!important;
+}
+
+.submenu a:hover{
+  background:#f1f1f1!important;
+
+  color:#000!important;
+
+  padding-left:24px!important;
+}
+
+.submenu-number{
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  width:27px;
+  height:27px;
+
+  flex:0 0 27px;
+
+  margin-right:11px;
+
+  background:#111;
+
+  color:#fff;
+
+  border-radius:50%;
+
+  font-size:.65rem;
+
+  font-weight:800;
+}
+
+.submenu a:hover .submenu-number{
+  background:#8b5cf6;
+}
+
+/* =====================================================
+   FONDO ACUÁTICO
+===================================================== */
+
+.water-bg{
+  position:fixed;
+  inset:0;
+
+  z-index:-10;
+
+  overflow:hidden;
+
+  pointer-events:none;
+}
+
+.water-light{
+  position:absolute;
+
+  width:500px;
+  height:500px;
+
+  border-radius:50%;
+
+  filter:blur(80px);
+
+  opacity:.25;
+
+  animation:waterMove 12s ease-in-out infinite;
+}
+
+.water-light.one{
+  background:#27e2f7;
+
+  left:-180px;
+  top:25%;
+}
+
+.water-light.two{
+  background:#57f885;
+
+  right:-200px;
+  top:45%;
+
+  animation-delay:-4s;
+}
+
+.water-light.three{
+  background:#6ed7f7;
+
+  left:40%;
+  bottom:-250px;
+
+  animation-delay:-7s;
+}
+
+@keyframes waterMove{
+
+  0%,100%{
+    transform:translate(0,0) scale(1);
+  }
+
+  50%{
+    transform:
+      translate(50px,-40px)
+      scale(1.12);
+  }
+
+}
+
+.bubble{
+  position:absolute;
+
+  bottom:-100px;
+
+  border-radius:50%;
+
+  border:2px solid rgba(255,255,255,.65);
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255,255,255,.9),
+      rgba(255,255,255,.2) 35%,
+      transparent 70%
+    );
+
+  box-shadow:
+    inset 0 0 15px rgba(255,255,255,.6),
+    0 0 20px rgba(255,255,255,.25);
+
+  animation:
+    bubbleUp linear infinite;
+}
+
+@keyframes bubbleUp{
+
+  0%{
+    transform:
+      translateY(0)
+      translateX(0)
+      scale(.6);
+
+    opacity:0;
+  }
+
+  10%{
+    opacity:.75;
+  }
+
+  50%{
+    transform:
+      translateY(-50vh)
+      translateX(30px)
+      scale(1);
+  }
+
+  100%{
+    transform:
+      translateY(-120vh)
+      translateX(-40px)
+      scale(1.25);
+
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+main{
+  padding-top:215px;
+
+  position:relative;
+}
+
+/* INTRO */
+
+.material-header{
+  width:min(1150px,92%);
+
+  margin:
+    0 auto 35px;
+
+  text-align:center;
+}
+
+.material-tag{
+  display:inline-flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:9px 18px;
+
+  border-radius:50px;
+
+  background:
+    rgba(255,255,255,.78);
+
+  border:
+    1px solid rgba(0,190,210,.35);
+
+  color:#008ba1;
+
+  font-size:.68rem;
+
+  font-weight:900;
+
+  letter-spacing:2px;
+
+  box-shadow:
+    0 8px 25px rgba(0,140,170,.10);
+}
+
+.material-header h1{
+  margin-top:18px;
+
+  font-family:var(--title);
+
+  font-size:
+    clamp(
+      2rem,
+      5vw,
+      4rem
+    );
+
+  font-weight:900;
+
+  color:#174d60;
+
+  letter-spacing:-2px;
+}
+
+.material-header h1 span{
+  color:#08aebd;
+
+  position:relative;
+}
+
+.material-header h1 span:after{
+  content:"";
+
+  position:absolute;
+
+  height:7px;
+
+  left:4px;
+  right:4px;
+  bottom:-7px;
+
+  background:
+    var(--limon);
+
+  border-radius:50%;
+
+  transform:
+    rotate(-2deg);
+}
+
+.material-header p{
+  max-width:760px;
+
+  margin:20px auto 0;
+
+  color:#527684;
+
+  font-size:.88rem;
+
+  line-height:1.8;
+}
+
+/* =====================================================
+   DECORACIÓN FLOTANTE
+===================================================== */
+
+.floating-object{
+  position:fixed;
+
+  z-index:1;
+
+  pointer-events:none;
+
+  filter:
+    drop-shadow(
+      0 8px 8px rgba(39,109,126,.15)
+    );
+}
+
+.pencil{
+  font-size:3.3rem;
+
+  animation:
+    pencilFloat 5s ease-in-out infinite;
+}
+
+.pencil.one{
+  left:2%;
+  top:30%;
+  transform:rotate(-25deg);
+}
+
+.pencil.two{
+  right:2%;
+  top:68%;
+  transform:rotate(25deg);
+
+  animation-delay:-2s;
+}
+
+.book{
+  font-size:3.5rem;
+
+  animation:
+    bookFloat 6s ease-in-out infinite;
+}
+
+.book.one{
+  right:3%;
+  top:30%;
+}
+
+.book.two{
+  left:3%;
+  bottom:10%;
+
+  animation-delay:-3s;
+}
+
+@keyframes pencilFloat{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-25deg);
+  }
+
+  50%{
+    transform:
+      translateY(-25px)
+      rotate(-12deg);
+  }
+}
+
+@keyframes bookFloat{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-8deg);
+  }
+
+  50%{
+    transform:
+      translateY(-22px)
+      rotate(7deg);
+  }
+}
+
+/* =====================================================
+   ANIMALITOS
+===================================================== */
+
+.animals-top{
+  position:relative;
+
+  width:min(1100px,94%);
+
+  height:110px;
+
+  margin:
+    0 auto -8px;
+
+  z-index:4;
+}
+
+.animal{
+  position:absolute;
+
+  font-size:3.3rem;
+
+  filter:
+    drop-shadow(
+      0 7px 6px rgba(29,101,116,.18)
+    );
+
+  animation:
+    animalMove 3.8s ease-in-out infinite;
+}
+
+.animal:nth-child(1){
+  left:4%;
+  top:25px;
+}
+
+.animal:nth-child(2){
+  left:23%;
+  top:0;
+
+  animation-delay:-1s;
+}
+
+.animal:nth-child(3){
+  right:23%;
+  top:8px;
+
+  animation-delay:-2s;
+}
+
+.animal:nth-child(4){
+  right:5%;
+  top:28px;
+
+  animation-delay:-.7s;
+}
+
+.animal:nth-child(5){
+  left:48%;
+  top:40px;
+
+  animation-delay:-1.7s;
+}
+
+@keyframes animalMove{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-5deg);
+  }
+
+  50%{
+    transform:
+      translateY(-15px)
+      rotate(5deg);
+  }
+}
+
+/* =====================================================
+   CONTENEDOR PRINCIPAL
+===================================================== */
+
+.material-grid{
+  width:min(1150px,92%);
+
+  margin:0 auto 80px;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:35px;
+
+  align-items:stretch;
+}
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+.material-card{
+  position:relative;
+
+  min-height:650px;
+
+  padding:35px 30px 32px;
+
+  background:
+    rgba(255,255,255,.94);
+
+  border-radius:35px;
+
+  border:
+    3px solid rgba(255,255,255,.9);
+
+  box-shadow:
+    0 18px 50px rgba(31,117,135,.15),
+    0 0 0 1px rgba(0,205,215,.18);
+
+  overflow:hidden;
+
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease;
+}
+
+.material-card:hover{
+  transform:
+    translateY(-10px);
+
+  box-shadow:
+    0 30px 65px rgba(26,116,136,.20),
+    0 0 35px rgba(0,212,224,.18);
+}
+
+/* RAMAS */
+
+.material-card:before,
+.material-card:after{
+  content:"";
+
+  position:absolute;
+
+  width:190px;
+  height:190px;
+
+  border:
+    6px solid #68ad65;
+
+  opacity:.18;
+
+  border-radius:
+    80% 20% 70% 30%;
+
+  pointer-events:none;
+}
+
+.material-card:before{
+  left:-80px;
+  top:-65px;
+
+  transform:
+    rotate(-25deg);
+
+  border-right-color:transparent;
+  border-bottom-color:transparent;
+}
+
+.material-card:after{
+  right:-80px;
+  bottom:-70px;
+
+  transform:
+    rotate(155deg);
+
+  border-left-color:transparent;
+  border-top-color:transparent;
+}
+
+/* RAMITAS INTERNAS */
+
+.branch{
+  position:absolute;
+
+  width:170px;
+  height:5px;
+
+  background:
+    #68ad65;
+
+  border-radius:20px;
+
+  opacity:.35;
+
+  transform:rotate(35deg);
+
+  pointer-events:none;
+}
+
+.branch:before,
+.branch:after{
+  content:"🍃";
+
+  position:absolute;
+
+  font-size:27px;
+}
+
+.branch:before{
+  left:20px;
+  top:-23px;
+}
+
+.branch:after{
+  right:25px;
+  top:-28px;
+}
+
+.branch.one{
+  left:-20px;
+  top:120px;
+}
+
+.branch.two{
+  right:-30px;
+  top:125px;
+
+  transform:
+    rotate(145deg);
+}
+
+/* =====================================================
+   ENCABEZADO DE TARJETA
+===================================================== */
+
+.card-top{
+  position:relative;
+
+  z-index:3;
+
+  text-align:center;
+}
+
+.card-icon{
+  width:80px;
+  height:80px;
+
+  margin:
+    0 auto 15px;
+
+  display:grid;
+
+  place-items:center;
+
+  border-radius:25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #e2ffff,
+      #c6f8ec
+    );
+
+  border:
+    2px solid rgba(0,197,207,.25);
+
+  color:#008fa3;
+
+  font-size:2rem;
+
+  box-shadow:
+    0 10px 25px rgba(0,184,197,.13);
+}
+
+.card-top h2{
+  font-family:var(--title);
+
+  color:#174d60;
+
+  font-size:
+    clamp(1.3rem,2.5vw,1.8rem);
+
+  font-weight:900;
+
+  margin-bottom:8px;
+}
+
+.card-top .subtitle{
+  color:#6d8b96;
+
+  font-size:.72rem;
+
+  font-weight:700;
+
+  letter-spacing:1px;
+}
+
+/* =====================================================
+   DESCRIPCIÓN
+===================================================== */
+
+.description{
+  position:relative;
+
+  z-index:3;
+
+  margin:
+    25px auto 22px;
+
+  padding:19px;
+
+  max-width:540px;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f2ffff,
+      #ecfff4
+    );
+
+  border:
+    1px solid rgba(72,192,171,.22);
+
+  color:#456c78;
+
+  font-size:.76rem;
+
+  line-height:1.8;
+}
+
+.description strong{
+  color:#008da0;
+}
+
+/* =====================================================
+   BOTÓN DE ACCESO
+===================================================== */
+
+.access-area{
+  position:relative;
+
+  z-index:3;
+
+  text-align:center;
+
+  margin:20px 0 25px;
+}
+
+.access-button{
+  position:relative;
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:11px;
+
+  padding:
+    15px 26px;
+
+  border-radius:50px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #00bfcf,
+      #19d4b4
+    );
+
+  color:white;
+
+  text-decoration:none;
+
+  font-size:.76rem;
+
+  font-weight:900;
+
+  letter-spacing:.7px;
+
+  box-shadow:
+    0 10px 25px rgba(0,180,190,.25);
+
+  transition:.3s;
+
+  animation:
+    clickPulse 2s infinite;
+}
+
+.access-button:hover{
+  transform:
+    translateY(-4px)
+    scale(1.04);
+
+  box-shadow:
+    0 16px 35px rgba(0,180,190,.35);
+}
+
+.access-button i{
+  font-size:1.1rem;
+
+  animation:
+    fingerMove 1.3s infinite;
+}
+
+@keyframes clickPulse{
+
+  0%,100%{
+    box-shadow:
+      0 10px 25px rgba(0,180,190,.25);
+  }
+
+  50%{
+    box-shadow:
+      0 10px 35px rgba(0,210,200,.55),
+      0 0 0 9px rgba(0,210,200,.08);
+  }
+}
+
+@keyframes fingerMove{
+
+  0%,100%{
+    transform:
+      translateX(0);
+  }
+
+  50%{
+    transform:
+      translateX(5px)
+      scale(1.15);
+  }
+}
+
+.click-message{
+  display:block;
+
+  margin-top:9px;
+
+  color:#5c7e88;
+
+  font-size:.65rem;
+
+  font-weight:700;
+}
+
+/* =====================================================
+   QR
+===================================================== */
+
+.qr-zone{
+  position:relative;
+
+  z-index:3;
+
+  display:flex;
+
+  justify-content:center;
+
+  margin:
+    15px auto 22px;
+}
+
+.qr-box{
+  padding:13px;
+
+  background:#fff;
+
+  border-radius:18px;
+
+  border:
+    2px solid #bdeef0;
+
+  box-shadow:
+    0 10px 25px rgba(31,128,139,.12);
+
+  position:relative;
+}
+
+.qr-box:before{
+  content:"";
+
+  position:absolute;
+
+  inset:-6px;
+
+  border-radius:23px;
+
+  border:
+    2px dashed #71d8d5;
+
+  animation:
+    qrRotate 8s linear infinite;
+}
+
+@keyframes qrRotate{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+.qr-label{
+  margin-top:10px;
+
+  text-align:center;
+
+  color:#688892;
+
+  font-size:.62rem;
+
+  font-weight:700;
+}
+
+/* =====================================================
+   INFORMACIÓN DEL MATERIAL
+===================================================== */
+
+.info-list{
+  position:relative;
+
+  z-index:3;
+
+  display:grid;
+
+  grid-template-columns:
+    repeat(2,1fr);
+
+  gap:10px;
+
+  margin-top:20px;
+}
+
+.info-item{
+  display:flex;
+
+  align-items:center;
+
+  gap:9px;
+
+  padding:12px;
+
+  border-radius:15px;
+
+  background:
+    #f5ffff;
+
+  border:
+    1px solid #d4f2f1;
+
+  color:#51737e;
+
+  font-size:.67rem;
+
+  font-weight:600;
+
+  transition:.25s;
+}
+
+.info-item:hover{
+  transform:
+    translateX(4px);
+
+  background:#edffff;
+
+  border-color:#8cdddd;
+}
+
+.info-item i{
+  color:#12b8b5;
+
+  font-size:.85rem;
+}
+
+/* =====================================================
+   SEPARADOR
+===================================================== */
+
+.card-divider{
+  width:80%;
+
+  height:2px;
+
+  margin:25px auto;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      #83d9d8,
+      transparent
+    );
+}
+
+/* =====================================================
+   MENSAJE INFERIOR
+===================================================== */
+
+.bottom-message{
+  position:relative;
+
+  z-index:3;
+
+  padding:14px;
+
+  border-radius:15px;
+
+  background:
+    rgba(201,249,61,.12);
+
+  border:
+    1px solid rgba(170,210,45,.28);
+
+  color:#607b55;
+
+  font-size:.66rem;
+
+  line-height:1.6;
+
+  text-align:center;
+}
+
+.bottom-message i{
+  color:#89af16;
+
+  margin-right:5px;
+}
+
+/* =====================================================
+   PIE DECORATIVO
+===================================================== */
+
+.material-footer{
+  width:min(1150px,92%);
+
+  margin:
+    0 auto 80px;
+
+  text-align:center;
+
+  padding:30px;
+
+  border-radius:30px;
+
+  background:
+    rgba(255,255,255,.72);
+
+  border:
+    1px solid rgba(0,190,205,.2);
+
+  box-shadow:
+    0 15px 40px rgba(30,120,140,.10);
+}
+
+.material-footer h3{
+  font-family:var(--title);
+
+  color:#176176;
+
+  margin-bottom:8px;
+}
+
+.material-footer p{
+  color:#6c8993;
+
+  font-size:.72rem;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+  text-align:center;
+
+  padding:40px 20px;
+
+  border-top:
+    1px solid rgba(0,130,150,.12);
+
+  background:
+    rgba(255,255,255,.65);
+}
+
+.footer-line{
+  width:140px;
+
+  height:3px;
+
+  margin:
+    0 auto 18px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #12d8c5,
+      #00bfe0,
+      #c9f93d
+    );
+
+  box-shadow:
+    0 0 12px rgba(0,190,210,.35);
+}
+
+footer p{
+  font-size:.67rem;
+
+  color:#63818b;
+
+  line-height:1.8;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:950px){
+
+  .material-grid{
+    grid-template-columns:1fr;
+
+    max-width:650px;
+  }
+
+  .material-card{
+    min-height:auto;
+  }
+
+  .animals-top{
+    height:90px;
+  }
+
+}
+
+@media(max-width:700px){
+
+  .institution-main{
+    flex-direction:column;
+
+    padding:
+      15px 50px 8px;
+  }
+
+  .institution-text{
+    text-align:center;
+  }
+
+  .logo{
+    width:58px;
+  }
+
+  .logo-box:before{
+    width:70px;
+    height:70px;
+  }
+
+  .navbar{
+    overflow-x:auto;
+
+    justify-content:flex-start;
+  }
+
+  .nav-links{
+    flex-wrap:nowrap;
+
+    min-width:max-content;
+  }
+
+  .nav-links a{
+    min-width:100px;
+  }
+
+  main{
+    padding-top:205px;
+  }
+
+  .material-header h1{
+    letter-spacing:-1px;
+  }
+
+  .material-card{
+    padding:
+      30px 20px;
+  }
+
+  .info-list{
+    grid-template-columns:1fr;
+  }
+
+  .animal{
+    font-size:2.4rem;
+  }
+
+  .pencil,
+  .book{
+    display:none;
+  }
+
+  .submenu{
+    position:absolute;
+
+    left:0;
+
+    transform:
+      translateY(8px);
+
+    width:310px;
+
+    max-width:85vw;
+  }
+
+  .has-submenu:hover .submenu,
+  .has-submenu:focus-within .submenu,
+  .has-submenu.open .submenu{
+
+    transform:
+      translateY(0);
+  }
+
+}
+
+@media(max-width:450px){
+
+  .institution-button span{
+    display:none;
+  }
+
+  .material-header{
+    width:90%;
+  }
+
+  .material-grid{
+    width:90%;
+  }
+
+  .material-card{
+    border-radius:25px;
+  }
+
+  .animals-top{
+    height:75px;
+  }
+
+  .animal{
+    font-size:2rem;
+  }
+
+  .animal:nth-child(2),
+  .animal:nth-child(3){
+    display:none;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     FONDO DE AGUA
+===================================================== -->
+
+<div class="water-bg">
+
+  <div class="water-light one"></div>
+  <div class="water-light two"></div>
+  <div class="water-light three"></div>
+
+  <span class="bubble"
+        style="left:5%;width:28px;height:28px;animation-duration:10s;"></span>
+
+  <span class="bubble"
+        style="left:14%;width:15px;height:15px;animation-duration:7s;animation-delay:-2s;"></span>
+
+  <span class="bubble"
+        style="left:26%;width:42px;height:42px;animation-duration:12s;animation-delay:-5s;"></span>
+
+  <span class="bubble"
+        style="left:39%;width:22px;height:22px;animation-duration:9s;animation-delay:-3s;"></span>
+
+  <span class="bubble"
+        style="left:52%;width:35px;height:35px;animation-duration:13s;animation-delay:-7s;"></span>
+
+  <span class="bubble"
+        style="left:66%;width:18px;height:18px;animation-duration:8s;animation-delay:-1s;"></span>
+
+  <span class="bubble"
+        style="left:76%;width:45px;height:45px;animation-duration:11s;animation-delay:-6s;"></span>
+
+  <span class="bubble"
+        style="left:88%;width:25px;height:25px;animation-duration:9s;animation-delay:-4s;"></span>
+
+</div>
+
+
+<!-- =====================================================
+     OBJETOS FLOTANTES
+===================================================== -->
+
+<div class="floating-object pencil one">✏️</div>
+
+<div class="floating-object pencil two">✏️</div>
+
+<div class="floating-object book one">📚</div>
+
+<div class="floating-object book two">📖</div>
+
+
+<!-- =====================================================
+     HEADER ORIGINAL
+===================================================== -->
+
+<header class="header" id="header">
+
+  <div class="header-led"></div>
+
+  <button class="institution-button" id="institutionButton">
+    <i class="fa-solid fa-eye"></i>
+    <span>Ocultar información</span>
+  </button>
+
+  <div class="institution-area" id="institutionArea">
+
+    <div class="institution-main">
+
+      <div class="logo-box">
+
+        <img
+          src="img/logofce.png"
+          alt="Logo de la Facultad de Ciencias de la Educación"
+          class="logo">
+
+      </div>
+
+      <div class="institution-text">
+
+        <h1 class="uni-name">
+          UNIVERSIDAD AUTÓNOMA DE TLAXCALA
+        </h1>
+
+        <h2 class="facultad">
+          FACULTAD DE CIENCIAS DE LA EDUCACIÓN
+        </h2>
+
+        <p class="carrera">
+          Licenciatura en Ciencias de la Educación
+        </p>
+
+      </div>
+
+    </div>
+
+    <div class="academic-data">
+
+      <div class="academic-item">
+        <i class="fa-solid fa-laptop-code"></i>
+        <span>
+          U.A. SISTEMAS ABIERTOS DE APRENDIZAJE
+        </span>
+      </div>
+
+      <div class="academic-item">
+        <i class="fa-solid fa-chalkboard-user"></i>
+        <span>
+          MTRO. JUAN CARLOS SILMAR NAVA
+        </span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <nav class="navbar">
+
+    <ul class="nav-links">
+
+      <li>
+        <a href="index.html">
+          <i class="fa-solid fa-house"></i>
+          Inicio
+        </a>
+      </li>
+
+      <li>
+        <a href="index.html">
+          <i class="fa-solid fa-book-open"></i>
+          Introducción
+        </a>
+      </li>
+
+
+      <li class="has-submenu">
+
+        <a
+          href="index.html"
+          class="submenu-trigger"
+          aria-haspopup="true"
+          aria-expanded="false">
+
+          <i class="fa-solid fa-diagram-project"></i>
+          Contenido
+
+        </a>
+
+        <div class="submenu">
+
+          <div class="submenu-scroll">
+
+            <a href="index1.html">
+              <span class="submenu-number">1</span>
+              Concepto de aprendizaje autónomo
+            </a>
+
+            <a href="index2.html">
+              <span class="submenu-number">2</span>
+              Características del estudiante autónomo
+            </a>
+
+            <a href="index3.html">
+              <span class="submenu-number">3</span>
+              Papel del docente como guía o facilitador
+            </a>
+
+            <a href="index4.html">
+              <span class="submenu-number">4</span>
+              TIC, TAC y TEP para el aprendizaje autónomo
+            </a>
+
+            <a href="index5.html">
+              <span class="submenu-number">5</span>
+              Plataformas y aplicaciones para el estudio independiente
+            </a>
+
+            <a href="index6.html">
+              <span class="submenu-number">6</span>
+              Recursos digitales para buscar, seleccionar y organizar información
+            </a>
+
+            <a href="index7.html">
+              <span class="submenu-number">7</span>
+              Herramientas para establecer metas, horarios y seguimiento del aprendizaje
+            </a>
+
+            <a href="index8.html">
+              <span class="submenu-number">8</span>
+              Ventajas y desafíos del aprendizaje autónomo mediante tecnologías
+            </a>
+
+            <a href="index9.html">
+              <span class="submenu-number">9</span>
+              Conclusión
+            </a>
+
+          </div>
+
+        </div>
+
+      </li>
+
+
+      <li>
+
+        <a href="index10.html">
+
+          <i class="fa-solid fa-puzzle-piece"></i>
+
+          Material didáctico
+
+        </a>
+
+      </li>
+
+    </ul>
+
+  </nav>
+
+</header>
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main id="inicio">
+
+
+  <!-- ENCABEZADO -->
+
+  <section class="material-header">
+
+    <div class="material-tag">
+
+      <i class="fa-solid fa-puzzle-piece"></i>
+
+      MATERIAL DIDÁCTICO INTERACTIVO
+
+    </div>
+
+
+    <h1>
+
+      Aprende, explora y
+      <span>descubre</span>
+
+    </h1>
+
+
+    <p>
+
+      En este espacio encontrarás materiales digitales para
+      explorar el tema de los ecosistemas y reforzar los
+      contenidos relacionados con las TIC, TAC y TEP.
+
+    </p>
+
+  </section>
+
+
+  <!-- ANIMALES -->
+
+  <div class="animals-top">
+
+    <div class="animal">🦋</div>
+
+    <div class="animal">🐦</div>
+
+    <div class="animal">🐝</div>
+
+    <div class="animal">🐠</div>
+
+    <div class="animal">🐢</div>
+
+  </div>
+
+
+  <!-- ===================================================
+       DOS RECUADROS
+  ==================================================== -->
+
+  <section class="material-grid">
+
+
+    <!-- =================================================
+         RECUADRO 1
+    ================================================== -->
+
+    <article class="material-card">
+
+      <span class="branch one"></span>
+      <span class="branch two"></span>
+
+
+      <div class="card-top">
+
+        <div class="card-icon">
+
+          <i class="fa-solid fa-leaf"></i>
+
+        </div>
+
+
+        <h2>
+          Material didáctico
+        </h2>
+
+
+        <div class="subtitle">
+
+          🌿 EXPLORA EL MUNDO DE LOS ECOSISTEMAS 🌿
+
+        </div>
+
+      </div>
+
+
+      <div class="description">
+
+        <strong>4.º de Primaria</strong><br>
+
+        <strong>Tema principal:</strong>
+        Los ecosistemas<br>
+
+        <strong>Asignatura:</strong>
+        Ciencias Naturales<br>
+
+        <strong>Propósito:</strong>
+        Reconocer los elementos que forman un ecosistema
+        y comprender la relación entre los seres vivos
+        y su ambiente.
+
+      </div>
+
+
+      <!-- ACCESO -->
+
+      <div class="access-area">
+
+        <a
+          class="access-button"
+          href="https://juanmunoz203uatx-bit.github.io/siteweb-ecosistema-4togrado/"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <i class="fa-solid fa-hand-pointer"></i>
+
+          DAR CLIC AQUÍ
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <span class="click-message">
+
+          👆 Haz clic para entrar al material interactivo
+
+        </span>
+
+      </div>
+
+
+      <!-- QR -->
+
+      <div class="qr-zone">
+
+        <div>
+
+          <div
+            id="qrEcosistema"
+            class="qr-box">
+          </div>
+
+          <div class="qr-label">
+
+            📱 Escanea para abrir el material
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-divider"></div>
+
+
+      <!-- CARACTERÍSTICAS -->
+
+      <div class="info-list">
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-paw"></i>
+
+          <span>
+            Seres vivos
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-cloud-sun"></i>
+
+          <span>
+            Clima y ambiente
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-tree"></i>
+
+          <span>
+            Elementos naturales
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-link"></i>
+
+          <span>
+            Relaciones entre organismos
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="bottom-message">
+
+        <i class="fa-solid fa-lightbulb"></i>
+
+        Explora el material, observa los ejemplos
+        y descubre cómo interactúan los seres vivos
+        dentro de un ecosistema.
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =================================================
+         RECUADRO 2
+    ================================================== -->
+
+    <article class="material-card">
+
+      <span class="branch one"></span>
+      <span class="branch two"></span>
+
+
+      <div class="card-top">
+
+        <div class="card-icon">
+
+          <i class="fa-solid fa-rotate"></i>
+
+        </div>
+
+
+        <h2>
+          Retroalimentación
+        </h2>
+
+
+        <div class="subtitle">
+
+          💡 REFUERZA LO QUE APRENDISTE 💡
+
+        </div>
+
+      </div>
+
+
+      <div class="description">
+
+        <strong>Actividad de retroalimentación</strong><br>
+
+        Después de revisar los contenidos sobre
+        <strong>TIC, TAC y TEP para el aprendizaje autónomo</strong>,
+        utiliza esta actividad interactiva para
+        recordar conceptos y comprobar lo aprendido.
+
+      </div>
+
+
+      <!-- ACCESO -->
+
+      <div class="access-area">
+
+        <a
+          class="access-button"
+          href="https://es.educaplay.com/recursos-educativos/30788448-tic_tac_y_tep_para_el_aprendizaje_autonomo.html"
+          target="_blank"
+          rel="noopener noreferrer">
+
+          <i class="fa-solid fa-hand-pointer"></i>
+
+          DAR CLIC AQUÍ
+
+          <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+        </a>
+
+
+        <span class="click-message">
+
+          👆 Haz clic para realizar la actividad
+
+        </span>
+
+      </div>
+
+
+      <!-- QR -->
+
+      <div class="qr-zone">
+
+        <div>
+
+          <div
+            id="qrRetroalimentacion"
+            class="qr-box">
+          </div>
+
+          <div class="qr-label">
+
+            📱 Escanea para abrir la retroalimentación
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card-divider"></div>
+
+
+      <!-- CONCEPTOS -->
+
+      <div class="info-list">
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-laptop"></i>
+
+          <span>
+            TIC
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-book-open-reader"></i>
+
+          <span>
+            TAC
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-users"></i>
+
+          <span>
+            TEP
+          </span>
+
+        </div>
+
+
+        <div class="info-item">
+
+          <i class="fa-solid fa-user-graduate"></i>
+
+          <span>
+            Aprendizaje autónomo
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="bottom-message">
+
+        <i class="fa-solid fa-star"></i>
+
+        Pon a prueba tus conocimientos y
+        reflexiona sobre cómo las tecnologías
+        pueden apoyar tu aprendizaje.
+
+      </div>
+
+    </article>
+
+
+  </section>
+
+
+  <!-- MENSAJE FINAL -->
+
+  <section class="material-footer">
+
+    <h3>
+
+      🌊 ¡Explora, aprende y participa! 🌱
+
+    </h3>
+
+    <p>
+
+      Los materiales digitales son una oportunidad
+      para aprender de una manera dinámica,
+      interactiva y cercana a los estudiantes.
+
+    </p>
+
+  </section>
+
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  <div class="footer-line"></div>
+
+  <p>
+    TIC, TAC y TEP para el Aprendizaje Autónomo
+  </p>
+
+  <p>
+    Universidad Autónoma de Tlaxcala · Facultad de Ciencias de la Educación
+  </p>
+
+  <p>
+    GRUPO 503
+  </p>
+
+  <p>
+    SEGUNDO PARCIAL
+  </p>
+
+  <p>
+    EQUIPO 4: Rosa | Juan | Pedro | Isael
+  </p>
+
+</footer>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+/* =====================================================
+   INFORMACIÓN INSTITUCIONAL
+===================================================== */
+
+const institutionButton =
+  document.getElementById(
+    'institutionButton'
+  );
+
+const institutionArea =
+  document.getElementById(
+    'institutionArea'
+  );
+
+
+institutionButton.addEventListener(
+  'click',
+  () => {
+
+    const closed =
+      institutionArea.classList.toggle(
+        'closed'
+      );
+
+    institutionButton.innerHTML =
+      closed
+
+      ?
+
+      '<i class="fa-solid fa-eye"></i><span>Mostrar información</span>'
+
+      :
+
+      '<i class="fa-solid fa-eye-slash"></i><span>Ocultar información</span>';
+
+  }
+);
+
+
+/* =====================================================
+   HEADER AL HACER SCROLL
+===================================================== */
+
+const header =
+  document.getElementById(
+    'header'
+  );
+
+let lastScroll =
+  window.scrollY;
+
+
+window.addEventListener(
+  'scroll',
+  () => {
+
+    const y =
+      window.scrollY;
+
+
+    if(y <= 80){
+
+      header.classList.remove(
+        'hide'
+      );
+
+    }
+
+    else if(y > lastScroll){
+
+      header.classList.add(
+        'hide'
+      );
+
+    }
+
+    else{
+
+      header.classList.remove(
+        'hide'
+      );
+
+    }
+
+
+    lastScroll =
+      y;
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =====================================================
+   SUBMENÚ EN MÓVIL
+===================================================== */
+
+const submenuTrigger =
+  document.querySelector(
+    '.submenu-trigger'
+  );
+
+const submenuParent =
+  document.querySelector(
+    '.has-submenu'
+  );
+
+
+submenuTrigger.addEventListener(
+  'click',
+  (event) => {
+
+    if(window.innerWidth <= 700){
+
+      event.preventDefault();
+
+
+      const abierto =
+        submenuParent.classList.toggle(
+          'open'
+        );
+
+
+      submenuTrigger.setAttribute(
+        'aria-expanded',
+        abierto
+        ?
+        'true'
+        :
+        'false'
+      );
+
+    }
+
+  }
+);
+
+
+document.addEventListener(
+  'click',
+  (event) => {
+
+    if(
+      !submenuParent.contains(
+        event.target
+      )
+    ){
+
+      submenuParent.classList.remove(
+        'open'
+      );
+
+      submenuTrigger.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+    }
+
+  }
+);
+
+
+/* =====================================================
+   CREAR QR DEL MATERIAL DE ECOSISTEMAS
+===================================================== */
+
+new QRCode(
+  document.getElementById(
+    'qrEcosistema'
+  ),
+  {
+    text:
+      'https://juanmunoz203uatx-bit.github.io/siteweb-ecosistema-4togrado/',
+
+    width:150,
+
+    height:150,
+
+    colorDark:'#164c59',
+
+    colorLight:'#ffffff',
+
+    correctLevel:
+      QRCode.CorrectLevel.H
+  }
+);
+
+
+/* =====================================================
+   CREAR QR DE RETROALIMENTACIÓN
+===================================================== */
+
+new QRCode(
+  document.getElementById(
+    'qrRetroalimentacion'
+  ),
+  {
+    text:
+      'https://es.educaplay.com/recursos-educativos/30788448-tic_tac_y_tep_para_el_aprendizaje_autonomo.html',
+
+    width:150,
+
+    height:150,
+
+    colorDark:'#164c59',
+
+    colorLight:'#ffffff',
+
+    correctLevel:
+      QRCode.CorrectLevel.H
+  }
+);
+
+
+/* =====================================================
+   EFECTO DE CLIC EN BOTONES
+===================================================== */
+
+const accessButtons =
+  document.querySelectorAll(
+    '.access-button'
+  );
+
+
+accessButtons.forEach(
+  button => {
+
+    button.addEventListener(
+      'click',
+      () => {
+
+        button.style.transform =
+          'scale(.95)';
+
+        setTimeout(
+          () => {
+
+            button.style.transform =
+              '';
+
+          },
+          160
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* =====================================================
+   ANIMACIÓN EXTRA DE LOS ANIMALES
+===================================================== */
+
+const animals =
+  document.querySelectorAll(
+    '.animal'
+  );
+
+
+animals.forEach(
+  (animal,index) => {
+
+    animal.addEventListener(
+      'mouseenter',
+      () => {
+
+        animal.style.transform =
+          'scale(1.35) rotate(12deg)';
+
+      }
+    );
+
+
+    animal.addEventListener(
+      'mouseleave',
+      () => {
+
+        animal.style.transform =
+          '';
+
+      }
+    );
+
+  }
+);
+
+</script>
+
+</body>
+</html>

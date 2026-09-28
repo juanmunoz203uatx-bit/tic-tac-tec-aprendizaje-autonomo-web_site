@@ -1,0 +1,4714 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Recursos digitales para buscar, seleccionar y organizar información | TIC, TAC y TEP</title>
+
+<link rel="icon"
+type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050505'/%3E%3Cpath d='M28 18h44v12H57v52H43V30H28z' fill='%23ff6a00'/%3E%3Ccircle cx='75' cy='76' r='8' fill='%23ff1e1e'/%3E%3Ccircle cx='25' cy='76' r='8' fill='%2300eaff'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+
+:root{
+--black:#030303;
+--black2:#080808;
+--white:#fff;
+--gray:#a8a8a8;
+--red:#ff1e1e;
+--orange:#ff6a00;
+--gold:#ffc400;
+--cyan:#00eaff;
+--blue:#008cff;
+--green:#00ff88;
+
+--font-title:'Montserrat',sans-serif;
+--font-body:'Poppins',sans-serif
+}
+
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+
+html{
+scroll-behavior:smooth
+}
+
+
+body{
+min-height:100vh;
+
+background:
+radial-gradient(circle at 8% 18%,rgba(0,234,255,.11),transparent 25%),
+radial-gradient(circle at 92% 35%,rgba(255,106,0,.13),transparent 28%),
+radial-gradient(circle at 50% 90%,rgba(0,140,255,.08),transparent 30%),
+#05070a;
+
+color:#fff;
+font-family:var(--font-body);
+overflow-x:hidden
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.96),
+rgba(8,8,8,.91)
+);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,.09);
+
+box-shadow:0 10px 40px rgba(0,0,0,.65);
+
+transition:
+transform .45s ease,
+opacity .45s ease
+}
+
+
+.header.hide{
+transform:translateY(-105%);
+opacity:0
+}
+
+
+.header-led{
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:5px;
+
+background:
+linear-gradient(
+90deg,
+#ffc400,
+#ff9500,
+#00cfff,
+#00eaff,
+#00ff88,
+#ffc400,
+#ff9500
+);
+
+background-size:300% 100%;
+
+animation:ledMove 5s linear infinite;
+
+box-shadow:
+0 0 7px rgba(255,196,0,.9),
+0 0 14px rgba(255,149,0,.7),
+0 0 22px rgba(0,234,255,.55),
+0 0 30px rgba(0,255,136,.35);
+
+z-index:20
+}
+
+
+@keyframes ledMove{
+
+to{
+background-position:300% 50%
+}
+
+}
+
+
+/* =========================================================
+INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+.institution-area{
+max-height:260px;
+overflow:hidden;
+
+transition:
+max-height .55s ease,
+opacity .4s ease
+}
+
+
+.institution-area.closed{
+max-height:0;
+opacity:0
+}
+
+
+.institution-main{
+display:flex;
+justify-content:center;
+align-items:center;
+
+gap:20px;
+
+padding:16px 70px 8px
+}
+
+
+.logo-box{
+position:relative;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+flex-shrink:0
+}
+
+
+.logo-box:before{
+content:"";
+
+position:absolute;
+
+width:82px;
+height:82px;
+
+border-radius:50%;
+
+border:1px solid rgba(255,70,0,.5);
+
+box-shadow:
+0 0 12px rgba(255,50,0,.4),
+inset 0 0 15px rgba(255,50,0,.15);
+
+animation:logoRing 4s linear infinite
+}
+
+
+@keyframes logoRing{
+
+to{
+transform:rotate(360deg)
+}
+
+}
+
+
+.logo{
+width:68px;
+
+position:relative;
+z-index:2;
+
+filter:
+drop-shadow(0 0 5px var(--red))
+drop-shadow(0 0 12px rgba(255,70,0,.45))
+}
+
+
+.institution-text{
+text-align:left
+}
+
+
+.uni-name{
+font-family:var(--font-title);
+
+font-size:
+clamp(1rem,2vw,1.35rem);
+
+font-weight:800;
+
+letter-spacing:.8px;
+
+margin-bottom:3px
+}
+
+
+.facultad{
+font-family:var(--font-title);
+
+font-size:
+clamp(.72rem,1.4vw,.95rem);
+
+font-weight:600;
+
+color:var(--orange);
+
+letter-spacing:.7px
+}
+
+
+.carrera{
+font-size:.72rem;
+color:#aaa;
+margin-top:3px
+}
+
+
+.academic-data{
+display:flex;
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+padding:3px 20px 13px
+}
+
+
+.academic-item{
+display:flex;
+align-items:center;
+
+gap:7px;
+
+padding:6px 13px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:30px;
+
+background:rgba(255,255,255,.035);
+
+color:#ddd;
+
+font-size:.68rem;
+
+transition:.3s
+}
+
+
+.academic-item i{
+color:var(--orange)
+}
+
+
+.academic-item:hover{
+border-color:var(--orange);
+
+box-shadow:
+0 0 12px rgba(255,106,0,.25)
+}
+
+
+.institution-button{
+position:absolute;
+
+right:18px;
+top:18px;
+
+display:flex;
+align-items:center;
+
+gap:6px;
+
+padding:7px 11px;
+
+border:1px solid rgba(255,106,0,.55);
+
+border-radius:7px;
+
+background:rgba(255,70,0,.08);
+
+color:var(--orange);
+
+font-size:.65rem;
+
+cursor:pointer;
+
+transition:.3s;
+
+z-index:5
+}
+
+
+.institution-button:hover{
+background:var(--orange);
+
+color:#000;
+
+box-shadow:0 0 15px var(--orange)
+}
+
+
+/* =========================================================
+MENÚ
+========================================================= */
+
+.navbar{
+display:flex;
+justify-content:center;
+
+padding:7px 15px 10px
+}
+
+
+.nav-links{
+list-style:none;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:7px;
+
+padding:5px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:12px;
+
+background:rgba(255,255,255,.035);
+
+box-shadow:
+inset 0 0 15px rgba(255,255,255,.025),
+0 5px 20px rgba(0,0,0,.35)
+}
+
+
+.nav-links a{
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:8px;
+
+min-width:105px;
+
+padding:9px 15px;
+
+color:#d8d8d8;
+
+text-decoration:none;
+
+font-size:.70rem;
+
+font-weight:700;
+
+border:1px solid transparent;
+
+border-radius:8px;
+
+transition:.3s
+}
+
+
+.nav-links a:hover{
+color:#fff;
+
+border-color:rgba(255,106,0,.45);
+
+background:rgba(255,106,0,.08);
+
+box-shadow:
+inset 0 0 12px rgba(255,106,0,.06),
+0 0 12px rgba(255,106,0,.12)
+}
+
+
+.nav-links i{
+color:var(--orange);
+transition:.3s
+}
+
+
+.nav-links a:hover i{
+color:#fff;
+transform:scale(1.12)
+}
+
+
+/* =========================================================
+SUBMENÚ
+========================================================= */
+
+.has-submenu{
+position:relative;
+z-index:3000
+}
+
+
+.submenu{
+position:absolute;
+
+top:calc(100% + 8px);
+left:50%;
+
+transform:
+translateX(-50%)
+translateY(8px);
+
+width:330px;
+max-width:calc(100vw - 30px);
+
+background:#fff;
+
+border:1px solid #cfcfcf;
+
+border-radius:10px;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.45),
+0 4px 15px rgba(0,0,0,.20);
+
+opacity:0;
+
+visibility:hidden;
+
+pointer-events:none;
+
+transition:
+opacity .25s ease,
+transform .25s ease,
+visibility .25s ease;
+
+overflow:hidden;
+
+z-index:5000
+}
+
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+
+opacity:1;
+
+visibility:visible;
+
+pointer-events:auto;
+
+transform:
+translateX(-50%)
+translateY(0)
+
+}
+
+
+.submenu-scroll{
+max-height:300px;
+
+overflow-y:auto;
+overflow-x:hidden;
+
+scroll-behavior:smooth;
+
+background:#fff;
+
+padding:0
+}
+
+
+.submenu-scroll::-webkit-scrollbar{
+width:14px
+}
+
+
+.submenu-scroll::-webkit-scrollbar-track{
+background:#e5e5e5;
+
+border-left:1px solid #d0d0d0
+}
+
+
+.submenu-scroll::-webkit-scrollbar-thumb{
+background:#777;
+
+border-radius:10px;
+
+border:3px solid #e5e5e5;
+
+min-height:60px
+}
+
+
+.submenu-scroll::-webkit-scrollbar-thumb:hover{
+background:#222
+}
+
+
+.submenu-scroll{
+scrollbar-width:auto;
+scrollbar-color:#777 #e5e5e5
+}
+
+
+.submenu a{
+display:flex !important;
+
+align-items:center;
+
+justify-content:flex-start !important;
+
+width:100%;
+
+min-width:0 !important;
+
+padding:14px 18px !important;
+
+background:#fff !important;
+
+color:#111 !important;
+
+border:none !important;
+
+border-radius:0 !important;
+
+font-family:var(--font-body);
+
+font-size:.74rem !important;
+
+font-weight:700;
+
+line-height:1.4;
+
+text-align:left;
+
+text-decoration:none;
+
+box-shadow:none !important;
+
+transition:
+background .2s ease,
+color .2s ease,
+padding-left .2s ease
+}
+
+
+.submenu a{
+border-bottom:1px solid #d8d8d8 !important
+}
+
+
+.submenu a:last-child{
+border-bottom:none !important
+}
+
+
+.submenu a:hover{
+background:#f0f0f0 !important;
+
+color:#000 !important;
+
+padding-left:24px !important;
+
+border-color:#d0d0d0 !important;
+
+box-shadow:none !important
+}
+
+
+.submenu-number{
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+width:27px;
+height:27px;
+
+flex:0 0 27px;
+
+margin-right:11px;
+
+background:#111;
+
+color:#fff;
+
+border-radius:50%;
+
+font-size:.65rem;
+
+font-weight:800
+}
+
+
+.submenu a:hover .submenu-number{
+background:var(--orange);
+color:#fff
+}
+
+
+/* =========================================================
+FONDO ANIMADO
+========================================================= */
+
+.bg-effects,
+.stars,
+.bubbles,
+.particles{
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:-1
+}
+
+
+.bg-glow{
+position:absolute;
+
+width:500px;
+height:500px;
+
+border-radius:50%;
+
+filter:blur(110px);
+
+opacity:.13;
+
+animation:
+glowFloat 12s ease-in-out infinite
+}
+
+
+.g1{
+background:var(--cyan);
+
+left:-230px;
+top:15%
+}
+
+
+.g2{
+background:var(--orange);
+
+right:-230px;
+bottom:10%;
+
+animation-delay:-5s
+}
+
+
+.g3{
+background:var(--blue);
+
+left:35%;
+top:65%;
+
+width:350px;
+height:350px;
+
+animation-delay:-8s
+}
+
+
+@keyframes glowFloat{
+
+50%{
+transform:
+translate(35px,-30px)
+scale(1.1)
+}
+
+}
+
+
+/* ESTRELLAS */
+
+.star{
+position:absolute;
+
+width:5px;
+height:5px;
+
+border-radius:50%;
+
+background:#fff;
+
+box-shadow:
+0 0 8px #fff,
+0 0 17px var(--cyan),
+0 0 28px var(--cyan);
+
+animation:
+starMove 11s linear infinite
+}
+
+
+.star.big{
+
+width:10px;
+height:10px;
+
+box-shadow:
+0 0 10px #fff,
+0 0 25px var(--cyan),
+0 0 45px var(--cyan);
+
+animation-duration:15s
+}
+
+
+.star.orange{
+
+box-shadow:
+0 0 8px #fff,
+0 0 18px var(--orange),
+0 0 32px var(--orange)
+}
+
+
+@keyframes starMove{
+
+0%{
+transform:
+translateY(110vh)
+translateX(0)
+scale(.4);
+
+opacity:0
+}
+
+15%{
+opacity:.9
+}
+
+50%{
+transform:
+translateY(45vh)
+translateX(30px)
+scale(1)
+}
+
+100%{
+transform:
+translateY(-15vh)
+translateX(-35px)
+scale(1.4);
+
+opacity:0
+}
+
+}
+
+
+/* BURBUJAS */
+
+.bubble{
+position:absolute;
+
+border:1px solid rgba(255,255,255,.18);
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle at 30% 25%,
+rgba(255,255,255,.18),
+rgba(0,234,255,.035) 40%,
+transparent 70%
+);
+
+box-shadow:
+inset 0 0 30px rgba(0,234,255,.08),
+0 0 35px rgba(0,234,255,.08);
+
+animation:
+bubbleFloat 9s ease-in-out infinite
+}
+
+
+.bubble.orange{
+
+border-color:rgba(255,106,0,.25);
+
+background:
+radial-gradient(
+circle at 30% 25%,
+rgba(255,255,255,.15),
+rgba(255,106,0,.05) 45%,
+transparent 72%
+);
+
+box-shadow:
+inset 0 0 30px rgba(255,106,0,.08),
+0 0 35px rgba(255,106,0,.08)
+}
+
+
+.bubble.large{
+
+width:180px !important;
+height:180px !important
+}
+
+
+.bubble.xlarge{
+
+width:260px !important;
+height:260px !important
+}
+
+
+@keyframes bubbleFloat{
+
+0%,100%{
+transform:
+translate(0,0)
+scale(1)
+}
+
+50%{
+transform:
+translate(35px,-55px)
+scale(1.08)
+}
+
+}
+
+
+/* PARTICULAS */
+
+.particle{
+
+position:absolute;
+
+width:3px;
+height:3px;
+
+background:var(--orange);
+
+border-radius:50%;
+
+box-shadow:
+0 0 8px var(--orange);
+
+animation:
+particleFloat 8s linear infinite
+}
+
+
+@keyframes particleFloat{
+
+0%{
+transform:
+translateY(105vh);
+
+opacity:0
+}
+
+20%{
+opacity:.8
+}
+
+100%{
+transform:
+translateY(-10vh)
+translateX(50px);
+
+opacity:0
+}
+
+}
+
+
+/* =========================================================
+CONTENIDO PRINCIPAL - PUNTO 6
+========================================================= */
+
+main{
+padding-top:210px;
+position:relative
+}
+
+
+.page-intro{
+text-align:center;
+padding:35px 20px 18px
+}
+
+
+.kicker{
+display:inline-flex;
+
+align-items:center;
+gap:8px;
+
+color:var(--cyan);
+
+font-size:.7rem;
+
+font-weight:800;
+
+letter-spacing:2px;
+
+border:1px solid rgba(0,234,255,.35);
+
+padding:8px 15px;
+
+border-radius:999px;
+
+background:rgba(0,234,255,.05);
+
+box-shadow:
+0 0 22px rgba(0,234,255,.08)
+}
+
+
+.page-title{
+font-family:var(--font-title);
+
+font-size:
+clamp(2rem,5vw,4rem);
+
+font-weight:900;
+
+margin:20px auto 10px;
+
+letter-spacing:-1px;
+
+text-shadow:
+0 0 22px rgba(0,234,255,.12)
+}
+
+
+.page-title span{
+color:var(--orange)
+}
+
+
+.page-subtitle{
+max-width:850px;
+
+margin:auto;
+
+color:#aeb6c0;
+
+font-size:.9rem;
+
+line-height:1.7
+}
+
+
+/* =========================================================
+CARRUSEL PRINCIPAL
+========================================================= */
+
+.carousel-wrap{
+
+width:min(1100px,92%);
+
+margin:28px auto 45px;
+
+position:relative
+}
+
+
+.carousel{
+
+height:390px;
+
+border-radius:28px;
+
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,.16);
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.65),
+0 0 45px rgba(0,234,255,.08);
+
+background:#080b10;
+
+position:relative
+}
+
+
+.carousel:before{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+z-index:3;
+
+pointer-events:none;
+
+border-radius:28px;
+
+box-shadow:
+inset 0 0 70px rgba(0,0,0,.65)
+}
+
+
+.slide{
+
+position:absolute;
+
+inset:0;
+
+opacity:0;
+
+transform:scale(1.07);
+
+transition:
+opacity .8s ease,
+transform 1.2s ease
+}
+
+
+.slide.active{
+
+opacity:1;
+
+transform:scale(1)
+}
+
+
+.slide img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+filter:
+brightness(.48)
+saturate(1.2)
+contrast(1.05)
+}
+
+
+.slide:after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,0,0,.9),
+rgba(0,0,0,.12) 75%
+),
+
+linear-gradient(
+0deg,
+rgba(0,0,0,.75),
+transparent 55%
+)
+}
+
+
+.slide-caption{
+
+position:absolute;
+
+left:45px;
+bottom:38px;
+
+z-index:4;
+
+max-width:650px
+}
+
+
+.slide-caption .mini-tag{
+
+display:inline-block;
+
+padding:6px 11px;
+
+margin-bottom:10px;
+
+border-radius:30px;
+
+background:rgba(0,234,255,.12);
+
+border:1px solid rgba(0,234,255,.4);
+
+color:var(--cyan);
+
+font-size:.62rem;
+
+font-weight:800;
+
+letter-spacing:1px
+}
+
+
+.slide-caption strong{
+
+display:block;
+
+font-size:
+clamp(1.4rem,3vw,2.2rem);
+
+font-weight:900;
+
+margin-bottom:8px
+}
+
+
+.slide-caption p{
+
+color:#d3d9df;
+
+font-size:.78rem;
+
+line-height:1.7
+}
+
+
+.carousel-btn{
+
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+z-index:6;
+
+width:48px;
+height:48px;
+
+border:1px solid rgba(255,255,255,.25);
+
+border-radius:50%;
+
+background:rgba(0,0,0,.5);
+
+color:#fff;
+
+cursor:pointer;
+
+backdrop-filter:blur(8px);
+
+transition:.3s
+}
+
+
+.carousel-btn:hover{
+
+background:var(--orange);
+
+color:#000;
+
+box-shadow:
+0 0 25px rgba(255,106,0,.6);
+
+transform:
+translateY(-50%)
+scale(1.08)
+}
+
+
+.prev{
+left:18px
+}
+
+
+.next{
+right:18px
+}
+
+
+.dots{
+
+position:absolute;
+
+z-index:7;
+
+right:32px;
+bottom:28px;
+
+display:flex;
+
+gap:7px
+}
+
+
+.dot{
+
+width:9px;
+height:9px;
+
+border-radius:50%;
+
+border:1px solid #fff;
+
+background:transparent;
+
+cursor:pointer;
+
+opacity:.55;
+
+transition:.3s
+}
+
+
+.dot.active{
+
+width:27px;
+
+border-radius:20px;
+
+background:var(--cyan);
+
+box-shadow:
+0 0 12px var(--cyan);
+
+opacity:1
+}
+
+
+/* =========================================================
+CONTENEDOR GENERAL
+========================================================= */
+
+.content-area{
+
+width:min(1180px,92%);
+
+margin:auto;
+
+padding:
+0 0 110px
+}
+
+
+.info-card{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+145deg,
+rgba(14,19,27,.98),
+rgba(4,7,12,.98)
+);
+
+border:1px solid rgba(255,255,255,.13);
+
+border-radius:32px;
+
+padding:48px;
+
+box-shadow:
+0 35px 90px rgba(0,0,0,.62),
+inset 0 1px 0 rgba(255,255,255,.07)
+}
+
+
+.info-card:before{
+
+content:"";
+
+position:absolute;
+
+inset:-1px;
+
+border-radius:33px;
+
+padding:1px;
+
+background:
+linear-gradient(
+125deg,
+var(--cyan),
+transparent 25%,
+var(--orange) 55%,
+var(--gold) 80%,
+var(--cyan)
+);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+
+-webkit-mask-composite:xor;
+
+mask-composite:exclude;
+
+pointer-events:none;
+
+opacity:.7;
+
+animation:borderFlow 7s linear infinite
+}
+
+
+@keyframes borderFlow{
+
+to{
+filter:hue-rotate(30deg)
+}
+}
+
+
+.info-card:after{
+
+content:"✦";
+
+position:absolute;
+
+right:-20px;
+top:-35px;
+
+font-size:95px;
+
+color:var(--gold);
+
+opacity:.45;
+
+text-shadow:
+0 0 25px rgba(255,196,0,.55);
+
+animation:spark 3s ease-in-out infinite
+}
+
+
+@keyframes spark{
+
+50%{
+
+transform:
+rotate(12deg)
+scale(1.1);
+
+opacity:.7
+}
+
+}
+
+
+/* =========================================================
+ENCABEZADO DE SECCIÓN
+========================================================= */
+
+.info-head{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+margin-bottom:22px
+}
+
+
+.info-icon{
+
+width:70px;
+height:70px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.15),
+rgba(255,106,0,.17)
+);
+
+border:1px solid rgba(0,234,255,.5);
+
+color:var(--cyan);
+
+font-size:1.65rem;
+
+box-shadow:
+0 0 30px rgba(0,234,255,.1);
+
+flex-shrink:0
+}
+
+
+.info-head h2{
+
+font-size:
+clamp(1.45rem,3vw,2.3rem);
+
+font-weight:900
+}
+
+
+.info-head p{
+
+color:var(--orange);
+
+font-size:.67rem;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+margin-top:5px
+}
+
+
+.text-block{
+
+color:#d8dde5;
+
+font-size:.9rem;
+
+line-height:1.9;
+
+margin-bottom:35px
+}
+
+
+.text-block p{
+margin-bottom:13px
+}
+
+
+.text-block strong{
+color:#fff
+}
+
+
+/* =========================================================
+BARRA DE IDEA
+========================================================= */
+
+.concept-banner{
+
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+margin:0 0 38px;
+
+padding:20px 24px;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,234,255,.08),
+rgba(255,106,0,.06)
+);
+
+border:1px solid rgba(255,255,255,.1);
+
+box-shadow:
+inset 0 0 25px rgba(0,234,255,.025)
+}
+
+
+.concept-banner i{
+
+font-size:1.5rem;
+
+color:var(--gold)
+}
+
+
+.concept-banner p{
+
+font-size:.78rem;
+
+color:#cbd3dc;
+
+line-height:1.7
+}
+
+
+/* =========================================================
+APARTADOS PRINCIPALES
+========================================================= */
+
+.resource-section{
+
+position:relative;
+
+margin-top:42px;
+
+padding:0;
+
+border-radius:27px;
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.035),
+rgba(255,255,255,.008)
+);
+
+border:1px solid rgba(255,255,255,.09);
+
+overflow:hidden;
+
+transition:
+transform .4s ease,
+border-color .4s ease,
+box-shadow .4s ease
+}
+
+
+.resource-section:hover{
+
+transform:translateY(-5px);
+
+border-color:rgba(0,234,255,.35);
+
+box-shadow:
+0 25px 55px rgba(0,0,0,.4),
+0 0 30px rgba(0,234,255,.05)
+}
+
+
+.resource-visual{
+
+height:270px;
+
+position:relative;
+
+overflow:hidden
+}
+
+
+.resource-visual img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+filter:
+brightness(.55)
+saturate(1.18);
+
+transition:
+transform .8s ease,
+filter .8s ease
+}
+
+
+.resource-section:hover .resource-visual img{
+
+transform:scale(1.08);
+
+filter:
+brightness(.68)
+saturate(1.3)
+}
+
+
+.resource-visual:after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+transparent 25%,
+rgba(3,5,8,.96) 100%
+)
+}
+
+
+.resource-badge{
+
+position:absolute;
+
+left:22px;
+top:20px;
+
+z-index:3;
+
+display:flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:8px 13px;
+
+border-radius:30px;
+
+background:rgba(0,0,0,.65);
+
+border:1px solid rgba(255,255,255,.18);
+
+backdrop-filter:blur(8px);
+
+font-size:.62rem;
+
+font-weight:900;
+
+letter-spacing:1px
+}
+
+
+.resource-badge i{
+color:var(--cyan)
+}
+
+
+.resource-number{
+
+position:absolute;
+
+right:25px;
+top:18px;
+
+z-index:3;
+
+font-family:var(--font-title);
+
+font-size:3.8rem;
+
+font-weight:900;
+
+color:rgba(255,255,255,.12);
+
+line-height:1
+}
+
+
+.resource-content{
+
+padding:
+0 30px 32px;
+
+margin-top:-48px;
+
+position:relative;
+
+z-index:4
+}
+
+
+.resource-title{
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+margin-bottom:12px
+}
+
+
+.resource-icon{
+
+width:55px;
+height:55px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+var(--orange),
+#ff8b22
+);
+
+color:#000;
+
+font-size:1.25rem;
+
+box-shadow:
+0 0 25px rgba(255,106,0,.28)
+}
+
+
+.resource-title h3{
+
+font-size:
+clamp(1.15rem,2.3vw,1.6rem);
+
+font-weight:900
+}
+
+
+.resource-description{
+
+color:#aeb6c0;
+
+font-size:.78rem;
+
+line-height:1.75;
+
+margin-bottom:22px;
+
+max-width:850px
+}
+
+
+/* =========================================================
+LISTAS DE RECURSOS
+========================================================= */
+
+.resource-list{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:13px
+}
+
+
+.resource-item{
+
+position:relative;
+
+padding:17px 15px;
+
+min-height:100px;
+
+border-radius:16px;
+
+background:
+rgba(255,255,255,.035);
+
+border:1px solid rgba(255,255,255,.09);
+
+transition:.35s;
+
+overflow:hidden
+}
+
+
+.resource-item:before{
+
+content:"";
+
+position:absolute;
+
+width:80px;
+height:80px;
+
+right:-30px;
+bottom:-35px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(0,234,255,.14),
+transparent 70%
+)
+}
+
+
+.resource-item:hover{
+
+transform:
+translateY(-5px);
+
+border-color:
+rgba(255,106,0,.5);
+
+background:
+rgba(255,106,0,.055);
+
+box-shadow:
+0 12px 25px rgba(0,0,0,.3)
+}
+
+
+.resource-item i{
+
+display:block;
+
+font-size:1.15rem;
+
+color:var(--cyan);
+
+margin-bottom:10px
+}
+
+
+.resource-item strong{
+
+display:block;
+
+font-size:.76rem;
+
+color:#fff;
+
+margin-bottom:5px
+}
+
+
+.resource-item span{
+
+display:block;
+
+font-size:.63rem;
+
+line-height:1.55;
+
+color:#8f99a4
+}
+
+
+/* =========================================================
+CRITERIOS
+========================================================= */
+
+.criteria-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:15px
+}
+
+
+.criteria-card{
+
+position:relative;
+
+padding:24px 19px;
+
+border-radius:19px;
+
+background:
+linear-gradient(
+145deg,
+rgba(0,234,255,.055),
+rgba(255,255,255,.018)
+);
+
+border:1px solid rgba(0,234,255,.18);
+
+transition:.35s
+}
+
+
+.criteria-card:hover{
+
+transform:
+translateY(-7px);
+
+border-color:var(--cyan);
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.35),
+0 0 22px rgba(0,234,255,.08)
+}
+
+
+.criteria-icon{
+
+width:48px;
+height:48px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:14px;
+
+margin-bottom:16px;
+
+background:rgba(0,234,255,.09);
+
+border:1px solid rgba(0,234,255,.25);
+
+color:var(--cyan);
+
+font-size:1.15rem
+}
+
+
+.criteria-card h4{
+
+font-size:.82rem;
+
+margin-bottom:8px;
+
+font-weight:800
+}
+
+
+.criteria-card p{
+
+font-size:.65rem;
+
+line-height:1.65;
+
+color:#939ca7
+}
+
+
+.criteria-check{
+
+position:absolute;
+
+right:14px;
+top:14px;
+
+color:var(--green);
+
+font-size:.72rem
+}
+
+
+/* =========================================================
+ORGANIZADORES
+========================================================= */
+
+.organizer-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(4,1fr);
+
+gap:15px
+}
+
+
+.organizer-card{
+
+min-height:230px;
+
+padding:24px 20px;
+
+border-radius:21px;
+
+position:relative;
+
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,.1);
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.05),
+rgba(255,255,255,.015)
+);
+
+transition:.4s
+}
+
+
+.organizer-card:hover{
+
+transform:
+translateY(-8px)
+scale(1.015);
+
+border-color:
+rgba(255,196,0,.45);
+
+box-shadow:
+0 20px 40px rgba(0,0,0,.38)
+}
+
+
+.organizer-card:after{
+
+content:"";
+
+position:absolute;
+
+width:130px;
+height:130px;
+
+right:-50px;
+bottom:-50px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(255,196,0,.15),
+transparent 70%
+)
+}
+
+
+.organizer-icon{
+
+width:57px;
+height:57px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,196,0,.15),
+rgba(255,106,0,.12)
+);
+
+border:1px solid rgba(255,196,0,.35);
+
+color:var(--gold);
+
+font-size:1.3rem;
+
+margin-bottom:18px
+}
+
+
+.organizer-card h4{
+
+font-size:.9rem;
+
+font-weight:900;
+
+margin-bottom:9px
+}
+
+
+.organizer-card p{
+
+font-size:.66rem;
+
+color:#9ca5af;
+
+line-height:1.7
+}
+
+
+.organizer-tag{
+
+display:inline-block;
+
+margin-top:15px;
+
+padding:5px 9px;
+
+border-radius:20px;
+
+font-size:.56rem;
+
+font-weight:800;
+
+color:var(--gold);
+
+border:1px solid rgba(255,196,0,.25);
+
+background:rgba(255,196,0,.05)
+}
+
+
+/* =========================================================
+MINICARRUSEL
+========================================================= */
+
+.mini-gallery-section{
+
+margin-top:50px;
+
+padding-top:35px;
+
+border-top:1px solid rgba(255,255,255,.08)
+}
+
+
+.visual-title{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin:
+0 0 20px
+}
+
+
+.visual-title i{
+
+color:var(--orange);
+
+font-size:1.1rem
+}
+
+
+.visual-title h3{
+
+font-size:1.05rem;
+
+font-weight:900
+}
+
+
+.visual-title span{
+
+color:#777;
+
+font-size:.65rem;
+
+margin-left:auto
+}
+
+
+.mini-carousel{
+
+position:relative;
+
+height:250px;
+
+border-radius:22px;
+
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,.12);
+
+background:#080b0f;
+
+box-shadow:
+0 20px 50px rgba(0,0,0,.4)
+}
+
+
+.mini-slide{
+
+position:absolute;
+
+inset:0;
+
+opacity:0;
+
+transition:
+opacity .7s ease
+}
+
+
+.mini-slide.active{
+opacity:1
+}
+
+
+.mini-slide img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+filter:
+brightness(.5)
+saturate(1.15)
+}
+
+
+.mini-slide:after{
+
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,0,0,.82),
+transparent 70%
+)
+}
+
+
+.mini-caption{
+
+position:absolute;
+
+left:30px;
+top:50%;
+
+transform:translateY(-50%);
+
+z-index:2;
+
+max-width:500px
+}
+
+
+.mini-caption h4{
+
+font-size:1.25rem;
+
+font-weight:900;
+
+margin-bottom:7px
+}
+
+
+.mini-caption p{
+
+font-size:.7rem;
+
+color:#cbd3dc;
+
+line-height:1.65
+}
+
+
+.mini-nav{
+
+position:absolute;
+
+right:20px;
+bottom:20px;
+
+z-index:5;
+
+display:flex;
+
+gap:7px
+}
+
+
+.mini-dot{
+
+width:8px;
+height:8px;
+
+border-radius:50%;
+
+border:1px solid #fff;
+
+background:transparent;
+
+cursor:pointer;
+
+transition:.3s
+}
+
+
+.mini-dot.active{
+
+width:24px;
+
+border-radius:20px;
+
+background:var(--orange);
+
+box-shadow:
+0 0 10px var(--orange)
+}
+
+
+/* =========================================================
+JUSTIFICACIÓN
+========================================================= */
+
+.justification{
+
+margin-top:42px;
+
+position:relative;
+
+padding:34px 35px;
+
+border-radius:23px;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.08),
+rgba(0,140,255,.035),
+rgba(255,106,0,.07)
+);
+
+border:1px solid rgba(255,255,255,.12);
+
+box-shadow:
+inset 0 0 35px rgba(0,234,255,.025),
+0 15px 40px rgba(0,0,0,.25)
+}
+
+
+.justification:before{
+
+content:"";
+
+position:absolute;
+
+left:0;
+top:0;
+bottom:0;
+
+width:4px;
+
+background:
+linear-gradient(
+180deg,
+var(--cyan),
+var(--orange),
+var(--gold)
+);
+
+box-shadow:
+0 0 18px rgba(0,234,255,.35);
+
+border-radius:10px
+}
+
+
+.justification-head{
+
+display:flex;
+
+align-items:center;
+
+gap:13px;
+
+margin-bottom:12px
+}
+
+
+.justification-head i{
+
+font-size:1.35rem;
+
+color:var(--gold)
+}
+
+
+.justification-head h3{
+
+font-size:1rem;
+
+font-weight:900
+}
+
+
+.justification p{
+
+color:#cbd3dc;
+
+font-size:.8rem;
+
+line-height:1.9
+}
+
+
+/* =========================================================
+MENSAJE FINAL
+========================================================= */
+
+.final-message{
+
+margin-top:24px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:20px 23px;
+
+border-radius:17px;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,234,255,.07),
+rgba(0,234,255,.015)
+);
+
+border:1px solid rgba(0,234,255,.14)
+}
+
+
+.final-message i{
+
+color:var(--cyan);
+
+font-size:1.25rem
+}
+
+
+.final-message p{
+
+color:#cbd3dc;
+
+font-size:.75rem;
+
+line-height:1.7
+}
+
+
+/* =========================================================
+ONDAS
+========================================================= */
+
+.wave-section{
+
+height:125px;
+
+position:relative;
+
+overflow:hidden;
+
+margin-top:15px
+}
+
+
+.wave{
+
+position:absolute;
+
+left:-5%;
+
+width:110%;
+
+height:100px;
+
+border-radius:
+50% 50% 0 0;
+
+border-top:
+3px solid var(--cyan);
+
+box-shadow:
+0 -3px 15px var(--cyan);
+
+animation:
+wave 5s ease-in-out infinite
+}
+
+
+.wave.w2{
+
+top:15px;
+
+border-color:var(--orange);
+
+box-shadow:
+0 -3px 15px var(--orange);
+
+animation-duration:7s;
+
+animation-direction:reverse;
+
+opacity:.7
+}
+
+
+.wave.w3{
+
+top:30px;
+
+border-color:var(--gold);
+
+box-shadow:
+0 -3px 15px var(--gold);
+
+animation-duration:9s;
+
+opacity:.45
+}
+
+
+@keyframes wave{
+
+50%{
+transform:
+translateX(3%)
+scaleY(1.3)
+}
+
+}
+
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer{
+
+text-align:center;
+
+padding:40px 20px;
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+background:
+rgba(0,0,0,.8);
+
+position:relative;
+
+z-index:2
+}
+
+
+.footer-line{
+
+width:120px;
+
+height:2px;
+
+margin:
+0 auto 18px;
+
+background:
+linear-gradient(
+90deg,
+var(--red),
+var(--orange),
+white
+);
+
+box-shadow:
+0 0 10px var(--orange)
+}
+
+
+footer p{
+
+font-size:.67rem;
+
+color:#777;
+
+line-height:1.8
+}
+
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:1050px){
+
+.resource-list,
+.criteria-grid,
+.organizer-grid{
+
+grid-template-columns:
+repeat(2,1fr)
+}
+
+}
+
+
+@media(max-width:850px){
+
+.carousel{
+
+height:330px
+}
+
+}
+
+
+@media(max-width:700px){
+
+.institution-main{
+
+flex-direction:column;
+
+padding:
+15px 50px 8px
+}
+
+
+.institution-text{
+
+text-align:center
+}
+
+
+.logo{
+
+width:58px
+}
+
+
+.logo-box:before{
+
+width:70px;
+height:70px
+}
+
+
+.navbar{
+
+overflow-x:auto;
+
+justify-content:flex-start
+}
+
+
+.nav-links{
+
+flex-wrap:nowrap;
+
+min-width:max-content
+}
+
+
+.nav-links a{
+
+min-width:100px
+}
+
+
+main{
+
+padding-top:205px
+}
+
+
+.carousel{
+
+height:270px
+}
+
+
+.slide-caption{
+
+left:25px;
+
+bottom:23px;
+
+max-width:75%
+}
+
+
+.slide-caption strong{
+
+font-size:1.25rem
+}
+
+
+.slide-caption p{
+
+font-size:.68rem
+}
+
+
+.info-card{
+
+padding:28px 20px
+}
+
+
+.resource-visual{
+
+height:220px
+}
+
+
+.resource-content{
+
+padding:
+0 20px 25px;
+
+margin-top:-35px
+}
+
+
+.resource-title{
+
+align-items:flex-end
+}
+
+
+.resource-icon{
+
+width:48px;
+height:48px;
+
+font-size:1rem
+}
+
+
+.resource-list,
+.criteria-grid,
+.organizer-grid{
+
+grid-template-columns:1fr
+}
+
+
+.organizer-card{
+
+min-height:190px
+}
+
+
+.mini-carousel{
+
+height:220px
+}
+
+
+.mini-caption{
+
+left:20px;
+
+max-width:65%
+}
+
+
+.mini-caption h4{
+
+font-size:1rem
+}
+
+
+.mini-caption p{
+
+font-size:.62rem
+}
+
+
+.justification{
+
+padding:28px 23px
+}
+
+
+.submenu{
+
+position:absolute;
+
+left:0;
+
+transform:
+translateY(8px);
+
+width:310px;
+
+max-width:85vw
+}
+
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+
+transform:
+translateY(0)
+}
+
+
+.submenu-scroll{
+
+max-height:270px
+}
+
+
+.submenu-scroll::-webkit-scrollbar{
+
+width:15px
+}
+
+
+.submenu a{
+
+padding:
+15px 16px !important;
+
+font-size:
+.70rem !important
+}
+
+}
+
+
+@media(max-width:450px){
+
+.institution-button span{
+
+display:none
+}
+
+
+.carousel{
+
+height:230px
+}
+
+
+.page-title{
+
+font-size:2rem
+}
+
+
+.submenu{
+
+width:285px;
+
+max-width:82vw
+}
+
+
+.resource-visual{
+
+height:190px
+}
+
+
+.resource-title h3{
+
+font-size:1rem
+}
+
+
+.resource-description{
+
+font-size:.7rem
+}
+
+
+.mini-carousel{
+
+height:190px
+}
+
+
+.mini-caption{
+
+max-width:70%
+}
+
+
+.mini-caption h4{
+
+font-size:.9rem
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+FONDO
+========================================================= -->
+
+<div class="bg-effects">
+
+<span class="bg-glow g1"></span>
+<span class="bg-glow g2"></span>
+<span class="bg-glow g3"></span>
+
+</div>
+
+
+<div class="stars">
+
+<span class="star big" style="left:6%;animation-duration:14s"></span>
+<span class="star" style="left:12%;animation-delay:-3s"></span>
+<span class="star orange big" style="left:21%;animation-delay:-7s"></span>
+<span class="star" style="left:29%;animation-duration:13s;animation-delay:-2s"></span>
+<span class="star big" style="left:38%;animation-delay:-8s"></span>
+<span class="star orange" style="left:46%;animation-duration:16s;animation-delay:-4s"></span>
+<span class="star" style="left:54%;animation-delay:-10s"></span>
+<span class="star big" style="left:63%;animation-duration:15s;animation-delay:-5s"></span>
+<span class="star orange" style="left:71%;animation-delay:-9s"></span>
+<span class="star" style="left:79%;animation-duration:12s;animation-delay:-6s"></span>
+<span class="star big" style="left:87%;animation-delay:-11s"></span>
+<span class="star orange" style="left:94%;animation-duration:17s;animation-delay:-3s"></span>
+
+</div>
+
+
+<div class="bubbles">
+
+<span class="bubble large"
+style="left:-70px;top:20%;animation-duration:11s"></span>
+
+<span class="bubble"
+style="width:70px;height:70px;left:14%;top:32%;animation-duration:6s"></span>
+
+<span class="bubble orange large"
+style="right:-80px;top:28%;animation-duration:13s"></span>
+
+<span class="bubble"
+style="width:55px;height:55px;right:15%;top:18%;animation-duration:7s"></span>
+
+<span class="bubble xlarge"
+style="left:-110px;top:65%;animation-duration:15s"></span>
+
+<span class="bubble orange"
+style="width:90px;height:90px;left:28%;top:78%;animation-duration:8s"></span>
+
+<span class="bubble large"
+style="right:-70px;top:62%;animation-duration:12s"></span>
+
+<span class="bubble"
+style="width:60px;height:60px;right:27%;top:82%;animation-duration:6s"></span>
+
+</div>
+
+
+<div class="particles">
+
+<span class="particle" style="left:8%;animation-delay:-2s"></span>
+<span class="particle" style="left:17%;animation-delay:-5s"></span>
+<span class="particle" style="left:26%;animation-delay:-1s"></span>
+<span class="particle" style="left:35%;animation-delay:-7s"></span>
+<span class="particle" style="left:48%;animation-delay:-4s"></span>
+<span class="particle" style="left:59%;animation-delay:-6s"></span>
+<span class="particle" style="left:68%;animation-delay:-3s"></span>
+<span class="particle" style="left:78%;animation-delay:-8s"></span>
+<span class="particle" style="left:89%;animation-delay:-5s"></span>
+
+</div>
+
+
+<!-- =========================================================
+HEADER
+========================================================= -->
+
+<header
+class="header"
+id="header">
+
+<div class="header-led"></div>
+
+
+<button
+class="institution-button"
+id="institutionButton">
+
+<i class="fa-solid fa-eye"></i>
+
+<span>
+Ocultar información
+</span>
+
+</button>
+
+
+<div
+class="institution-area"
+id="institutionArea">
+
+
+<div class="institution-main">
+
+<div class="logo-box">
+
+<img
+src="img/logofce.png"
+alt="Logo de la Facultad de Ciencias de la Educación"
+class="logo">
+
+</div>
+
+
+<div class="institution-text">
+
+<h1 class="uni-name">
+UNIVERSIDAD AUTÓNOMA DE TLAXCALA
+</h1>
+
+<h2 class="facultad">
+FACULTAD DE CIENCIAS DE LA EDUCACIÓN
+</h2>
+
+<p class="carrera">
+Licenciatura en Ciencias de la Educación
+</p>
+
+</div>
+
+</div>
+
+
+<div class="academic-data">
+
+<div class="academic-item">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+<span>
+U.A. SISTEMAS ABIERTOS DE APRENDIZAJE
+</span>
+
+</div>
+
+
+<div class="academic-item">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<span>
+MTRO. JUAN CARLOS SILMAR NAVA
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+MENÚ
+========================================================= -->
+
+<nav class="navbar">
+
+<ul class="nav-links">
+
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-book-open"></i>
+
+Introducción
+
+</a>
+
+</li>
+
+
+<li class="has-submenu">
+
+<a
+href="index.html"
+class="submenu-trigger"
+aria-haspopup="true"
+aria-expanded="false">
+
+<i class="fa-solid fa-diagram-project"></i>
+
+Contenido
+
+</a>
+
+
+<div class="submenu">
+
+<div class="submenu-scroll">
+
+
+<a href="index1.html">
+
+<span class="submenu-number">
+1
+</span>
+
+Concepto de aprendizaje autónomo
+
+</a>
+
+
+<a href="index2.html">
+
+<span class="submenu-number">
+2
+</span>
+
+Características del estudiante autónomo
+
+</a>
+
+
+<a href="index3.html">
+
+<span class="submenu-number">
+3
+</span>
+
+Papel del docente como guía o facilitador
+
+</a>
+
+
+<a href="index4.html">
+
+<span class="submenu-number">
+4
+</span>
+
+TIC, TAC y TEP para el aprendizaje autónomo
+
+</a>
+
+
+<a href="index5.html">
+
+<span class="submenu-number">
+5
+</span>
+
+Plataformas y aplicaciones para el estudio independiente
+
+</a>
+
+
+<a href="index6.html">
+
+<span class="submenu-number">
+6
+</span>
+
+Recursos digitales para buscar, seleccionar y organizar información
+
+</a>
+
+
+<a href="index7.html">
+
+<span class="submenu-number">
+7
+</span>
+
+Herramientas para establecer metas, horarios y seguimiento del aprendizaje
+
+</a>
+
+
+<a href="index8.html">
+
+<span class="submenu-number">
+8
+</span>
+
+Ventajas y desafíos del aprendizaje autónomo mediante tecnologías
+
+</a>
+
+
+<a href="index9.html">
+
+<span class="submenu-number">
+9
+</span>
+
+Conclusión
+
+</a>
+
+
+</div>
+
+</div>
+
+</li>
+
+
+<li>
+
+<a href="index10.html">
+
+<i class="fa-solid fa-puzzle-piece"></i>
+
+Material didáctico
+
+</a>
+
+</li>
+
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<!-- =========================================================
+CONTENIDO PRINCIPAL
+========================================================= -->
+
+<main id="inicio">
+
+
+<section class="page-intro">
+
+<div class="kicker">
+
+<i class="fa-solid fa-database"></i>
+
+PUNTO 06 · APRENDIZAJE AUTÓNOMO
+
+</div>
+
+
+<h1 class="page-title">
+
+Recursos digitales para
+<span>buscar, seleccionar y organizar información</span>
+
+</h1>
+
+
+<p class="page-subtitle">
+
+Aprender de manera autónoma implica saber dónde buscar información, reconocer cuáles fuentes son confiables y utilizar herramientas que permitan organizar los conocimientos de forma clara y significativa.
+
+</p>
+
+</section>
+
+
+<!-- =========================================================
+CARRUSEL PRINCIPAL
+========================================================= -->
+
+<section
+class="carousel-wrap"
+aria-label="Galería de recursos digitales">
+
+<div class="carousel">
+
+
+<div class="slide active">
+
+<img
+src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1500&q=85"
+alt="Libros y recursos para investigar">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+INVESTIGACIÓN DIGITAL
+</span>
+
+<strong>
+Buscar información de calidad
+</strong>
+
+<p>
+Internet ofrece múltiples recursos para localizar información que puede apoyar el aprendizaje autónomo.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1500&q=85"
+alt="Estudiante utilizando computadora">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+BÚSQUEDA ACADÉMICA
+</span>
+
+<strong>
+Explorar fuentes académicas</strong>
+
+<p>
+Los buscadores especializados permiten encontrar artículos, investigaciones y documentos académicos.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1500&q=85"
+alt="Biblioteca con libros">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+BIBLIOTECAS DIGITALES
+</span>
+
+<strong>
+Acceder al conocimiento</strong>
+
+<p>
+Las bibliotecas digitales facilitan el acceso a colecciones, libros y documentos desde diferentes lugares.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1500&q=85"
+alt="Persona organizando información">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+ORGANIZACIÓN</span>
+
+<strong>
+Convertir información en conocimiento</strong>
+
+<p>
+Organizar las ideas permite comprender mejor los contenidos y relacionarlos entre sí.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1500&q=85"
+alt="Gráficas y análisis de información">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+ANÁLISIS CRÍTICO
+</span>
+
+<strong>
+Evaluar antes de utilizar</strong>
+
+<p>
+No toda la información disponible en Internet tiene la misma calidad o confiabilidad.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1500&q=85"
+alt="Organización y planificación de información">
+
+<div class="slide-caption">
+
+<span class="mini-tag">
+APRENDIZAJE AUTÓNOMO
+</span>
+
+<strong>
+Buscar · Seleccionar · Organizar</strong>
+
+<p>
+Estas habilidades permiten utilizar la información de manera responsable y efectiva.
+
+</p>
+
+</div>
+
+</div>
+
+
+<button
+class="carousel-btn prev"
+aria-label="Imagen anterior">
+
+<i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+
+<button
+class="carousel-btn next"
+aria-label="Imagen siguiente">
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+
+<div class="dots"></div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+TARJETA PRINCIPAL
+========================================================= -->
+
+<section
+class="content-area"
+id="contenido6">
+
+
+<article class="info-card">
+
+
+<div class="info-head">
+
+<div class="info-icon">
+
+<i class="fa-solid fa-magnifying-glass-chart"></i>
+
+</div>
+
+
+<div>
+
+<h2>
+Buscar, seleccionar y organizar información
+</h2>
+
+<p>
+EXPLORAR · EVALUAR · ORGANIZAR · APRENDER
+</p>
+
+</div>
+
+</div>
+
+
+<div class="text-block">
+
+<p>
+
+Para aprender de manera autónoma es necesario <strong>localizar información confiable y organizarla adecuadamente</strong>. Las herramientas digitales facilitan este proceso al permitir acceder a fuentes académicas, bibliotecas digitales y diferentes formas de representación de la información.
+
+</p>
+
+<p>
+
+El estudiante no solo necesita encontrar información, sino también analizarla, comparar diferentes fuentes y determinar cuáles pueden ser utilizadas para construir conocimientos.
+
+</p>
+
+</div>
+
+
+<div class="concept-banner">
+
+<i class="fa-solid fa-lightbulb"></i>
+
+<p>
+
+<strong>Idea clave:</strong> buscar información es solo el primer paso. Un aprendizaje autónomo requiere seleccionar fuentes confiables, analizar su contenido y organizar las ideas para comprenderlas mejor.
+
+</p>
+
+</div>
+
+
+<!-- =========================================================
+APARTADO 1
+========================================================= -->
+
+<section class="resource-section">
+
+<div class="resource-visual">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=85"
+alt="Búsqueda académica en Internet">
+
+<div class="resource-badge">
+
+<i class="fa-solid fa-magnifying-glass"></i>
+
+MOTORES DE BÚSQUEDA ACADÉMICA
+
+</div>
+
+<div class="resource-number">
+01
+</div>
+
+</div>
+
+
+<div class="resource-content">
+
+<div class="resource-title">
+
+<div class="resource-icon">
+
+<i class="fa-solid fa-search"></i>
+
+</div>
+
+<h3>
+Motores de búsqueda académica
+</h3>
+
+</div>
+
+
+<p class="resource-description">
+
+Permiten localizar artículos científicos, investigaciones, tesis y otros documentos relacionados con diferentes temas de estudio.
+
+</p>
+
+
+<div class="resource-list">
+
+
+<div class="resource-item">
+
+<i class="fa-brands fa-google"></i>
+
+<strong>Google Académico</strong>
+
+<span>
+Buscador especializado en literatura académica y científica.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-flask"></i>
+
+<strong>Scielo</strong>
+
+<span>
+Biblioteca electrónica con revistas y artículos científicos.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-book"></i>
+
+<strong>Redalyc</strong>
+
+<span>
+Sistema de información científica con publicaciones académicas.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-file-lines"></i>
+
+<strong>Dialnet</strong>
+
+<span>
+Portal especializado en literatura científica y humanística.
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+APARTADO 2
+========================================================= -->
+
+<section class="resource-section">
+
+<div class="resource-visual">
+
+<img
+src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=85"
+alt="Biblioteca digital">
+
+<div class="resource-badge">
+
+<i class="fa-solid fa-book-open"></i>
+
+BIBLIOTECAS DIGITALES
+
+</div>
+
+<div class="resource-number">
+02
+</div>
+
+</div>
+
+
+<div class="resource-content">
+
+<div class="resource-title">
+
+<div class="resource-icon">
+
+<i class="fa-solid fa-building-columns"></i>
+
+</div>
+
+<h3>
+Bibliotecas digitales
+</h3>
+
+</div>
+
+
+<p class="resource-description">
+
+Facilitan el acceso a libros, documentos históricos, obras literarias y diferentes colecciones disponibles mediante Internet.
+
+</p>
+
+
+<div class="resource-list">
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-earth-americas"></i>
+
+<strong>Biblioteca Digital Mundial</strong>
+
+<span>
+Permite explorar materiales culturales e históricos de diferentes países.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-feather"></i>
+
+<strong>Biblioteca Virtual Miguel de Cervantes</strong>
+
+<span>
+Ofrece acceso digital a numerosas obras de la literatura hispánica.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-landmark"></i>
+
+<strong>Europeana</strong>
+
+<span>
+Reúne colecciones culturales y digitales de instituciones europeas.
+</span>
+
+</div>
+
+
+<div class="resource-item">
+
+<i class="fa-solid fa-globe"></i>
+
+<strong>Acceso digital</strong>
+
+<span>
+Permite consultar recursos desde diferentes dispositivos y lugares.
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+APARTADO 3
+========================================================= -->
+
+<section class="resource-section">
+
+<div class="resource-visual">
+
+<img
+src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=85"
+alt="Evaluación y análisis de información">
+
+<div class="resource-badge">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+FUENTES CONFIABLES
+
+</div>
+
+<div class="resource-number">
+03
+</div>
+
+</div>
+
+
+<div class="resource-content">
+
+<div class="resource-title">
+
+<div class="resource-icon">
+
+<i class="fa-solid fa-circle-check"></i>
+
+</div>
+
+<h3>
+Criterios para evaluar fuentes confiables
+</h3>
+
+</div>
+
+
+<p class="resource-description">
+
+Antes de utilizar información encontrada en Internet es importante revisar algunos elementos que permiten valorar su confiabilidad y utilidad.
+
+</p>
+
+
+<div class="criteria-grid">
+
+
+<div class="criteria-card">
+
+<i class="fa-solid fa-user criteria-icon"></i>
+
+<i class="fa-solid fa-check criteria-check"></i>
+
+<h4>
+Autor identificado
+</h4>
+
+<p>
+Verificar quién escribió o elaboró la información.
+</p>
+
+</div>
+
+
+<div class="criteria-card">
+
+<i class="fa-solid fa-building criteria-icon"></i>
+
+<i class="fa-solid fa-check criteria-check"></i>
+
+<h4>
+Institución responsable
+</h4>
+
+<p>
+Identificar la institución, organización o editorial que respalda la información.
+</p>
+
+</div>
+
+
+<div class="criteria-card">
+
+<i class="fa-solid fa-calendar-days criteria-icon"></i>
+
+<i class="fa-solid fa-check criteria-check"></i>
+
+<h4>
+Fecha de publicación
+</h4>
+
+<p>
+Revisar cuándo fue publicada o actualizada la información.
+</p>
+
+</div>
+
+
+<div class="criteria-card">
+
+<i class="fa-solid fa-link criteria-icon"></i>
+
+<i class="fa-solid fa-check criteria-check"></i>
+
+<h4>
+Evidencias y referencias
+</h4>
+
+<p>
+Comprobar si presenta datos, evidencias y referencias que respalden sus afirmaciones.
+</p>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+APARTADO 4
+========================================================= -->
+
+<section class="resource-section">
+
+<div class="resource-visual">
+
+<img
+src="https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1200&q=85"
+alt="Organización de información">
+
+<div class="resource-badge">
+
+<i class="fa-solid fa-diagram-project"></i>
+
+ORGANIZACIÓN DE INFORMACIÓN
+
+</div>
+
+<div class="resource-number">
+04
+</div>
+
+</div>
+
+
+<div class="resource-content">
+
+<div class="resource-title">
+
+<div class="resource-icon">
+
+<i class="fa-solid fa-network-wired"></i>
+
+</div>
+
+<h3>
+Organizadores de información
+</h3>
+
+</div>
+
+
+<p class="resource-description">
+
+Los organizadores gráficos permiten representar las ideas de manera visual, establecer relaciones y facilitar la comprensión de información compleja.
+
+</p>
+
+
+<div class="organizer-grid">
+
+
+<div class="organizer-card">
+
+<div class="organizer-icon">
+
+<i class="fa-solid fa-sitemap"></i>
+
+</div>
+
+<h4>
+Mapas conceptuales
+</h4>
+
+<p>
+Representan conceptos y relaciones entre diferentes ideas mediante una estructura organizada.
+</p>
+
+<span class="organizer-tag">
+RELACIONAR IDEAS
+</span>
+
+</div>
+
+
+<div class="organizer-card">
+
+<div class="organizer-icon">
+
+<i class="fa-solid fa-brain"></i>
+
+</div>
+
+<h4>
+Mapas mentales
+</h4>
+
+<p>
+Organizan información a partir de una idea central utilizando palabras, conexiones y elementos visuales.
+</p>
+
+<span class="organizer-tag">
+ASOCIAR IDEAS
+</span>
+
+</div>
+
+
+<div class="organizer-card">
+
+<div class="organizer-icon">
+
+<i class="fa-solid fa-table-columns"></i>
+
+</div>
+
+<h4>
+Cuadros comparativos
+</h4>
+
+<p>
+Permiten identificar semejanzas, diferencias y características entre dos o más elementos.
+</p>
+
+<span class="organizer-tag">
+COMPARAR
+</span>
+
+</div>
+
+
+<div class="organizer-card">
+
+<div class="organizer-icon">
+
+<i class="fa-solid fa-chart-pie"></i>
+
+</div>
+
+<h4>
+Infografías
+</h4>
+
+<p>
+Combinan textos, imágenes y elementos gráficos para presentar información de manera clara y visual.
+</p>
+
+<span class="organizer-tag">
+VISUALIZAR
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+MINICARRUSEL
+========================================================= -->
+
+<section class="mini-gallery-section">
+
+<div class="visual-title">
+
+<i class="fa-solid fa-images"></i>
+
+<h3>
+Explora los recursos digitales
+</h3>
+
+<span>
+MINICARRUSEL VISUAL
+</span>
+
+</div>
+
+
+<div class="mini-carousel">
+
+
+<div class="mini-slide active">
+
+<img
+src="https://images.unsplash.com/photo-1495446815901-a7297e633e8d?auto=format&fit=crop&w=1200&q=85"
+alt="Libros y recursos">
+
+<div class="mini-caption">
+
+<h4>
+Información para aprender
+</h4>
+
+<p>
+El acceso a diferentes fuentes permite ampliar conocimientos y descubrir nuevas perspectivas.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="mini-slide">
+
+<img
+src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=1200&q=85"
+alt="Biblioteca">
+
+<div class="mini-caption">
+
+<h4>
+Bibliotecas digitales
+</h4>
+
+<p>
+Los recursos digitales permiten consultar libros y documentos sin necesidad de acudir físicamente a una biblioteca.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="mini-slide">
+
+<img
+src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=85"
+alt="Trabajo colaborativo con tecnología">
+
+<div class="mini-caption">
+
+<h4>
+Tecnología para investigar
+</h4>
+
+<p>
+Las herramientas digitales apoyan la búsqueda, selección y organización de información.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="mini-slide">
+
+<img
+src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=85"
+alt="Personas organizando información">
+
+<div class="mini-caption">
+
+<h4>
+Organizar para comprender
+</h4>
+
+<p>
+Representar las ideas visualmente facilita la comprensión y el aprendizaje significativo.
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="mini-nav">
+
+<button class="mini-dot active" aria-label="Imagen 1"></button>
+<button class="mini-dot" aria-label="Imagen 2"></button>
+<button class="mini-dot" aria-label="Imagen 3"></button>
+<button class="mini-dot" aria-label="Imagen 4"></button>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+JUSTIFICACIÓN
+========================================================= -->
+
+<section class="justification">
+
+<div class="justification-head">
+
+<i class="fa-solid fa-graduation-cap"></i>
+
+<h3>
+¿Por qué son importantes estos recursos?
+</h3>
+
+</div>
+
+
+<p>
+
+Estos recursos permiten <strong>localizar información de calidad, analizarla críticamente y organizarla de forma efectiva</strong>, favoreciendo un aprendizaje más profundo y significativo. Su uso ayuda al estudiante a desarrollar habilidades para investigar, seleccionar información relevante y construir sus propios conocimientos de manera autónoma.
+
+</p>
+
+</section>
+
+
+<!-- =========================================================
+MENSAJE FINAL
+========================================================= -->
+
+<div class="final-message">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<p>
+
+Un estudiante autónomo no solo busca información: <strong>aprende a reconocer fuentes confiables, analizar su contenido y organizarlo para convertir la información en conocimiento.</strong>
+
+</p>
+
+</div>
+
+
+</article>
+
+</section>
+
+
+<!-- =========================================================
+ONDAS
+========================================================= -->
+
+<div class="wave-section">
+
+<div class="wave"></div>
+
+<div class="wave w2"></div>
+
+<div class="wave w3"></div>
+
+</div>
+
+
+</main>
+
+
+<!-- =========================================================
+FOOTER
+========================================================= -->
+
+<footer>
+
+<div class="footer-line"></div>
+
+
+<p>
+TIC, TAC y TEP para el Aprendizaje Autónomo
+</p>
+
+
+<p>
+Universidad Autónoma de Tlaxcala ·
+Facultad de Ciencias de la Educación
+</p>
+
+
+<p>
+GRUPO 503
+</p>
+
+
+<p>
+SEGUNDO PARCIAL
+</p>
+
+
+<p>
+EQUIPO 4: Rosa | Juan | Isael | Pedro | Yadsiri
+</p>
+
+</footer>
+
+
+<!-- =========================================================
+JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+const institutionButton =
+document.getElementById('institutionButton');
+
+const institutionArea =
+document.getElementById('institutionArea');
+
+
+institutionButton.addEventListener(
+'click',
+()=>{
+
+const closed =
+institutionArea.classList.toggle('closed');
+
+
+institutionButton.innerHTML =
+
+closed
+
+?
+
+'<i class="fa-solid fa-eye"></i><span>Mostrar información</span>'
+
+:
+
+'<i class="fa-solid fa-eye-slash"></i><span>Ocultar información</span>';
+
+}
+);
+
+
+/* =========================================================
+HEADER AL HACER SCROLL
+========================================================= */
+
+const header =
+document.getElementById('header');
+
+let lastScroll =
+window.scrollY;
+
+
+window.addEventListener(
+'scroll',
+()=>{
+
+const y =
+window.scrollY;
+
+
+if(y<=80){
+
+header.classList.remove('hide');
+
+}
+
+else if(y>lastScroll){
+
+header.classList.add('hide');
+
+}
+
+else{
+
+header.classList.remove('hide');
+
+}
+
+
+lastScroll=y;
+
+},
+{passive:true}
+);
+
+
+/* =========================================================
+SUBMENÚ
+========================================================= */
+
+const submenuTrigger =
+document.querySelector('.submenu-trigger');
+
+const submenuParent =
+document.querySelector('.has-submenu');
+
+
+submenuTrigger.addEventListener(
+'click',
+(event)=>{
+
+if(window.innerWidth<=700){
+
+event.preventDefault();
+
+
+const abierto =
+submenuParent.classList.toggle('open');
+
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+abierto ? 'true' : 'false'
+);
+
+}
+
+}
+);
+
+
+/* CERRAR AL HACER CLIC AFUERA */
+
+document.addEventListener(
+'click',
+(event)=>{
+
+if(
+!submenuParent.contains(event.target)
+){
+
+submenuParent.classList.remove('open');
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+'false'
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+CARRUSEL PRINCIPAL
+========================================================= */
+
+const slides =
+[
+...document.querySelectorAll('.slide')
+];
+
+
+const dots =
+document.querySelector('.dots');
+
+
+let current=0;
+
+let timer;
+
+
+/* CREAR PUNTOS */
+
+slides.forEach(
+(_,i)=>{
+
+const d =
+document.createElement('button');
+
+
+d.className =
+'dot'+
+(i===0 ? ' active' : '');
+
+
+d.setAttribute(
+'aria-label',
+'Ir a imagen '+(i+1)
+);
+
+
+d.onclick =
+()=>show(i);
+
+
+dots.appendChild(d);
+
+}
+);
+
+
+/* MOSTRAR SLIDE */
+
+function show(i){
+
+current =
+(i+slides.length)%slides.length;
+
+
+slides.forEach(
+(s,n)=>
+
+s.classList.toggle(
+'active',
+n===current
+)
+
+);
+
+
+[
+...dots.children
+].forEach(
+(d,n)=>
+
+d.classList.toggle(
+'active',
+n===current
+)
+
+);
+
+
+clearInterval(timer);
+
+
+timer =
+setInterval(
+()=>show(current+1),
+5000
+);
+
+}
+
+
+/* BOTONES */
+
+document.querySelector('.next').onclick =
+()=>show(current+1);
+
+
+document.querySelector('.prev').onclick =
+()=>show(current-1);
+
+
+/* INICIO AUTOMÁTICO */
+
+timer =
+setInterval(
+()=>show(current+1),
+5000
+);
+
+
+/* =========================================================
+MINICARRUSEL
+========================================================= */
+
+const miniSlides =
+[
+...document.querySelectorAll('.mini-slide')
+];
+
+const miniDots =
+[
+...document.querySelectorAll('.mini-dot')
+];
+
+let miniCurrent=0;
+
+let miniTimer;
+
+
+function showMini(i){
+
+miniCurrent =
+(i+miniSlides.length)%miniSlides.length;
+
+
+miniSlides.forEach(
+(slide,n)=>{
+
+slide.classList.toggle(
+'active',
+n===miniCurrent
+);
+
+}
+);
+
+
+miniDots.forEach(
+(dot,n)=>{
+
+dot.classList.toggle(
+'active',
+n===miniCurrent
+);
+
+}
+);
+
+
+clearInterval(miniTimer);
+
+
+miniTimer =
+setInterval(
+()=>showMini(miniCurrent+1),
+4200
+);
+
+}
+
+
+miniDots.forEach(
+(dot,index)=>{
+
+dot.addEventListener(
+'click',
+()=>showMini(index)
+);
+
+}
+);
+
+
+miniTimer =
+setInterval(
+()=>showMini(miniCurrent+1),
+4200
+);
+
+
+/* =========================================================
+PAUSA DEL CARRUSEL AL PASAR EL RATÓN
+========================================================= */
+
+const mainCarousel =
+document.querySelector('.carousel');
+
+
+mainCarousel.addEventListener(
+'mouseenter',
+()=>clearInterval(timer)
+);
+
+
+mainCarousel.addEventListener(
+'mouseleave',
+()=>{
+
+timer =
+setInterval(
+()=>show(current+1),
+5000
+);
+
+}
+);
+
+
+const miniCarousel =
+document.querySelector('.mini-carousel');
+
+
+miniCarousel.addEventListener(
+'mouseenter',
+()=>clearInterval(miniTimer)
+);
+
+
+miniCarousel.addEventListener(
+'mouseleave',
+()=>{
+
+miniTimer =
+setInterval(
+()=>showMini(miniCurrent+1),
+4200
+);
+
+}
+);
+
+</script>
+
+</body>
+
+</html>

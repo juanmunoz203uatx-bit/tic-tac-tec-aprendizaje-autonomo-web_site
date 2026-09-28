@@ -1,0 +1,3353 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Características del estudiante autónomo | TIC, TAC y TEP</title>
+
+<link rel="icon"
+type="image/svg+xml"
+href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23050505'/%3E%3Cpath d='M28 18h44v12H57v52H43V30H28z' fill='%23ff6a00'/%3E%3Ccircle cx='75' cy='76' r='8' fill='%23ff1e1e'/%3E%3Ccircle cx='25' cy='76' r='8' fill='%2300eaff'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Bungee&family=Montserrat:wght@400;500;600;700;800;900&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<style>
+
+:root{
+--black:#030303;
+--black2:#080808;
+--white:#fff;
+--gray:#a8a8a8;
+--red:#ff1e1e;
+--orange:#ff6a00;
+--gold:#ffc400;
+--cyan:#00eaff;
+--blue:#008cff;
+--green:#00ff88;
+
+--font-title:'Montserrat',sans-serif;
+--font-body:'Poppins',sans-serif
+}
+
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0
+}
+
+
+html{
+scroll-behavior:smooth
+}
+
+
+body{
+min-height:100vh;
+
+background:
+radial-gradient(circle at 10% 20%,rgba(0,234,255,.08),transparent 25%),
+radial-gradient(circle at 90% 65%,rgba(255,106,0,.10),transparent 25%),
+#05070a;
+
+color:#fff;
+font-family:var(--font-body);
+overflow-x:hidden
+}
+
+
+/* =========================================================
+HEADER
+========================================================= */
+
+.header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+z-index:1000;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.96),
+rgba(8,8,8,.91)
+);
+
+backdrop-filter:blur(18px);
+
+border-bottom:1px solid rgba(255,255,255,.09);
+
+box-shadow:0 10px 40px rgba(0,0,0,.65);
+
+transition:
+transform .45s ease,
+opacity .45s ease
+}
+
+
+.header.hide{
+transform:translateY(-105%);
+opacity:0
+}
+
+
+.header-led{
+position:absolute;
+top:0;
+left:0;
+
+width:100%;
+height:5px;
+
+background:
+linear-gradient(
+90deg,
+#ffc400,
+#ff9500,
+#00cfff,
+#00eaff,
+#00ff88,
+#ffc400,
+#ff9500
+);
+
+background-size:300% 100%;
+
+animation:ledMove 5s linear infinite;
+
+box-shadow:
+0 0 7px rgba(255,196,0,.9),
+0 0 14px rgba(255,149,0,.7),
+0 0 22px rgba(0,234,255,.55),
+0 0 30px rgba(0,255,136,.35);
+
+z-index:20
+}
+
+
+@keyframes ledMove{
+
+to{
+background-position:300% 50%
+}
+
+}
+
+
+/* =========================================================
+INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+.institution-area{
+max-height:260px;
+overflow:hidden;
+
+transition:
+max-height .55s ease,
+opacity .4s ease
+}
+
+
+.institution-area.closed{
+max-height:0;
+opacity:0
+}
+
+
+.institution-main{
+display:flex;
+justify-content:center;
+align-items:center;
+
+gap:20px;
+
+padding:16px 70px 8px
+}
+
+
+.logo-box{
+position:relative;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+flex-shrink:0
+}
+
+
+.logo-box:before{
+content:"";
+
+position:absolute;
+
+width:82px;
+height:82px;
+
+border-radius:50%;
+
+border:1px solid rgba(255,70,0,.5);
+
+box-shadow:
+0 0 12px rgba(255,50,0,.4),
+inset 0 0 15px rgba(255,50,0,.15);
+
+animation:logoRing 4s linear infinite
+}
+
+
+@keyframes logoRing{
+
+to{
+transform:rotate(360deg)
+}
+
+}
+
+
+.logo{
+width:68px;
+
+position:relative;
+z-index:2;
+
+filter:
+drop-shadow(0 0 5px var(--red))
+drop-shadow(0 0 12px rgba(255,70,0,.45))
+}
+
+
+.institution-text{
+text-align:left
+}
+
+
+.uni-name{
+font-family:var(--font-title);
+
+font-size:
+clamp(1rem,2vw,1.35rem);
+
+font-weight:800;
+
+letter-spacing:.8px;
+
+margin-bottom:3px
+}
+
+
+.facultad{
+font-family:var(--font-title);
+
+font-size:
+clamp(.72rem,1.4vw,.95rem);
+
+font-weight:600;
+
+color:var(--orange);
+
+letter-spacing:.7px
+}
+
+
+.carrera{
+font-size:.72rem;
+color:#aaa;
+margin-top:3px
+}
+
+
+.academic-data{
+display:flex;
+justify-content:center;
+
+flex-wrap:wrap;
+
+gap:8px;
+
+padding:3px 20px 13px
+}
+
+
+.academic-item{
+display:flex;
+align-items:center;
+
+gap:7px;
+
+padding:6px 13px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:30px;
+
+background:rgba(255,255,255,.035);
+
+color:#ddd;
+
+font-size:.68rem;
+
+transition:.3s
+}
+
+
+.academic-item i{
+color:var(--orange)
+}
+
+
+.academic-item:hover{
+border-color:var(--orange);
+
+box-shadow:
+0 0 12px rgba(255,106,0,.25)
+}
+
+
+.institution-button{
+position:absolute;
+
+right:18px;
+top:18px;
+
+display:flex;
+align-items:center;
+
+gap:6px;
+
+padding:7px 11px;
+
+border:1px solid rgba(255,106,0,.55);
+
+border-radius:7px;
+
+background:rgba(255,70,0,.08);
+
+color:var(--orange);
+
+font-size:.65rem;
+
+cursor:pointer;
+
+transition:.3s;
+
+z-index:5
+}
+
+
+.institution-button:hover{
+background:var(--orange);
+
+color:#000;
+
+box-shadow:0 0 15px var(--orange)
+}
+
+
+/* =========================================================
+MENÚ
+========================================================= */
+
+.navbar{
+display:flex;
+justify-content:center;
+
+padding:7px 15px 10px
+}
+
+
+.nav-links{
+list-style:none;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+flex-wrap:wrap;
+
+gap:7px;
+
+padding:5px;
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:12px;
+
+background:rgba(255,255,255,.035);
+
+box-shadow:
+inset 0 0 15px rgba(255,255,255,.025),
+0 5px 20px rgba(0,0,0,.35)
+}
+
+
+.nav-links a{
+display:flex;
+align-items:center;
+justify-content:center;
+
+gap:8px;
+
+min-width:105px;
+
+padding:9px 15px;
+
+color:#d8d8d8;
+
+text-decoration:none;
+
+font-size:.70rem;
+
+font-weight:700;
+
+border:1px solid transparent;
+
+border-radius:8px;
+
+transition:.3s
+}
+
+
+.nav-links a:hover{
+color:#fff;
+
+border-color:rgba(255,106,0,.45);
+
+background:rgba(255,106,0,.08);
+
+box-shadow:
+inset 0 0 12px rgba(255,106,0,.06),
+0 0 12px rgba(255,106,0,.12)
+}
+
+
+.nav-links i{
+color:var(--orange);
+transition:.3s
+}
+
+
+.nav-links a:hover i{
+color:#fff;
+transform:scale(1.12)
+}
+
+
+/* =========================================================
+SUBMENÚ
+========================================================= */
+
+.has-submenu{
+position:relative;
+z-index:3000
+}
+
+
+.submenu{
+position:absolute;
+
+top:calc(100% + 8px);
+left:50%;
+
+transform:
+translateX(-50%)
+translateY(8px);
+
+width:330px;
+max-width:calc(100vw - 30px);
+
+background:#fff;
+
+border:1px solid #cfcfcf;
+
+border-radius:10px;
+
+box-shadow:
+0 15px 35px rgba(0,0,0,.45),
+0 4px 15px rgba(0,0,0,.20);
+
+opacity:0;
+
+visibility:hidden;
+
+pointer-events:none;
+
+transition:
+opacity .25s ease,
+transform .25s ease,
+visibility .25s ease;
+
+overflow:hidden;
+
+z-index:5000
+}
+
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+
+opacity:1;
+
+visibility:visible;
+
+pointer-events:auto;
+
+transform:
+translateX(-50%)
+translateY(0)
+
+}
+
+
+.submenu-scroll{
+max-height:300px;
+
+overflow-y:auto;
+overflow-x:hidden;
+
+scroll-behavior:smooth;
+
+background:#fff;
+
+padding:0
+}
+
+
+.submenu-scroll::-webkit-scrollbar{
+width:14px
+}
+
+
+.submenu-scroll::-webkit-scrollbar-track{
+background:#e5e5e5;
+
+border-left:1px solid #d0d0d0
+}
+
+
+.submenu-scroll::-webkit-scrollbar-thumb{
+background:#777;
+
+border-radius:10px;
+
+border:3px solid #e5e5e5;
+
+min-height:60px
+}
+
+
+.submenu-scroll::-webkit-scrollbar-thumb:hover{
+background:#222
+}
+
+
+.submenu-scroll{
+scrollbar-width:auto;
+scrollbar-color:#777 #e5e5e5
+}
+
+
+.submenu a{
+display:flex !important;
+
+align-items:center;
+
+justify-content:flex-start !important;
+
+width:100%;
+
+min-width:0 !important;
+
+padding:14px 18px !important;
+
+background:#fff !important;
+
+color:#111 !important;
+
+border:none !important;
+
+border-radius:0 !important;
+
+font-family:var(--font-body);
+
+font-size:.74rem !important;
+
+font-weight:700;
+
+line-height:1.4;
+
+text-align:left;
+
+text-decoration:none;
+
+box-shadow:none !important;
+
+transition:
+background .2s ease,
+color .2s ease,
+padding-left .2s ease
+}
+
+
+.submenu a{
+border-bottom:1px solid #d8d8d8 !important
+}
+
+
+.submenu a:last-child{
+border-bottom:none !important
+}
+
+
+.submenu a:hover{
+background:#f0f0f0 !important;
+
+color:#000 !important;
+
+padding-left:24px !important;
+
+border-color:#d0d0d0 !important;
+
+box-shadow:none !important
+}
+
+
+.submenu-number{
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+width:27px;
+height:27px;
+
+flex:0 0 27px;
+
+margin-right:11px;
+
+background:#111;
+
+color:#fff;
+
+border-radius:50%;
+
+font-size:.65rem;
+
+font-weight:800
+}
+
+
+.submenu a:hover .submenu-number{
+background:var(--orange);
+color:#fff
+}
+
+
+/* =========================================================
+FONDO
+========================================================= */
+
+.bg-effects,
+.stars,
+.bubbles{
+position:fixed;
+
+inset:0;
+
+pointer-events:none;
+
+overflow:hidden;
+
+z-index:-1
+}
+
+
+.bg-glow{
+position:absolute;
+
+width:420px;
+height:420px;
+
+border-radius:50%;
+
+filter:blur(100px);
+
+opacity:.13
+}
+
+
+.g1{
+background:var(--cyan);
+
+left:-200px;
+top:25%
+}
+
+
+.g2{
+background:var(--orange);
+
+right:-180px;
+bottom:15%
+}
+
+
+.star{
+position:absolute;
+
+width:4px;
+height:4px;
+
+border-radius:50%;
+
+background:#fff;
+
+box-shadow:
+0 0 8px #fff,
+0 0 15px var(--cyan);
+
+animation:
+star 10s linear infinite
+}
+
+
+@keyframes star{
+
+0%{
+transform:
+translateY(105vh)
+scale(.4);
+
+opacity:0
+}
+
+15%{
+opacity:.8
+}
+
+100%{
+transform:
+translateY(-15vh)
+translateX(30px)
+scale(1.3);
+
+opacity:0
+}
+
+}
+
+
+.bubble{
+position:absolute;
+
+border:1px solid rgba(255,255,255,.2);
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle at 30% 25%,
+rgba(255,255,255,.2),
+transparent 45%
+);
+
+box-shadow:
+inset 0 0 20px rgba(0,234,255,.08),
+0 0 25px rgba(255,106,0,.08);
+
+animation:
+bubble 7s ease-in-out infinite
+}
+
+
+@keyframes bubble{
+
+50%{
+transform:
+translate(25px,-45px)
+scale(1.06)
+}
+
+}
+
+
+/* =========================================================
+CONTENIDO
+========================================================= */
+
+main{
+padding-top:210px;
+
+position:relative
+}
+
+
+.page-intro{
+text-align:center;
+
+padding:35px 20px 15px
+}
+
+
+.kicker{
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+color:var(--cyan);
+
+font-size:.7rem;
+
+font-weight:800;
+
+letter-spacing:2px;
+
+border:1px solid rgba(0,234,255,.35);
+
+padding:8px 15px;
+
+border-radius:999px;
+
+background:rgba(0,234,255,.05);
+
+box-shadow:
+0 0 22px rgba(0,234,255,.08)
+}
+
+
+.page-title{
+font-family:var(--font-title);
+
+font-size:
+clamp(2rem,5vw,4rem);
+
+font-weight:900;
+
+margin:20px auto 10px;
+
+letter-spacing:-1px;
+
+text-shadow:
+0 0 22px rgba(0,234,255,.12)
+}
+
+
+.page-title span{
+color:var(--orange)
+}
+
+
+.page-subtitle{
+max-width:820px;
+
+margin:auto;
+
+color:#aeb6c0;
+
+font-size:.9rem;
+
+line-height:1.7
+}
+
+
+/* =========================================================
+CARRUSEL
+========================================================= */
+
+.carousel-wrap{
+width:min(1050px,92%);
+
+margin:30px auto 45px;
+
+position:relative
+}
+
+
+.carousel{
+height:340px;
+
+border-radius:24px;
+
+overflow:hidden;
+
+border:1px solid rgba(255,255,255,.16);
+
+box-shadow:
+0 25px 70px rgba(0,0,0,.55),
+0 0 35px rgba(0,234,255,.07);
+
+background:#080b10;
+
+position:relative
+}
+
+
+.slide{
+position:absolute;
+
+inset:0;
+
+opacity:0;
+
+transform:scale(1.05);
+
+transition:
+opacity .7s ease,
+transform 1.1s ease
+}
+
+
+.slide.active{
+opacity:1;
+
+transform:scale(1)
+}
+
+
+.slide img{
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+filter:
+brightness(.55)
+saturate(1.12)
+}
+
+
+.slide:after{
+content:"";
+
+position:absolute;
+
+inset:0;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,0,0,.82),
+transparent 70%
+),
+
+linear-gradient(
+0deg,
+rgba(0,0,0,.6),
+transparent 60%
+)
+}
+
+
+.slide-caption{
+position:absolute;
+
+left:35px;
+bottom:32px;
+
+z-index:2;
+
+max-width:560px
+}
+
+
+.slide-caption strong{
+font-size:1.4rem;
+
+font-weight:800
+}
+
+
+.slide-caption p{
+color:#cbd3dc;
+
+font-size:.76rem;
+
+margin-top:6px
+}
+
+
+.carousel-btn{
+position:absolute;
+
+top:50%;
+
+transform:translateY(-50%);
+
+z-index:4;
+
+width:44px;
+height:44px;
+
+border:1px solid rgba(255,255,255,.25);
+
+border-radius:50%;
+
+background:rgba(0,0,0,.48);
+
+color:#fff;
+
+cursor:pointer;
+
+backdrop-filter:blur(8px);
+
+transition:.3s
+}
+
+
+.carousel-btn:hover{
+background:var(--orange);
+
+box-shadow:
+0 0 18px var(--orange)
+}
+
+
+.prev{
+left:15px
+}
+
+
+.next{
+right:15px
+}
+
+
+.dots{
+position:absolute;
+
+z-index:5;
+
+right:25px;
+bottom:24px;
+
+display:flex;
+
+gap:7px
+}
+
+
+.dot{
+width:9px;
+height:9px;
+
+border-radius:50%;
+
+border:1px solid #fff;
+
+background:transparent;
+
+cursor:pointer;
+
+opacity:.6
+}
+
+
+.dot.active{
+background:var(--cyan);
+
+box-shadow:
+0 0 9px var(--cyan);
+
+opacity:1
+}
+
+
+/* =========================================================
+CONTENEDOR
+========================================================= */
+
+.content-area{
+width:min(1150px,92%);
+
+margin:0 auto;
+
+padding:
+10px 0 110px;
+
+position:relative
+}
+
+
+.info-card{
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+145deg,
+rgba(15,20,28,.97),
+rgba(5,8,13,.97)
+);
+
+border:1px solid rgba(255,255,255,.13);
+
+border-radius:30px;
+
+padding:48px;
+
+box-shadow:
+0 30px 80px rgba(0,0,0,.55),
+inset 0 1px 0 rgba(255,255,255,.07)
+}
+
+
+.info-card:before{
+content:"";
+
+position:absolute;
+
+inset:-1px;
+
+border-radius:31px;
+
+padding:1px;
+
+background:
+linear-gradient(
+120deg,
+var(--cyan),
+transparent 25%,
+var(--orange) 60%,
+var(--gold)
+);
+
+-webkit-mask:
+linear-gradient(#000 0 0) content-box,
+linear-gradient(#000 0 0);
+
+-webkit-mask-composite:xor;
+
+mask-composite:exclude;
+
+pointer-events:none;
+
+opacity:.75
+}
+
+
+.info-card:after{
+content:"✦";
+
+position:absolute;
+
+right:-25px;
+top:-35px;
+
+font-size:82px;
+
+color:var(--gold);
+
+text-shadow:
+0 0 25px rgba(255,196,0,.5);
+
+animation:
+spark 3s ease-in-out infinite
+}
+
+
+@keyframes spark{
+
+50%{
+transform:
+rotate(12deg)
+scale(1.08);
+
+opacity:.65
+}
+
+}
+
+
+.info-head{
+display:flex;
+
+align-items:center;
+
+gap:18px;
+
+margin-bottom:25px
+}
+
+
+.info-icon{
+width:64px;
+height:64px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.15),
+rgba(255,106,0,.15)
+);
+
+border:1px solid rgba(0,234,255,.5);
+
+color:var(--cyan);
+
+font-size:1.5rem;
+
+box-shadow:
+0 0 25px rgba(0,234,255,.08);
+
+flex-shrink:0
+}
+
+
+.info-head h2{
+font-size:
+clamp(1.45rem,3vw,2.25rem);
+
+font-weight:900
+}
+
+
+.info-head p{
+color:var(--orange);
+
+font-size:.7rem;
+
+font-weight:800;
+
+letter-spacing:1.5px;
+
+margin-top:4px
+}
+
+
+.text-block{
+color:#d8dde5;
+
+font-size:.9rem;
+
+line-height:1.9;
+
+margin-bottom:28px
+}
+
+
+.text-block strong{
+color:#fff
+}
+
+
+.text-block p{
+margin-bottom:16px
+}
+
+
+/* =========================================================
+TARJETAS DE CARACTERÍSTICAS
+========================================================= */
+
+.character-grid{
+
+display:grid;
+
+grid-template-columns:
+repeat(2,1fr);
+
+gap:20px;
+
+margin-top:25px
+}
+
+
+.character-card{
+
+position:relative;
+
+min-height:230px;
+
+padding:28px;
+
+border-radius:22px;
+
+border:1px solid rgba(255,255,255,.11);
+
+background:
+linear-gradient(
+145deg,
+rgba(255,255,255,.055),
+rgba(255,255,255,.015)
+);
+
+overflow:hidden;
+
+transition:
+transform .35s ease,
+border-color .35s ease,
+box-shadow .35s ease
+}
+
+
+.character-card:hover{
+
+transform:
+translateY(-7px);
+
+border-color:
+rgba(0,234,255,.55);
+
+box-shadow:
+0 18px 38px rgba(0,0,0,.4),
+0 0 25px rgba(0,234,255,.08)
+}
+
+
+.character-card:before{
+
+content:"";
+
+position:absolute;
+
+width:100px;
+height:100px;
+
+right:-30px;
+bottom:-35px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(0,234,255,.12),
+transparent 68%
+)
+}
+
+
+.card-top{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:18px
+}
+
+
+.card-icon{
+
+width:55px;
+height:55px;
+
+display:grid;
+
+place-items:center;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+135deg,
+rgba(0,234,255,.13),
+rgba(255,106,0,.12)
+);
+
+border:1px solid rgba(255,255,255,.14);
+
+color:var(--cyan);
+
+font-size:1.35rem;
+
+transition:.35s
+}
+
+
+.character-card:hover .card-icon{
+
+background:var(--orange);
+
+color:#000;
+
+box-shadow:
+0 0 20px rgba(255,106,0,.3);
+
+transform:
+rotate(-5deg)
+scale(1.08)
+}
+
+
+.card-number{
+
+font-size:.65rem;
+
+font-weight:900;
+
+color:#777;
+
+letter-spacing:1px
+}
+
+
+.character-card h3{
+
+font-size:1.05rem;
+
+font-weight:800;
+
+margin-bottom:10px
+}
+
+
+.character-card p{
+
+font-size:.76rem;
+
+line-height:1.75;
+
+color:#aeb6c0;
+
+margin-bottom:15px
+}
+
+
+.example-mini{
+
+padding:10px 13px;
+
+border-left:3px solid var(--orange);
+
+background:
+rgba(255,106,0,.06);
+
+border-radius:
+0 10px 10px 0;
+
+color:#dce2e8;
+
+font-size:.69rem;
+
+line-height:1.6
+}
+
+
+.example-mini strong{
+
+color:var(--gold)
+}
+
+
+/* =========================================================
+GALERÍA VISUAL
+========================================================= */
+
+.visual-title{
+
+display:flex;
+
+align-items:center;
+
+gap:12px;
+
+margin:
+45px 0 20px
+}
+
+
+.visual-title i{
+
+color:var(--orange);
+
+font-size:1.1rem
+}
+
+
+.visual-title h3{
+
+font-size:1rem;
+
+font-weight:800
+}
+
+
+.visual-title span{
+
+color:#777;
+
+font-size:.67rem;
+
+margin-left:auto
+}
+
+
+.visual-gallery{
+
+display:grid;
+
+grid-template-columns:
+repeat(3,1fr);
+
+gap:14px
+}
+
+
+.visual-item{
+
+height:190px;
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:18px;
+
+border:1px solid rgba(255,255,255,.12);
+
+background:#090b0f;
+
+box-shadow:
+0 10px 25px rgba(0,0,0,.3);
+
+transition:
+transform .35s ease,
+border-color .35s ease
+}
+
+
+.visual-item:hover{
+
+transform:
+translateY(-5px);
+
+border-color:
+rgba(255,106,0,.55)
+}
+
+
+.visual-item img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+filter:
+brightness(.65)
+saturate(1.08);
+
+transition:
+transform .5s ease,
+filter .5s ease
+}
+
+
+.visual-item:hover img{
+
+transform:scale(1.08);
+
+filter:
+brightness(.8)
+saturate(1.2)
+}
+
+
+.visual-label{
+
+position:absolute;
+
+left:12px;
+bottom:12px;
+
+right:12px;
+
+padding:9px 11px;
+
+border-radius:10px;
+
+background:
+rgba(0,0,0,.68);
+
+backdrop-filter:blur(7px);
+
+font-size:.68rem;
+
+font-weight:700;
+
+border:1px solid rgba(255,255,255,.1)
+}
+
+
+/* =========================================================
+EJEMPLO FINAL
+========================================================= */
+
+.example{
+
+margin-top:30px;
+
+padding:27px 30px;
+
+border-left:
+4px solid var(--orange);
+
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+rgba(255,106,0,.10),
+rgba(255,106,0,.025)
+);
+
+box-shadow:
+inset 0 0 30px rgba(255,106,0,.03)
+}
+
+
+.example-title{
+
+color:var(--gold);
+
+font-size:.7rem;
+
+font-weight:900;
+
+letter-spacing:2px;
+
+margin-bottom:8px
+}
+
+
+.example p{
+
+color:#e4e8ee;
+
+line-height:1.8;
+
+font-size:.82rem
+}
+
+
+/* =========================================================
+FRASE FINAL
+========================================================= */
+
+.final-message{
+
+margin-top:25px;
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+padding:20px 23px;
+
+border-radius:16px;
+
+background:
+linear-gradient(
+90deg,
+rgba(0,234,255,.07),
+rgba(0,234,255,.015)
+);
+
+border:1px solid rgba(0,234,255,.14)
+}
+
+
+.final-message i{
+
+color:var(--cyan);
+
+font-size:1.25rem
+}
+
+
+.final-message p{
+
+color:#cbd3dc;
+
+font-size:.76rem;
+
+line-height:1.7
+}
+
+
+/* =========================================================
+ONDAS
+========================================================= */
+
+.wave-section{
+
+height:125px;
+
+position:relative;
+
+overflow:hidden;
+
+margin-top:15px
+}
+
+
+.wave{
+
+position:absolute;
+
+left:-5%;
+
+width:110%;
+
+height:100px;
+
+border-radius:
+50% 50% 0 0;
+
+border-top:
+3px solid var(--cyan);
+
+box-shadow:
+0 -3px 15px var(--cyan);
+
+animation:
+wave 5s ease-in-out infinite
+}
+
+
+.wave.w2{
+
+top:15px;
+
+border-color:var(--orange);
+
+box-shadow:
+0 -3px 15px var(--orange);
+
+animation-duration:7s;
+
+animation-direction:reverse;
+
+opacity:.7
+}
+
+
+.wave.w3{
+
+top:30px;
+
+border-color:var(--gold);
+
+box-shadow:
+0 -3px 15px var(--gold);
+
+animation-duration:9s;
+
+opacity:.45
+}
+
+
+@keyframes wave{
+
+50%{
+transform:
+translateX(3%)
+scaleY(1.3)
+}
+
+}
+
+
+/* =========================================================
+FOOTER
+========================================================= */
+
+footer{
+
+text-align:center;
+
+padding:40px 20px;
+
+border-top:
+1px solid rgba(255,255,255,.08);
+
+background:
+rgba(0,0,0,.8);
+
+position:relative;
+
+z-index:2
+}
+
+
+.footer-line{
+
+width:120px;
+
+height:2px;
+
+margin:
+0 auto 18px;
+
+background:
+linear-gradient(
+90deg,
+var(--red),
+var(--orange),
+white
+);
+
+box-shadow:
+0 0 10px var(--orange)
+}
+
+
+footer p{
+
+font-size:.67rem;
+
+color:#777;
+
+line-height:1.8
+}
+
+
+/* =========================================================
+RESPONSIVE
+========================================================= */
+
+@media(max-width:850px){
+
+.character-grid{
+
+grid-template-columns:1fr
+}
+
+
+.visual-gallery{
+
+grid-template-columns:
+repeat(2,1fr)
+}
+
+}
+
+
+@media(max-width:700px){
+
+.institution-main{
+
+flex-direction:column;
+
+padding:
+15px 50px 8px
+}
+
+
+.institution-text{
+
+text-align:center
+}
+
+
+.logo{
+
+width:58px
+}
+
+
+.logo-box:before{
+
+width:70px;
+height:70px
+}
+
+
+.navbar{
+
+overflow-x:auto;
+
+justify-content:flex-start
+}
+
+
+.nav-links{
+
+flex-wrap:nowrap;
+
+min-width:max-content
+}
+
+
+.nav-links a{
+
+min-width:100px
+}
+
+
+main{
+
+padding-top:205px
+}
+
+
+.carousel{
+
+height:270px
+}
+
+
+.slide-caption{
+
+left:20px;
+
+bottom:20px
+}
+
+
+.info-card{
+
+padding:28px 22px
+}
+
+
+.character-grid{
+
+grid-template-columns:1fr
+}
+
+
+.visual-gallery{
+
+grid-template-columns:1fr
+}
+
+
+.visual-item{
+
+height:210px
+}
+
+
+/* SUBMENU */
+
+.submenu{
+
+position:absolute;
+
+left:0;
+
+transform:
+translateY(8px);
+
+width:310px;
+
+max-width:85vw
+}
+
+
+.has-submenu:hover .submenu,
+.has-submenu:focus-within .submenu,
+.has-submenu.open .submenu{
+
+transform:
+translateY(0)
+}
+
+
+.submenu-scroll{
+
+max-height:270px
+}
+
+
+.submenu-scroll::-webkit-scrollbar{
+
+width:15px
+}
+
+
+.submenu a{
+
+padding:
+15px 16px !important;
+
+font-size:
+.70rem !important
+}
+
+}
+
+
+@media(max-width:450px){
+
+.institution-button span{
+
+display:none
+}
+
+
+.carousel{
+
+height:230px
+}
+
+
+.page-title{
+
+font-size:2rem
+}
+
+
+.submenu{
+
+width:285px;
+
+max-width:82vw
+}
+
+
+.visual-item{
+
+height:190px
+}
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+FONDO
+========================================================= -->
+
+<div class="bg-effects">
+
+<span class="bg-glow g1"></span>
+<span class="bg-glow g2"></span>
+
+</div>
+
+
+<div class="stars">
+
+<span class="star"
+style="left:7%;animation-duration:12s"></span>
+
+<span class="star"
+style="left:18%;animation-delay:-4s"></span>
+
+<span class="star"
+style="left:31%;animation-duration:14s;animation-delay:-7s"></span>
+
+<span class="star"
+style="left:46%;animation-delay:-2s"></span>
+
+<span class="star"
+style="left:61%;animation-duration:13s;animation-delay:-9s"></span>
+
+<span class="star"
+style="left:75%;animation-delay:-5s"></span>
+
+<span class="star"
+style="left:88%;animation-duration:15s;animation-delay:-11s"></span>
+
+</div>
+
+
+<div class="bubbles">
+
+<span class="bubble"
+style="width:90px;height:90px;left:4%;top:28%"></span>
+
+<span class="bubble"
+style="width:45px;height:45px;right:8%;top:22%;animation-duration:5s"></span>
+
+<span class="bubble"
+style="width:120px;height:120px;right:2%;top:58%;animation-duration:10s"></span>
+
+<span class="bubble"
+style="width:55px;height:55px;left:10%;top:72%;animation-duration:6s"></span>
+
+</div>
+
+
+<!-- =========================================================
+HEADER
+========================================================= -->
+
+<header
+class="header"
+id="header">
+
+<div class="header-led"></div>
+
+
+<button
+class="institution-button"
+id="institutionButton">
+
+<i class="fa-solid fa-eye"></i>
+
+<span>
+Ocultar información
+</span>
+
+</button>
+
+
+<div
+class="institution-area"
+id="institutionArea">
+
+
+<div class="institution-main">
+
+<div class="logo-box">
+
+<img
+src="img/logofce.png"
+alt="Logo de la Facultad de Ciencias de la Educación"
+class="logo">
+
+</div>
+
+
+<div class="institution-text">
+
+<h1 class="uni-name">
+UNIVERSIDAD AUTÓNOMA DE TLAXCALA
+</h1>
+
+<h2 class="facultad">
+FACULTAD DE CIENCIAS DE LA EDUCACIÓN
+</h2>
+
+<p class="carrera">
+Licenciatura en Ciencias de la Educación
+</p>
+
+</div>
+
+</div>
+
+
+<div class="academic-data">
+
+<div class="academic-item">
+
+<i class="fa-solid fa-laptop-code"></i>
+
+<span>
+U.A. SISTEMAS ABIERTOS DE APRENDIZAJE
+</span>
+
+</div>
+
+
+<div class="academic-item">
+
+<i class="fa-solid fa-chalkboard-user"></i>
+
+<span>
+MTRO. JUAN CARLOS SILMAR NAVA
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- =========================================================
+MENÚ
+========================================================= -->
+
+<nav class="navbar">
+
+<ul class="nav-links">
+
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-house"></i>
+
+Inicio
+
+</a>
+
+</li>
+
+
+<li>
+
+<a href="index.html">
+
+<i class="fa-solid fa-book-open"></i>
+
+Introducción
+
+</a>
+
+</li>
+
+
+<!-- =========================================================
+CONTENIDO + SUBMENÚ
+========================================================= -->
+
+<li class="has-submenu">
+
+<a
+href="index.html"
+class="submenu-trigger"
+aria-haspopup="true"
+aria-expanded="false">
+
+<i class="fa-solid fa-diagram-project"></i>
+
+Contenido
+
+</a>
+
+
+<div class="submenu">
+
+<div class="submenu-scroll">
+
+
+<a href="index1.html">
+
+<span class="submenu-number">
+1
+</span>
+
+Concepto de aprendizaje autónomo
+
+</a>
+
+
+<a href="index2.html">
+
+<span class="submenu-number">
+2
+</span>
+
+Características del estudiante autónomo
+
+</a>
+
+
+<a href="index3.html">
+
+<span class="submenu-number">
+3
+</span>
+
+Papel del docente como guía o facilitador
+
+</a>
+
+
+<a href="index4.html">
+
+<span class="submenu-number">
+4
+</span>
+
+TIC, TAC y TEP para el aprendizaje autónomo
+
+</a>
+
+
+<a href="index5.html">
+
+<span class="submenu-number">
+5
+</span>
+
+Plataformas y aplicaciones para el estudio independiente
+
+</a>
+
+
+<a href="index6.html">
+
+<span class="submenu-number">
+6
+</span>
+
+Recursos digitales para buscar, seleccionar y organizar información
+
+</a>
+
+
+<a href="index7.html">
+
+<span class="submenu-number">
+7
+</span>
+
+Herramientas para establecer metas, horarios y seguimiento del aprendizaje
+
+</a>
+
+
+<a href="index8.html">
+
+<span class="submenu-number">
+8
+</span>
+
+Ventajas y desafíos del aprendizaje autónomo mediante tecnologías
+
+</a>
+
+
+<a href="index9.html">
+
+<span class="submenu-number">
+9
+</span>
+
+Conclusión
+
+</a>
+
+
+</div>
+
+</div>
+
+</li>
+
+
+<li>
+
+<a href="index10.html">
+
+<i class="fa-solid fa-puzzle-piece"></i>
+
+Material didáctico
+
+</a>
+
+</li>
+
+
+</ul>
+
+</nav>
+
+</header>
+
+
+<!-- =========================================================
+CONTENIDO PRINCIPAL
+========================================================= -->
+
+<main id="inicio">
+
+
+<section class="page-intro">
+
+<div class="kicker">
+
+<i class="fa-solid fa-user-graduate"></i>
+
+PUNTO 02 · APRENDIZAJE AUTÓNOMO
+
+</div>
+
+
+<h1 class="page-title">
+
+Características del
+<span>estudiante autónomo</span>
+
+</h1>
+
+
+<p class="page-subtitle">
+
+Un estudiante autónomo no solo aprende por iniciativa propia, sino que también desarrolla habilidades que le permiten gestionar eficazmente su aprendizaje.
+
+</p>
+
+</section>
+
+
+<!-- =========================================================
+CARRUSEL - 6 IMÁGENES
+========================================================= -->
+
+<section
+class="carousel-wrap"
+aria-label="Galería sobre las características del estudiante autónomo">
+
+
+<div class="carousel">
+
+
+<div class="slide active">
+
+<img
+src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1400&q=85"
+alt="Estudiantes aprendiendo">
+
+<div class="slide-caption">
+
+<strong>
+Un estudiante activo
+</strong>
+
+<p>
+Participa de manera responsable en la construcción de su aprendizaje.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1400&q=85"
+alt="Organización y planificación">
+
+<div class="slide-caption">
+
+<strong>
+Organización y tiempo
+</strong>
+
+<p>
+Planificar las actividades permite cumplir objetivos académicos.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1400&q=85"
+alt="Estudiante estudiando">
+
+<div class="slide-caption">
+
+<strong>
+Autodisciplina
+</strong>
+
+<p>
+Los hábitos constantes ayudan a mantener el esfuerzo y la concentración.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=1400&q=85"
+alt="Persona tomando decisiones">
+
+<div class="slide-caption">
+
+<strong>
+Pensamiento crítico
+</strong>
+
+<p>
+Analizar información permite tomar decisiones más fundamentadas.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1400&q=85"
+alt="Estudiante usando computadora">
+
+<div class="slide-caption">
+
+<strong>
+Uso de recursos
+</strong>
+
+<p>
+La tecnología puede apoyar la búsqueda y organización de información.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="slide">
+
+<img
+src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1400&q=85"
+alt="Personas colaborando">
+
+<div class="slide-caption">
+
+<strong>
+Motivación para aprender
+</strong>
+
+<p>
+El interés personal impulsa a continuar aprendiendo y mejorar.
+</p>
+
+</div>
+
+</div>
+
+
+<button
+class="carousel-btn prev"
+aria-label="Imagen anterior">
+
+<i class="fa-solid fa-chevron-left"></i>
+
+</button>
+
+
+<button
+class="carousel-btn next"
+aria-label="Imagen siguiente">
+
+<i class="fa-solid fa-chevron-right"></i>
+
+</button>
+
+
+<div class="dots"></div>
+
+
+</div>
+
+</section>
+
+
+<!-- =========================================================
+TARJETA PRINCIPAL
+========================================================= -->
+
+<section
+class="content-area"
+id="contenido2">
+
+
+<article class="info-card">
+
+
+<div class="info-head">
+
+<div class="info-icon">
+
+<i class="fa-solid fa-brain"></i>
+
+</div>
+
+
+<div>
+
+<h2>
+¿Qué caracteriza al estudiante autónomo?
+</h2>
+
+<p>
+HABILIDADES PARA GESTIONAR EL APRENDIZAJE
+</p>
+
+</div>
+
+</div>
+
+
+<div class="text-block">
+
+<p>
+
+Un <strong>estudiante autónomo</strong> es capaz de asumir un papel activo en su proceso de aprendizaje. Para lograrlo, desarrolla diferentes habilidades que le permiten organizar sus actividades, tomar decisiones, reconocer sus avances y buscar estrategias para mejorar.
+
+</p>
+
+
+<p>
+
+Estas características no funcionan de manera aislada. Se relacionan entre sí y ayudan al estudiante a construir una mayor responsabilidad sobre sus metas académicas.
+
+</p>
+
+</div>
+
+
+<!-- =========================================================
+6 CARACTERÍSTICAS
+========================================================= -->
+
+<div class="character-grid">
+
+
+<!-- 1 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-handshake"></i>
+
+</div>
+
+<span class="card-number">
+01
+</span>
+
+</div>
+
+
+<h3>
+Responsabilidad y compromiso
+</h3>
+
+
+<p>
+
+Asume las consecuencias de sus decisiones y cumple con las actividades necesarias para alcanzar sus objetivos.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Entrega sus trabajos en tiempo y forma sin necesidad de recordatorios constantes.
+
+</div>
+
+</div>
+
+
+<!-- 2 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-shield-halved"></i>
+
+</div>
+
+<span class="card-number">
+02
+</span>
+
+</div>
+
+
+<h3>
+Autodisciplina
+</h3>
+
+
+<p>
+
+Mantiene hábitos de estudio constantes y controla las distracciones que puedan afectar su aprendizaje.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Dedica diariamente un tiempo específico para estudiar.
+
+</div>
+
+</div>
+
+
+<!-- 3 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-arrows-rotate"></i>
+
+</div>
+
+<span class="card-number">
+03
+</span>
+
+</div>
+
+
+<h3>
+Capacidad de autorregulación
+</h3>
+
+
+<p>
+
+Evalúa su propio desempeño y realiza ajustes cuando identifica dificultades durante su aprendizaje.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Si obtiene bajos resultados en una evaluación, modifica sus estrategias de estudio.
+
+</div>
+
+</div>
+
+
+<!-- 4 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-clock"></i>
+
+</div>
+
+<span class="card-number">
+04
+</span>
+
+</div>
+
+
+<h3>
+Gestión del tiempo
+</h3>
+
+
+<p>
+
+Organiza adecuadamente sus actividades para cumplir con sus responsabilidades académicas.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Utiliza calendarios o agendas para planificar tareas y exámenes.
+
+</div>
+
+</div>
+
+
+<!-- 5 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-magnifying-glass-chart"></i>
+
+</div>
+
+<span class="card-number">
+05
+</span>
+
+</div>
+
+
+<h3>
+Pensamiento crítico y toma de decisiones
+</h3>
+
+
+<p>
+
+Analiza la información disponible antes de aceptarla o utilizarla en sus actividades académicas.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Compara diferentes fuentes antes de elaborar una investigación.
+
+</div>
+
+</div>
+
+
+<!-- 6 -->
+
+<div class="character-card">
+
+<div class="card-top">
+
+<div class="card-icon">
+
+<i class="fa-solid fa-fire"></i>
+
+</div>
+
+<span class="card-number">
+06
+</span>
+
+</div>
+
+
+<h3>
+Motivación personal
+</h3>
+
+
+<p>
+
+Mantiene interés por aprender y mejorar continuamente, incluso cuando encuentra dificultades.
+
+</p>
+
+
+<div class="example-mini">
+
+<strong>Ejemplo:</strong>
+
+Busca información adicional sobre temas que le resultan interesantes.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+GALERÍA DE IMÁGENES
+========================================================= -->
+
+<div class="visual-title">
+
+<i class="fa-solid fa-images"></i>
+
+<h3>
+El estudiante autónomo en acción
+</h3>
+
+<span>
+6 aspectos visuales
+</span>
+
+</div>
+
+
+<div class="visual-gallery">
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=800&q=80"
+alt="Estudiantes trabajando">
+
+<div class="visual-label">
+Responsabilidad y compromiso
+</div>
+
+</div>
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=800&q=80"
+alt="Persona estudiando">
+
+<div class="visual-label">
+Autodisciplina
+</div>
+
+</div>
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=800&q=80"
+alt="Uso de computadora para estudiar">
+
+<div class="visual-label">
+Autorregulación
+</div>
+
+</div>
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=800&q=80"
+alt="Agenda y organización">
+
+<div class="visual-label">
+Gestión del tiempo
+</div>
+
+</div>
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1453738773917-9c3eff1db985?auto=format&fit=crop&w=800&q=80"
+alt="Persona analizando información">
+
+<div class="visual-label">
+Pensamiento crítico
+</div>
+
+</div>
+
+
+<div class="visual-item">
+
+<img
+src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=800&q=80"
+alt="Personas aprendiendo">
+
+<div class="visual-label">
+Motivación personal
+</div>
+
+</div>
+
+
+</div>
+
+
+<!-- =========================================================
+EJEMPLO
+========================================================= -->
+
+<div class="example">
+
+<div class="example-title">
+
+<i class="fa-solid fa-lightbulb"></i>
+
+SITUACIÓN INTEGRADORA
+
+</div>
+
+
+<p>
+
+Un estudiante recibe una investigación para realizar durante la semana. Primero organiza su tiempo, establece cuándo trabajará, busca información en diferentes fuentes y revisa si los datos son confiables. Si encuentra dificultades, cambia su estrategia de estudio y busca otros recursos. Finalmente, entrega su trabajo dentro del plazo establecido.
+
+</p>
+
+</div>
+
+
+<!-- =========================================================
+MENSAJE FINAL
+========================================================= -->
+
+<div class="final-message">
+
+<i class="fa-solid fa-circle-check"></i>
+
+<p>
+
+Desarrollar estas características permite que el estudiante participe activamente en su formación y tenga mayor control sobre las decisiones que toma durante su proceso de aprendizaje.
+
+</p>
+
+</div>
+
+
+</article>
+
+</section>
+
+
+<!-- =========================================================
+ONDAS
+========================================================= -->
+
+<div class="wave-section">
+
+<div class="wave"></div>
+
+<div class="wave w2"></div>
+
+<div class="wave w3"></div>
+
+</div>
+
+
+</main>
+
+
+<!-- =========================================================
+FOOTER
+========================================================= -->
+
+<footer>
+
+<div class="footer-line"></div>
+
+
+<p>
+TIC, TAC y TEP para el Aprendizaje Autónomo
+</p>
+
+
+<p>
+Universidad Autónoma de Tlaxcala ·
+Facultad de Ciencias de la Educación
+</p>
+
+
+<p>
+GRUPO 503
+</p>
+
+
+<p>
+SEGUNDO PARCIAL
+</p>
+
+
+<p>
+EQUIPO 4: Rosa | Juan | Isael | Pedro | Yadsiri
+</p>
+
+</footer>
+
+
+<!-- =========================================================
+JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* =========================================================
+INFORMACIÓN INSTITUCIONAL
+========================================================= */
+
+const institutionButton =
+document.getElementById('institutionButton');
+
+const institutionArea =
+document.getElementById('institutionArea');
+
+
+institutionButton.addEventListener(
+'click',
+()=>{
+
+const closed =
+institutionArea.classList.toggle('closed');
+
+
+institutionButton.innerHTML =
+
+closed
+
+?
+
+'<i class="fa-solid fa-eye"></i><span>Mostrar información</span>'
+
+:
+
+'<i class="fa-solid fa-eye-slash"></i><span>Ocultar información</span>';
+
+}
+);
+
+
+/* =========================================================
+HEADER AL HACER SCROLL
+========================================================= */
+
+const header =
+document.getElementById('header');
+
+let lastScroll =
+window.scrollY;
+
+
+window.addEventListener(
+'scroll',
+()=>{
+
+const y =
+window.scrollY;
+
+
+if(y<=80){
+
+header.classList.remove('hide');
+
+}
+
+else if(y>lastScroll){
+
+header.classList.add('hide');
+
+}
+
+else{
+
+header.classList.remove('hide');
+
+}
+
+
+lastScroll=y;
+
+},
+{passive:true}
+);
+
+
+/* =========================================================
+SUBMENÚ
+========================================================= */
+
+const submenuTrigger =
+document.querySelector('.submenu-trigger');
+
+const submenuParent =
+document.querySelector('.has-submenu');
+
+
+submenuTrigger.addEventListener(
+'click',
+(event)=>{
+
+if(window.innerWidth<=700){
+
+event.preventDefault();
+
+
+const abierto =
+submenuParent.classList.toggle('open');
+
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+abierto ? 'true' : 'false'
+);
+
+}
+
+}
+);
+
+
+/* CERRAR AL HACER CLIC AFUERA */
+
+document.addEventListener(
+'click',
+(event)=>{
+
+if(
+!submenuParent.contains(event.target)
+){
+
+submenuParent.classList.remove('open');
+
+submenuTrigger.setAttribute(
+'aria-expanded',
+'false'
+);
+
+}
+
+}
+);
+
+
+/* =========================================================
+CARRUSEL
+========================================================= */
+
+const slides =
+[
+...document.querySelectorAll('.slide')
+];
+
+
+const dots =
+document.querySelector('.dots');
+
+
+let current=0;
+
+let timer;
+
+
+/* CREAR PUNTOS */
+
+slides.forEach(
+(_,i)=>{
+
+const d =
+document.createElement('button');
+
+
+d.className =
+'dot'+
+(i===0 ? ' active' : '');
+
+
+d.setAttribute(
+'aria-label',
+'Ir a imagen '+(i+1)
+);
+
+
+d.onclick =
+()=>show(i);
+
+
+dots.appendChild(d);
+
+}
+);
+
+
+/* MOSTRAR SLIDE */
+
+function show(i){
+
+current =
+(i+slides.length)%slides.length;
+
+
+slides.forEach(
+(s,n)=>
+
+s.classList.toggle(
+'active',
+n===current
+)
+
+);
+
+
+[
+...dots.children
+].forEach(
+(d,n)=>
+
+d.classList.toggle(
+'active',
+n===current
+)
+
+);
+
+
+clearInterval(timer);
+
+
+timer =
+setInterval(
+()=>show(current+1),
+5000
+);
+
+}
+
+
+/* BOTONES */
+
+document.querySelector('.next').onclick =
+()=>show(current+1);
+
+
+document.querySelector('.prev').onclick =
+()=>show(current-1);
+
+
+/* INICIO AUTOMÁTICO */
+
+timer =
+setInterval(
+()=>show(current+1),
+5000
+);
+
+
+</script>
+
+</body>
+
+</html>
